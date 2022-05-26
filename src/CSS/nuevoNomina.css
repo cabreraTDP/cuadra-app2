@@ -1,0 +1,123 @@
+#contenedorPrincipal{
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: auto;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    border-radius: 5px;
+    margin-bottom: 3%;
+}
+#informacion{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+    padding: 15px;
+    width: 100%;
+
+}
+#informacionEspecifica{
+    display: grid;
+    grid-template-columns: auto auto auto;
+}
+#titulo{
+    font-family: 'Noto Sans';
+    font-size: 25px;
+}
+#info{
+    font-family: 'Noto Sans';
+    font-size: 25px;
+    color: blue;
+}
+#verNomina{
+    display: grid;
+    grid-template-columns: 10% 70%;
+}
+#botones{
+    display: grid;
+    grid-template-columns: 10% 10% auto;
+}
+
+.inputNomina{
+    background-color: inherit;
+    border: solid 2.5px gray;
+    border-radius: 10px;
+    padding: 2px;
+    text-align: center;
+    font-size: 17;
+}
+
+.inputNomina::-webkit-outer-spin-button,
+.inputNomina::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+.inputNomina[type=number] {
+  -moz-appearance: textfield;
+}
+
+.esquemaInput, .periodoInput{
+    background-color: white;
+    padding: 5px;
+    text-align: center;
+    border: 2px solid gray;
+    border-radius: 5px;
+    font-size: 15px;
+}
+
+.esquemaInput:hover, .periodoInput:hover{
+    background-color: whitesmoke;
+    padding: 5px;
+    text-align: center;
+    border: 2px solid gray;
+    border-radius: 5px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+.submitButton{
+    background-color: rgba(5, 1, 219, 0.1);
+    opacity: 50;
+    margin-left: 88%;
+    width: 12%;
+    padding:10px;
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 2px solid gray;
+    font-size: 17px;
+}
+
+.submitButton:hover{
+    background-color: rgba(5, 1, 219, 0.5);
+    opacity: 50;
+    margin-left: 88%;
+    width: 12%;
+    padding:10px;
+    margin-top: 15px;
+    border-radius: 10px;
+    border: 2px solid gray;
+    font-size: 17px;
+    cursor: pointer;
+}
+
+#buttonExportar{
+    padding: 12px;
+    background-color: #287233; 
+    color: white;
+    font-size: 16px;
+    border: none; 
+    border-radius:10px; 
+    font-weight: 'bold';
+}
+
+#buttonExportar:hover{
+    padding: 12px;
+    background-color: rgba(40,114,51,0.5); 
+    color: black;
+    font-size: 16px;
+    border: none; 
+    border-radius: 10px; 
+    font-weight: 'bold';
+    cursor: pointer;
+}

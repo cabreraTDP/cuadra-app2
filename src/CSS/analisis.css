@@ -1,0 +1,61 @@
+#fecha {
+    display: grid;
+    grid-template-columns: auto auto;
+}
+
+#contenido {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    height: 300px;
+    
+}
+
+#separador {
+    padding-top: 60px;
+    background-color: white;
+}
+#linea{
+    border-right: solid 2px black;
+
+}
+
+
+
+
+#tabla {
+    margin:0 auto;
+    width: 350px;
+
+}
+
+
+#utilidad {
+    border: 2px solid blue; 
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: underline;
+    font-weight: bold;
+    line-height: 80px;
+    font-size: 25px;
+}
+#icono-ingreso{
+    width: 100px;
+    height: 100px;
+    background-image: url('./ingreso.png');
+    background-repeat: no-repeat;
+    background-size: 100px 100px;
+}
+#icono-gasto{
+    width: 100px;
+    height: 100px;
+    background-image: url('./gasto.jpg');
+    background-repeat: no-repeat;
+    background-size: 100px 100px;
+}
+#icono-utilidad{
+    width: 100px;
+    height: 100px;
+    background-image: url('./utilidad.png');
+    background-repeat: no-repeat;
+    background-size: 100px 100px;
+}

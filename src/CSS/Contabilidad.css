@@ -1,0 +1,39 @@
+#buscadorOpcion {
+    padding-bottom: 20px;
+    display: inline-grid;
+    grid-template-columns: auto auto 450px;
+    width: 100%;
+}
+
+
+#btn {
+    margin-right: 170px;
+}
+
+#filtroOpcion {
+    display: inline-grid;
+    grid-template-columns: 100px auto;
+}
+#opciones{
+    display: inline-grid;
+    grid-template-columns: auto auto auto auto;
+}
+#opcion{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    justify-content: center;
+    text-align: center;
+}
+
+#opcion:hover{
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: auto auto;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
+    margin-left: 5px;
+    margin-right: 5px;
+    color: gray
+}
