@@ -8,12 +8,12 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Button, Modal } from 'react-bootstrap';
 
 import { getProp } from '../../../utils/functions'
-import { mapaDetalleEmpleado as mapa} from '../../../Constants/mapaDetalleEmpleado'
+import { mapaDetalleEmpleado as mapa } from '../../../Constants/mapaDetalleEmpleado'
 import axios from 'axios';
 const URL = `${process.env.REACT_APP_URL_URI}`;
 
 
-const titleArchivos = ['Titulo','Fecha','Ver'];
+const titleArchivos = ['Titulo', 'Fecha', 'Ver'];
 
 //Tratar de abstraer una estructura del json para el llenado del formulario
 
@@ -36,8 +36,8 @@ const DetalleEmpleado = () => {
   const changeFile = (e) => {
     setArchivo(e);
   }
-  
-  const onChangeHandlerDocumento = (e)=>{
+
+  const onChangeHandlerDocumento = (e) => {
     const { name, value } = e.target;
     setDatosDocumento({
       ...datosDocumento,
@@ -97,7 +97,7 @@ const DetalleEmpleado = () => {
 
 
 
-  const onSubmitHandlerDocumento = async(e) => {
+  const onSubmitHandlerDocumento = async (e) => {
     e.preventDefault();
 
     const f = new FormData();
@@ -107,7 +107,7 @@ const DetalleEmpleado = () => {
     const res = await axios.post(`${URL}/trabajadores/uploadFile`, f);
     console.log(res)
     setShow2(false);
-};
+  };
 
 
   useEffect(() => {
@@ -139,14 +139,14 @@ const DetalleEmpleado = () => {
         sueldo: datosDelTrabajador.datosLaborales.sueldo,
         ingreso: datosDelTrabajador.datosLaborales.ingreso
       });
-      console.log(datosDelTrabajador.documentos.length>0)
-      setArchivos(datosDelTrabajador.documentos.length>0?
+      console.log(datosDelTrabajador.documentos.length > 0)
+      setArchivos(datosDelTrabajador.documentos.length > 0 ?
         datosDelTrabajador.documentos.map(documento => (
-        {
-          "Titulo": documento.titulo,
-          "Fecha": documento.createdAt.slice(0,10),
-          "Ver": documento.URI
-        }))
+          {
+            "Titulo": documento.titulo,
+            "Fecha": documento.createdAt.slice(0, 10),
+            "Ver": documento.URI
+          }))
         :
         [{
           "Titulo": '',
@@ -154,14 +154,14 @@ const DetalleEmpleado = () => {
           "Ver": ''
         }]
       );
-    //const documentos = datosDelTrabajador.documentos.map(async(documento) => await Get('/trabajadores/downloadFile/'+documento.URI ));
-    //const bufferData =  Buffer.from(documento.data, 'base64');
-    //const blob = new Blob([bufferData], {type: 'application/octet-stream'});                   // Step 3
-    //const fileDownloadUrl = URL.createObjectURL(blob);
-   // setURL2(documentos);      // Step 7
-    //console.log(documentos)
+      //const documentos = datosDelTrabajador.documentos.map(async(documento) => await Get('/trabajadores/downloadFile/'+documento.URI ));
+      //const bufferData =  Buffer.from(documento.data, 'base64');
+      //const blob = new Blob([bufferData], {type: 'application/octet-stream'});                   // Step 3
+      //const fileDownloadUrl = URL.createObjectURL(blob);
+      // setURL2(documentos);      // Step 7
+      //console.log(documentos)
 
-      
+
       //const download = await axios.get(documento.data);
       //console.log(download)
     };
@@ -179,9 +179,12 @@ const DetalleEmpleado = () => {
             <div style={{ textAlign: 'center', marginTop: '40%' }}>
               <h3>Añadir Foto</h3>
             </div>
-            <Button variant="primary" onClick={handleShow} style={{marginTop:'50%', marginLeft:'10%'}}>
-          Expediente Digital
-        </Button>
+            <Button variant="primary" onClick={handleShow} style={{ marginTop: '50%', marginLeft: '10%' }}>
+              Expediente Digital
+            </Button>
+            <Button variant="primary" onClick={handleShow} style={{ marginTop: '30%', marginLeft: '25%' }}>
+              Contrato 
+            </Button>
           </div>
 
         </div>
@@ -204,7 +207,7 @@ const DetalleEmpleado = () => {
               )}
             <button className="submitButtonEmpleado" type="submit" style={{ width: '100%' }} > Guardar </button>
           </form>
-          
+
         </div>
 
       </div>
@@ -233,15 +236,15 @@ const DetalleEmpleado = () => {
               -Eliminar filtro de la
               -Agregar las opciones de borrar y descargar 
               */}
-              {archivos?
-              <TableDisplay titles={titleArchivos} rawData={archivos} filtro={false} paginacion={false} link={`${URL}/trabajadores/downloadFile/`} target="_blank"/>:
+            {archivos ?
+              <TableDisplay titles={titleArchivos} rawData={archivos} filtro={false} paginacion={false} link={`${URL}/trabajadores/downloadFile/`} target="_blank" /> :
               null}
           </Modal.Body>
           <Modal.Footer>
-                {/* 
+            {/* 
               Tratar de que el botón subir archivo ejecute 2 cambios de estado para hacer el cambio de modal 
               */}
-            <Button variant="primary" onClick={()=>{handleClose(); handleShow2();}}>Subir archivo</Button>
+            <Button variant="primary" onClick={() => { handleClose(); handleShow2(); }}>Subir archivo</Button>
           </Modal.Footer>
         </Modal>
 
@@ -256,15 +259,15 @@ const DetalleEmpleado = () => {
           </Modal.Header>
           <Modal.Body>
 
-              <form onSubmit={onSubmitHandlerDocumento}>
-                <label>Nombre del documento:</label>
-                <input type="text" name="title" style={{width:'100%', marginTop:'10px'}} onChange={(e)=>onChangeHandlerDocumento(e)} required />
+            <form onSubmit={onSubmitHandlerDocumento}>
+              <label>Nombre del documento:</label>
+              <input type="text" name="title" style={{ width: '100%', marginTop: '10px' }} onChange={(e) => onChangeHandlerDocumento(e)} required />
 
-                <input type="file" name="file" style={{width:'100%', marginTop:'20px'}} onChange={(e)=>changeFile(e.target.files)} required/>
-                
-                <Button variant="primary" type="submit"  style={{width:'100%', marginTop:'20px'}} >Subir Documento</Button>
+              <input type="file" name="file" style={{ width: '100%', marginTop: '20px' }} onChange={(e) => changeFile(e.target.files)} required />
 
-              </form>
+              <Button variant="primary" type="submit" style={{ width: '100%', marginTop: '20px' }} >Subir Documento</Button>
+
+            </form>
             {/* 
               -Eliminar filtro de la
               -Agregar las opciones de borrar y descargar 
