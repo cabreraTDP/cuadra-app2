@@ -25,7 +25,9 @@ const PlusButton = (props) => {
             <ul>
                 {options.map((option) => {
                     return(
-                    <li key={option.title}><Link to={option.link}>{option.title}</Link></li>
+                    option.link?<li key={option.title}><Link to={option.link}>{option.title}</Link></li>:
+                    option.function?<li key={option.title} onClick={()=>option.function()}>{option.title}</li>:
+                    null
                     )
                 })}
             </ul>

@@ -1,12 +1,14 @@
 import '../../../CSS/nuevoNomina.css'
-import { titles } from '../../../dataNomina';
 import TableNominasNueva from './TableNominasNueva';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Post } from '../../../utils/axiosUtils';
 import { useNavigate } from 'react-router';
+import PlusButton from '../../PlusButton'
 
 const URL = process.env.REACT_APP_URL_URI;
+
+
 
 const NuevoNomina = () => {
     const [dataEmpleados, setDataEmpleados] = useState([{
@@ -15,6 +17,35 @@ const NuevoNomina = () => {
         "Complementos": 0,
         "Rebajes": 0
     }]);
+
+    const [titles, setTitles] = useState(['Nombre','Faltas','Complementos','Rebajes']);
+
+    const agregarConcepto = (titulo) => {
+        if(titles.filter(title => title === titulo).length === 0){
+            setTitles([...titles,titulo]) 
+            setDataEmpleados(dataEmpleados.map(objeto => (
+                {
+                    ...objeto,
+                    titulo: 0
+                }
+            )));
+        }
+    }
+
+    const options=[
+        {
+            function: ()=>{
+              agregarConcepto('Domingos Trabajados')
+            },
+            title: 'Prima Dominical'
+        },
+        {
+            function: ()=>{
+                agregarConcepto("Horas Extras")
+            },
+            title: 'Horas Extras'
+        }
+    ]
 
     const [periodoInicio, setPeriodoInicio] = useState();
     const [periodoFin, setPeriodoFin] = useState();
@@ -121,12 +152,19 @@ const NuevoNomina = () => {
                             </div>
                                 <input type='date' className='periodoInput' name="periodoFin" onChange={onChangePeriodoFin} required/>
                         </div>
+                        <span className="FilterEnd">
+                                <PlusButton options={options} /> 
+                            </span>
                     </div>
 
                 </div>
                 <div >
 
-                    <TableNominasNueva titles={titles} rawData={dataEmpleados} onChangeHandler={(e)=>onChangeHandler(e)}/>
+                    <TableNominasNueva 
+                    titles={titles} 
+                    rawData={dataEmpleados} 
+                    onChangeHandler={(e)=>onChangeHandler(e)}/>
+
                     <button type='submit' className='submitButton'>Enviar</button>
                     
                 </div>
