@@ -13,8 +13,6 @@ import { Link } from 'react-router-dom';
 
 const URL = process.env.REACT_APP_URL_URI;
 
-const titleArchivos = ['Factura', 'Fecha', 'Tipo', 'Tamaño'];
-
 const transformarDatos = (datos) => {
     const nuevos = datos.map((registro) => (
         registro ? {
@@ -128,7 +126,7 @@ const Contabilidad = () => {
     };
 
     const onDeleteOperacion = async(id) => {
-        const eliminar = await axios.post(`${URL}/contabilidad/eliminar`, {id},{ withCredentials: true });
+        await axios.post(`${URL}/contabilidad/eliminar`, {id},{ withCredentials: true });
         setDataContabilidad(dataContabilidad.filter((operacion) => operacion.Editar._id !== id));
         setEditarRegistro(false)
     };

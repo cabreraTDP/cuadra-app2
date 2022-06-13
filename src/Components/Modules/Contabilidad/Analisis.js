@@ -1,5 +1,4 @@
 import '../../../CSS/analisis.css'
-import Icon from "awesome-react-icons";
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { currencyToNumber, numberToCurrency } from '../../../utils/format';
