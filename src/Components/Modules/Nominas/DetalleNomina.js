@@ -8,7 +8,7 @@ import { Post } from '../../../utils/axiosUtils';
 const titlesNomina = ['Nombre','Banco','Clabe','Faltas','Complementos',"Rebajes", "Total a pagar"]
 
 const ExportarExcel = ({datos,periodoInicio,periodoFin}) => {
-    return
+    return true
 }
 
 const DetalleNomina = () => {

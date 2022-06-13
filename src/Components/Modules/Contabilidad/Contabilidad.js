@@ -41,7 +41,7 @@ const transformarDatos = (datos) => {
 const titlesTablaContabilidad = ['Tipo','Categoría', 'Titulo', 'Descripción','Monto', 'Fecha Operación',  'Editar'];
 
 const ExportarExcel = ({datos}) => {
-    return
+    return true
 }
 
 const Contabilidad = () => {
