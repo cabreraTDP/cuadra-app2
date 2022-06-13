@@ -4,28 +4,11 @@ import TableDisplay from "../../TableDisplay"
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Post } from '../../../utils/axiosUtils';
-import ExportExcel from "react-export-excel";
-
-const ExcelFile = ExportExcel.ExcelFile;
-const ExcelSheet = ExportExcel.ExcelSheet;
-const ExcelColumn = ExportExcel.ExcelColumn;
 
 const titlesNomina = ['Nombre','Banco','Clabe','Faltas','Complementos',"Rebajes", "Total a pagar"]
 
 const ExportarExcel = ({datos,periodoInicio,periodoFin}) => {
-    return(
-    <ExcelFile element={<button id='buttonExportar'>Descargar Excel</button>} filename={`Nomina del ${periodoInicio} - ${periodoFin}`}>
-        <ExcelSheet data={datos} name="Nomina">
-            <ExcelColumn label="Nombre" value="Nombre"/>
-            <ExcelColumn label="Banco" value="Banco"/>
-            <ExcelColumn label="Clabe" value="Clabe"/>
-            <ExcelColumn label="Faltas" value="Faltas"/>
-            <ExcelColumn label="Complementos" value="Complementos"/>
-            <ExcelColumn label="Rebajes" value="Rebajes"/>
-            <ExcelColumn label="Total a pagar" value="Total a pagar"/>
-        </ExcelSheet>
-    </ExcelFile>
-    )
+    return
 }
 
 const DetalleNomina = () => {
