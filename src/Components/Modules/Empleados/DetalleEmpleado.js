@@ -10,6 +10,7 @@ import { Button, Modal } from 'react-bootstrap';
 import { getProp } from '../../../utils/functions'
 import { mapaDetalleEmpleado as mapa} from '../../../Constants/mapaDetalleEmpleado'
 import axios from 'axios';
+import moment from 'moment'
 const URL = `${process.env.REACT_APP_URL_URI}`;
 
 
@@ -118,28 +119,30 @@ const DetalleEmpleado = () => {
       const trabajador = await Post('/trabajadores/getTrabajador', data);
       const datosDelTrabajador = trabajador.data.data
       setDatosTrabajador(datosDelTrabajador);
+      console.log('ddd',datosDelTrabajador.datosPersonales.rfc)
+
       setDatos({
         idTrabajador: datosDelTrabajador._id,
-        nombre: datosDelTrabajador.datosPersonales.nombre,
-        apellidoPaterno: datosDelTrabajador.datosPersonales.apellidoPaterno,
-        apellidoMaterno: datosDelTrabajador.datosPersonales.apellidoMaterno,
-        nss: datosDelTrabajador.datosPersonales.nss,
-        curp: datosDelTrabajador.datosPersonales.curp,
-        rfc: datosDelTrabajador.datosPersonales.rfc,
-        calle: datosDelTrabajador.datosPersonales.direccion.calle,
-        numeroExterior: datosDelTrabajador.datosPersonales.direccion.numeroExterior,
-        numeroInterior: datosDelTrabajador.datosPersonales.direccion.numeroInterior,
-        codigoPostal: datosDelTrabajador.datosPersonales.direccion.codigoPostal,
-        municipio: datosDelTrabajador.datosPersonales.direccion.municipio,
-        estado: datosDelTrabajador.datosPersonales.direccion.estado,
-        banco: datosDelTrabajador.datosBancarios.banco,
-        cuenta: datosDelTrabajador.datosBancarios.cuenta,
-        clabe: datosDelTrabajador.datosBancarios.clabe,
-        Puesto: datosDelTrabajador.datosLaborales.puesto,
+        nombre: (datosDelTrabajador.datosPersonales.nombre ? datosDelTrabajador.datosPersonales.nombre : ''),
+        apellidoPaterno: (datosDelTrabajador.datosPersonales.apellidoPaterno ? datosDelTrabajador.datosPersonales.apellidoPaterno : ''),
+        apellidoMaterno: (datosDelTrabajador.datosPersonales.apellidoMaterno ? datosDelTrabajador.datosPersonales.apellidoMaterno : ''),
+        nss: (datosDelTrabajador.datosPersonales.nss ? datosDelTrabajador.datosPersonales.nss : ''),
+        curp: (datosDelTrabajador.datosPersonales.curp ? datosDelTrabajador.datosPersonales.curp : ''),
+        rfc: (datosDelTrabajador.datosPersonales.rfc ? datosDelTrabajador.datosPersonales.rfc : ''),
+        calle: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.calle : ''),
+        numeroExterior: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.numeroExterior : ''),
+        numeroInterior: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.numeroInterior : ''),
+        codigoPostal: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.codigoPostal : ''),
+        municipio: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.municipio : ''),
+        estado: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.estado : ''),
+        banco: (datosDelTrabajador.datosBancarios ? datosDelTrabajador.datosBancarios.banco : ''),
+        cuenta: (datosDelTrabajador.datosBancarios ? datosDelTrabajador.datosBancarios.cuenta : ''),
+        clabe: (datosDelTrabajador.datosBancarios ? datosDelTrabajador.datosBancarios.clabe : ''),
+        Puesto: (datosDelTrabajador.datosLaborales.puesto ? datosDelTrabajador.datosLaborales.puesto : ''),
         sueldo: datosDelTrabajador.datosLaborales.sueldo,
-        ingreso: datosDelTrabajador.datosLaborales.ingreso
+        ingreso: moment(datosDelTrabajador.datosLaborales.ingreso).format('YYYY-MM-DD'),
+        idTrabajador: datosDelTrabajador._id 
       });
-      console.log(datosDelTrabajador.documentos.length>0)
       setArchivos(datosDelTrabajador.documentos.length>0?
         datosDelTrabajador.documentos.map(documento => (
         {
