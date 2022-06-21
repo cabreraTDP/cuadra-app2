@@ -54,6 +54,7 @@ const NuevoEmpleado = () => {
                                     placeholder={input.placeholder}
                                     tipo={input.tipo}
                                     name={input.name}
+                                    value={input.value}
                                     onChangeHandler={(e)=>onChangeHandler(e)}
                                 />
                         )}
