@@ -10,7 +10,7 @@ import { numberToCurrency } from '../../../utils/format'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 import { Modal } from '../../Modal'
-
+const XLSX = require("xlsx")
 const URL = process.env.REACT_APP_URL_URI
 
 const transformarDatos = (datos) => {
@@ -93,6 +93,15 @@ const Contabilidad = () => {
     ])
     setNuevoRegistro(false)
   }
+
+  const exportarExcel = () => {
+    const workBook = XLSX.utils.book_new();
+    const workSheet = XLSX.utils.json_to_sheet(dataFiltered);
+    XLSX.utils.book_append_sheet(workBook, workSheet, "Nómina");
+    const fecha = new Date();
+    const hoy = fecha.toDateString();
+    XLSX.writeFile(workBook, hoy+'.xlsx');
+}
 
   const onChangeOperacion = async (e) => {
     const { name, value } = e.target
@@ -256,8 +265,9 @@ const Contabilidad = () => {
             </Link>
           </div>
           <div id="opcion">
-            <ExportarExcel datos={dataFiltered} />
-            <div>Exportar a Excel</div>
+          <Icon name="chevron-down" strokeWidth="3" size="25" color="blue" />
+
+            <div onClick={()=>exportarExcel()}>Exportar a Excel</div>
           </div>
         </div>
       </div>

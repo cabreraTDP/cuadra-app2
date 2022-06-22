@@ -4,12 +4,10 @@ import TableDisplay from "../../TableDisplay"
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Post } from '../../../utils/axiosUtils';
-
+const XLSX = require("xlsx")
 const titlesNomina = ['Nombre','Banco','Clabe','Faltas','Complementos',"Rebajes", "Total a pagar"]
 
-const ExportarExcel = ({datos,periodoInicio,periodoFin}) => {
-    return true
-}
+
 
 const DetalleNomina = () => {
 
@@ -28,6 +26,15 @@ const DetalleNomina = () => {
 
 
     const { id } = useParams();
+
+    const exportarExcel = () => {
+        const workBook = XLSX.utils.book_new();
+        const workSheet = XLSX.utils.json_to_sheet(nomina);
+        XLSX.utils.book_append_sheet(workBook, workSheet, "Nómina");
+        const fecha = new Date();
+        const hoy = fecha.toDateString();
+        XLSX.writeFile(workBook, hoy+'.xlsx');
+    }
 
     useEffect(() => {
 
@@ -98,11 +105,7 @@ const DetalleNomina = () => {
                     <TableDisplay titles={titlesNomina} rawData={nomina} />
                 </div>
                 <div style={{marginLeft:'80%', marginTop:15}}>
-                    <ExportarExcel datos={nomina} periodoInicio={periodoInicio} periodoFin={periodoFin}/>
-                </div>
-            </div>
-
-           {/* <button type="button"
+                <button type="button" onClick={()=>exportarExcel}
                 style={{
                     float:'right',
                     backgroundColor: '#dae6eb',
@@ -113,7 +116,11 @@ const DetalleNomina = () => {
                     width: '170px',
                     borderRadius: '6px',
                     fontSize: '20px',
-                }}>Crear</button>*/}
+                }}>Crear</button>
+                </div>
+            </div>
+
+
         </div>
     )
 }
