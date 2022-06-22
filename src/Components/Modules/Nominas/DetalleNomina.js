@@ -105,7 +105,7 @@ const DetalleNomina = () => {
                     <TableDisplay titles={titlesNomina} rawData={nomina} />
                 </div>
                 <div style={{marginLeft:'80%', marginTop:15}}>
-                <button type="button" onClick={()=>exportarExcel}
+                <button type="button" onClick={()=>exportarExcel()}
                 style={{
                     marginLeft:'80%', 
                     marginTop:15,
