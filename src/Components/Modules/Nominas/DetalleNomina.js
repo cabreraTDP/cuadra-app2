@@ -4,9 +4,10 @@ import TableDisplay from "../../TableDisplay"
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Post } from '../../../utils/axiosUtils';
-const XLSX = require("xlsx");
-
+const XLSX = require("xlsx")
 const titlesNomina = ['Nombre','Banco','Clabe','Faltas','Complementos',"Rebajes", "Total a pagar"]
+
+
 
 const DetalleNomina = () => {
 
@@ -104,7 +105,7 @@ const DetalleNomina = () => {
                     <TableDisplay titles={titlesNomina} rawData={nomina} />
                 </div>
                 <div style={{marginLeft:'80%', marginTop:15}}>
-                <button type="button" onClick={()=>exportarExcel()}
+                <button type="button" onClick={()=>exportarExcel}
                 style={{
                     marginLeft:'80%', 
                     marginTop:15,
@@ -117,11 +118,11 @@ const DetalleNomina = () => {
                     width: '170px',
                     borderRadius: '6px',
                     fontSize: '20px',
-                }}>Exportar Excel</button>
+                }}>Crear</button>
                 </div>
-                
             </div>
-            
+
+
         </div>
             
     )
