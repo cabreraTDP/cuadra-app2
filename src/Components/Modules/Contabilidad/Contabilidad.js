@@ -9,6 +9,7 @@ import { Post } from '../../../utils/axiosUtils';
 import {numberToCurrency} from '../../../utils/format';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+const XLSX = require("xlsx");
 
 
 const URL = process.env.REACT_APP_URL_URI;
@@ -40,9 +41,6 @@ const transformarDatos = (datos) => {
 
 const titlesTablaContabilidad = ['Tipo','Categoría', 'Titulo', 'Descripción','Monto', 'Fecha Operación',  'Editar'];
 
-const ExportarExcel = ({datos}) => {
-    return true
-}
 
 const Contabilidad = () => {
     const [dataContabilidad, setDataContabilidad] = useState([]);
@@ -72,6 +70,15 @@ const Contabilidad = () => {
     const funcionFiltroMes = (e) => {
         setFiltroMes(e.target.value);
     };
+
+    const exportarExcel = () => {
+        const workBook = XLSX.utils.book_new();
+        const workSheet = XLSX.utils.json_to_sheet(dataFiltered);
+        XLSX.utils.book_append_sheet(workBook, workSheet, "Nómina");
+        const fecha = new Date();
+        const hoy = fecha.toDateString();
+        XLSX.writeFile(workBook, hoy+'.xlsx');
+    }
 
     const onSubmitOperacion = async(e) => {
         e.preventDefault();
@@ -204,9 +211,13 @@ const Contabilidad = () => {
                     </Link>
                     </div>
                     <div id='opcion'>
-                        <ExportarExcel datos={dataFiltered}/>
+                        <Icon name="chevron-down" strokeWidth="3" size="25" color="blue" onClick={()=>exportarExcel()} />
                         <div>
-                            Exportar a Excel
+                            <button onClick={()=>exportarExcel()}
+                            style={{
+                                backgroundColor:'transparent',
+                                border:'none'
+                            }}>Exportar a Excel</button>
                         </div>
                     </div>
                 </div>

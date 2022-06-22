@@ -6,11 +6,12 @@ import { useState, useEffect } from 'react'
 import { Post } from '../../../utils/axiosUtils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Button, Modal } from 'react-bootstrap';
-
 import { getProp } from '../../../utils/functions'
 import { mapaDetalleEmpleado as mapa} from '../../../Constants/mapaDetalleEmpleado'
 import axios from 'axios';
-import moment from 'moment'
+import moment from 'moment';
+
+
 const URL = `${process.env.REACT_APP_URL_URI}`;
 
 
@@ -119,8 +120,6 @@ const DetalleEmpleado = () => {
       const trabajador = await Post('/trabajadores/getTrabajador', data);
       const datosDelTrabajador = trabajador.data.data
       setDatosTrabajador(datosDelTrabajador);
-      console.log('ddd',datosDelTrabajador.datosPersonales.rfc)
-
       setDatos({
         idTrabajador: datosDelTrabajador._id,
         nombre: (datosDelTrabajador.datosPersonales.nombre ? datosDelTrabajador.datosPersonales.nombre : ''),
