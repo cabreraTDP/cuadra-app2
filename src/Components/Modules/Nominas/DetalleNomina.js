@@ -118,7 +118,7 @@ const DetalleNomina = () => {
                     width: '170px',
                     borderRadius: '6px',
                     fontSize: '20px',
-                }}>Crear</button>
+                }}>Exportar Excel</button>
                 </div>
             </div>
 
