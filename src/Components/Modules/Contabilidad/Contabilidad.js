@@ -400,15 +400,13 @@ const Contabilidad = () => {
 
       {/*EDITAR TRANSACCIÓN */}
       <Modal
-        show={editarRegistro}
-        onHide={CancelarEditarRegistro}
+        open={editarRegistro}
+        setOpen={setEditarRegistro}
+        title={'Editar Regisro'}
         backdrop="static"
         keyboard={false}
-      >
-        <Modal.Header closeButton>
-          <Modal.Title>Editar Regisro</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
+        >
+
           <form onSubmit={onSubmitEditar}>
             <label>Tipo:</label>
             <select
@@ -487,8 +485,7 @@ const Contabilidad = () => {
               Eliminar Registro
             </Button>
           </form>
-        </Modal.Body>
-        <ModalFooter></ModalFooter>
+
       </Modal>
     </div>
   )
