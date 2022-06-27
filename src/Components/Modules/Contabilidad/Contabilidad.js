@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Button, ModalFooter } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import React from 'react'
 import TableDisplay from '../../TableDisplay'
 import axios from 'axios'
@@ -51,10 +51,6 @@ const titlesTablaContabilidad = [
   'Editar',
 ]
 
-const ExportarExcel = ({ datos }) => {
-  return true
-}
-
 const Contabilidad = () => {
   const [dataContabilidad, setDataContabilidad] = useState([])
   const [dataFiltered, setDataFiltered] = useState([])
@@ -66,11 +62,9 @@ const Contabilidad = () => {
 
   const [NuevoRegistro, setNuevoRegistro] = useState(false)
 
-  const CancelarNuevoRegistro = () => setNuevoRegistro(false)
   const CrearNuevoRegistro = () => setNuevoRegistro(true)
 
   const [editarRegistro, setEditarRegistro] = useState(false)
-  const CancelarEditarRegistro = () => setEditarRegistro(false)
   const EditarRegistro = () => setEditarRegistro(true)
   const [registroEnEdicion, setRegistroEnEdicion] = useState({})
 

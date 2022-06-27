@@ -23,12 +23,10 @@ const titleArchivos = ['Titulo', 'Fecha', 'Ver']
 const DetalleEmpleado = () => {
   const [show, setShow] = useState(false)
 
-  const handleClose = () => setShow(false)
   const handleShow = () => setShow(true)
 
   const [show2, setShow2] = useState(false)
 
-  const handleClose2 = () => setShow2(false)
   const handleShow2 = () => setShow2(true)
 
   const [datosDocumento, setDatosDocumento] = useState({})
@@ -134,8 +132,7 @@ const DetalleEmpleado = () => {
         clabe: (datosDelTrabajador.datosBancarios ? datosDelTrabajador.datosBancarios.clabe : ''),
         Puesto: (datosDelTrabajador.datosLaborales.puesto ? datosDelTrabajador.datosLaborales.puesto : ''),
         sueldo: datosDelTrabajador.datosLaborales.sueldo,
-        ingreso: moment(datosDelTrabajador.datosLaborales.ingreso).format('YYYY-MM-DD'),
-        idTrabajador: datosDelTrabajador._id 
+        ingreso: moment(datosDelTrabajador.datosLaborales.ingreso).format('YYYY-MM-DD')
       });
       setArchivos(datosDelTrabajador.documentos.length>0?
         datosDelTrabajador.documentos.map(documento => (
