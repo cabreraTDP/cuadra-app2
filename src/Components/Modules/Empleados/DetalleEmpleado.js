@@ -14,7 +14,7 @@ import axios from 'axios';
 import moment from 'moment';
 
 
-const URL = `${process.env.REACT_APP_URL_URI}`;
+const URL2 = `${process.env.REACT_APP_URL_URI}`;
 
 const titleArchivos = ['Titulo', 'Fecha', 'Ver']
 
@@ -28,6 +28,8 @@ const DetalleEmpleado = () => {
   const [show2, setShow2] = useState(false)
 
   const handleShow2 = () => setShow2(true)
+
+  const [loadingContrato, setLoadingContrato] = useState(false)
 
   const [datosDocumento, setDatosDocumento] = useState({})
   const [archivo, setArchivo] = useState()
@@ -77,7 +79,41 @@ const DetalleEmpleado = () => {
 
   const [datosTrabajador, setDatosTrabajador] = useState({})
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+
+  const generarContrato = async() => {
+    const data = {
+      patron: '',
+      representante_legal: '',
+      rfc_representante: '',
+      direccion_representante: '',
+      principal_actividad: 'principal actividad',
+      nombre_empleado: `${datosTrabajador.datosPersonales.nombre} ${datosTrabajador.datosPersonales.apellidoPaterno} ${datosTrabajador.datosPersonales.apellidoMaterno}`,
+      sexo: '',
+      fecha_nacimiento: '',
+      nss: datosTrabajador.datosPersonales.nss,
+      rfc: datosTrabajador.datosPersonales.rfc,
+      curp: datosTrabajador.datosPersonales.curp,
+      direccion_empleado: `${datosTrabajador.datosPersonales.direccion.calle} ${datosTrabajador.datosPersonales.direccion.numeroExterior} ${datosTrabajador.datosPersonales.direccion.codigoPostal} ${datosTrabajador.datosPersonales.direccion.municipio} ${datosTrabajador.datosPersonales.direccion.estado}`,
+      salario_texto: datosTrabajador.datosLaborales.sueldo,
+      esquema_pago: 'Semanal',
+      fecha_contrato: 'fecha'
+    }
+
+    setLoadingContrato(true)
+    const link = document.createElement('a')
+    link.download = 'contrato.pdf'
+    link.target = '_blank'
+    const answer = await Post('/trabajadores/crearContrato', data)
+    const buffer = answer.data.data.data
+    const decodedBuffer = new Uint8Array(buffer)
+    const blob = new Blob([decodedBuffer], { type: 'application/pdf' })
+    link.href = URL.createObjectURL(blob)
+    link.click()
+    URL.revokeObjectURL(link.href)
+    setLoadingContrato(false)
+      
+  }
 
   const onSubmitHandler = async (e) => {
     e.preventDefault()
@@ -100,7 +136,7 @@ const DetalleEmpleado = () => {
     f.append('file', archivo[0])
     f.append('title', datosDocumento.title)
     console.log(f.get('file'))
-    const res = await axios.post(`${URL}/trabajadores/uploadFile`, f)
+    const res = await axios.post(`${URL2}/trabajadores/uploadFile`, f)
     console.log(res)
     setShow2(false)
   }
@@ -148,15 +184,6 @@ const DetalleEmpleado = () => {
           "Ver": ''
         }]
       );
-    //const documentos = datosDelTrabajador.documentos.map(async(documento) => await Get('/trabajadores/downloadFile/'+documento.URI ));
-    //const bufferData =  Buffer.from(documento.data, 'base64');
-    //const blob = new Blob([bufferData], {type: 'application/octet-stream'});                   // Step 3
-    //const fileDownloadUrl = URL.createObjectURL(blob);
-   // setURL2(documentos);      // Step 7
-    //console.log(documentos)
-
-      //const download = await axios.get(documento.data);
-      //console.log(download)
     }
 
     getDatos(id)
@@ -193,6 +220,20 @@ const DetalleEmpleado = () => {
             >
               Expediente Digital
             </Button>
+            {loadingContrato ?
+              <p
+              style={{ marginTop: '10%', marginLeft: '10%' }}
+            >
+              Generando Contrato ...
+            </p>:
+            <Button
+              variant="primary"
+              onClick={()=> generarContrato()}
+              style={{ marginTop: '10%', marginLeft: '10%' }}
+            >
+              Generar contrato
+            </Button>
+            }
           </div>
         </div>
         <div style={{ width: '30px', height: '400px', float: 'left' }}></div>
@@ -236,7 +277,7 @@ const DetalleEmpleado = () => {
               rawData={archivos}
               filtro={false}
               paginacion={false}
-              link={`${URL}/trabajadores/downloadFile/`}
+              link={`${URL2}/trabajadores/downloadFile/`}
               target="_blank"
             />
           ) : null}
