@@ -4,12 +4,10 @@ import TableDisplay from "../../TableDisplay"
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Post } from '../../../utils/axiosUtils';
-
+const XLSX = require("xlsx")
 const titlesNomina = ['Nombre','Banco','Clabe','Faltas','Complementos',"Rebajes", "Total a pagar"]
 
-const ExportarExcel = ({datos,periodoInicio,periodoFin}) => {
-    return true
-}
+
 
 const DetalleNomina = () => {
 
@@ -29,6 +27,15 @@ const DetalleNomina = () => {
 
     const { id } = useParams();
 
+    const exportarExcel = () => {
+        const workBook = XLSX.utils.book_new();
+        const workSheet = XLSX.utils.json_to_sheet(nomina);
+        XLSX.utils.book_append_sheet(workBook, workSheet, "Nómina");
+        const fecha = new Date();
+        const hoy = fecha.toDateString();
+        XLSX.writeFile(workBook, hoy+'.xlsx');
+    }
+
     useEffect(() => {
 
         const body = {
@@ -40,8 +47,8 @@ const DetalleNomina = () => {
 
             const registros = nominas.data.data[0].registros.map((registro) => ({
                 "Nombre": `${registro.trabajador.datosPersonales.nombre} ${registro.trabajador.datosPersonales.apellidoPaterno} ${registro.trabajador.datosPersonales.apellidoMaterno}`,
-                "Banco": registro.trabajador.datosBancarios.banco,
-                "Clabe": registro.trabajador.datosBancarios.clabe,
+                "Banco": registro.trabajador.datosBancarios?registro.trabajador.datosBancarios.banco:'',
+                "Clabe": registro.trabajador.datosBancarios?registro.trabajador.datosBancarios.clabe:'',
                 "Faltas": registro.faltas,
                 "Complementos": registro.complementos,
                 "Rebajes": registro.rebajes,
@@ -98,12 +105,10 @@ const DetalleNomina = () => {
                     <TableDisplay titles={titlesNomina} rawData={nomina} />
                 </div>
                 <div style={{marginLeft:'80%', marginTop:15}}>
-                    <ExportarExcel datos={nomina} periodoInicio={periodoInicio} periodoFin={periodoFin}/>
-                </div>
-            </div>
-
-           {/* <button type="button"
+                <button type="button" onClick={()=>exportarExcel()}
                 style={{
+                    marginLeft:'80%', 
+                    marginTop:15,
                     float:'right',
                     backgroundColor: '#dae6eb',
                     border: '3px solid',
@@ -113,8 +118,13 @@ const DetalleNomina = () => {
                     width: '170px',
                     borderRadius: '6px',
                     fontSize: '20px',
-                }}>Crear</button>*/}
+                }}>Exportar Excel</button>
+                </div>
+            </div>
+
+
         </div>
+            
     )
 }
 

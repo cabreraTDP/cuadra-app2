@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Button, ModalFooter } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import React from 'react'
 import TableDisplay from '../../TableDisplay'
 import axios from 'axios'
@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom'
 import { Modal } from '../../Modal'
 import { Buttom } from '../../Buttom'
 
+const XLSX = require('xlsx')
 const URL = process.env.REACT_APP_URL_URI
 
 const transformarDatos = (datos) => {
@@ -52,10 +53,6 @@ const titlesTablaContabilidad = [
   'Editar',
 ]
 
-const ExportarExcel = ({ datos }) => {
-  return true
-}
-
 const Contabilidad = () => {
   const [dataContabilidad, setDataContabilidad] = useState([])
   const [dataFiltered, setDataFiltered] = useState([])
@@ -67,11 +64,9 @@ const Contabilidad = () => {
 
   const [NuevoRegistro, setNuevoRegistro] = useState(false)
 
-  const CancelarNuevoRegistro = () => setNuevoRegistro(false)
   const CrearNuevoRegistro = () => setNuevoRegistro(true)
 
   const [editarRegistro, setEditarRegistro] = useState(false)
-  const CancelarEditarRegistro = () => setEditarRegistro(false)
   const EditarRegistro = () => setEditarRegistro(true)
   const [registroEnEdicion, setRegistroEnEdicion] = useState({})
 
@@ -93,6 +88,15 @@ const Contabilidad = () => {
       ...transformarDatos([nuevosDatos.data.data]),
     ])
     setNuevoRegistro(false)
+  }
+
+  const exportarExcel = () => {
+    const workBook = XLSX.utils.book_new()
+    const workSheet = XLSX.utils.json_to_sheet(dataFiltered)
+    XLSX.utils.book_append_sheet(workBook, workSheet, 'Nómina')
+    const fecha = new Date()
+    const hoy = fecha.toDateString()
+    XLSX.writeFile(workBook, hoy + '.xlsx')
   }
 
   const onChangeOperacion = async (e) => {
@@ -257,8 +261,9 @@ const Contabilidad = () => {
             </Link>
           </div>
           <div id="opcion">
-            <ExportarExcel datos={dataFiltered} />
-            <div>Exportar a Excel</div>
+            <Icon name="chevron-down" strokeWidth="3" size="25" color="blue" />
+
+            <div onClick={() => exportarExcel()}>Exportar a Excel</div>
           </div>
         </div>
       </div>
@@ -388,95 +393,90 @@ const Contabilidad = () => {
 
       {/*EDITAR TRANSACCIÓN */}
       <Modal
-        show={editarRegistro}
-        onHide={CancelarEditarRegistro}
+        open={editarRegistro}
+        setOpen={setEditarRegistro}
+        title={'Editar Regisro'}
         backdrop="static"
         keyboard={false}
       >
-        <Modal.Header closeButton>
-          <Modal.Title>Editar Regisro</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <form onSubmit={onSubmitEditar}>
-            <label>Tipo:</label>
-            <select
-              style={styles.input}
-              value={registroEnEdicion.tipo}
-              name="tipo"
-              onChange={(e) => onChangeEditar(e)}
-              required
-            >
-              <option value="Ingreso">Ingreso</option>
-              <option value="Gasto">Gasto</option>
-            </select>
+        <form onSubmit={onSubmitEditar}>
+          <label>Tipo:</label>
+          <select
+            style={styles.input}
+            value={registroEnEdicion.tipo}
+            name="tipo"
+            onChange={(e) => onChangeEditar(e)}
+            required
+          >
+            <option value="Ingreso">Ingreso</option>
+            <option value="Gasto">Gasto</option>
+          </select>
 
-            <label>Categoría:</label>
-            <select
-              style={styles.input}
-              value={registroEnEdicion.categoria}
-              name="categoria"
-              onChange={(e) => onChangeEditar(e)}
-              required
-            >
-              <option value="Ventas">Ventas</option>
-              <option value="Sueldos">Sueldos</option>
-            </select>
+          <label>Categoría:</label>
+          <select
+            style={styles.input}
+            value={registroEnEdicion.categoria}
+            name="categoria"
+            onChange={(e) => onChangeEditar(e)}
+            required
+          >
+            <option value="Ventas">Ventas</option>
+            <option value="Sueldos">Sueldos</option>
+          </select>
 
-            <label>Título:</label>
-            <input
-              type="text"
-              name="titulo"
-              value={registroEnEdicion.titulo}
-              style={styles.input}
-              onChange={(e) => onChangeEditar(e)}
-              required
-            />
+          <label>Título:</label>
+          <input
+            type="text"
+            name="titulo"
+            value={registroEnEdicion.titulo}
+            style={styles.input}
+            onChange={(e) => onChangeEditar(e)}
+            required
+          />
 
-            <label>Descripción:</label>
-            <input
-              type="text"
-              name="descripcion"
-              value={registroEnEdicion.descripcion}
-              style={styles.input}
-              onChange={(e) => onChangeEditar(e)}
-              required
-            />
+          <label>Descripción:</label>
+          <input
+            type="text"
+            name="descripcion"
+            value={registroEnEdicion.descripcion}
+            style={styles.input}
+            onChange={(e) => onChangeEditar(e)}
+            required
+          />
 
-            <label>Monto:</label>
-            <input
-              type="number"
-              name="monto"
-              value={registroEnEdicion.monto}
-              style={styles.input}
-              onChange={(e) => onChangeEditar(e)}
-              required
-            />
+          <label>Monto:</label>
+          <input
+            type="number"
+            name="monto"
+            value={registroEnEdicion.monto}
+            style={styles.input}
+            onChange={(e) => onChangeEditar(e)}
+            required
+          />
 
-            <label>Fecha Operación:</label>
-            <input
-              type="date"
-              name="fechaOperacion"
-              value={moment(registroEnEdicion.fechaOperacion).format(
-                'YYYY-MM-DD'
-              )}
-              style={styles.input}
-              onChange={(e) => onChangeEditar(e)}
-              required
-            />
+          <label>Fecha Operación:</label>
+          <input
+            type="date"
+            name="fechaOperacion"
+            value={moment(registroEnEdicion.fechaOperacion).format(
+              'YYYY-MM-DD'
+            )}
+            style={styles.input}
+            onChange={(e) => onChangeEditar(e)}
+            required
+          />
 
-            <Button variant="primary" type="submit">
-              Guardar Registro
-            </Button>
-            <Button
-              style={{ marginLeft: 20 }}
-              variant="warning"
-              onClick={() => onDeleteOperacion(registroEnEdicion._id)}
-            >
-              Eliminar Registro
-            </Button>
-          </form>
-        </Modal.Body>
-        <ModalFooter></ModalFooter>
+          <Button variant="primary" type="submit">
+            Guardar Registro
+          </Button>
+          <Button
+            style={{ marginLeft: 20 }}
+            variant="warning"
+            onClick={() => onDeleteOperacion(registroEnEdicion._id)}
+          >
+            Eliminar Registro
+          </Button>
+        </form>
       </Modal>
     </div>
   )
