@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react'
-import { Button } from 'react-bootstrap'
 import React from 'react'
 import TableDisplay from '../../TableDisplay'
 import axios from 'axios'
@@ -197,12 +196,6 @@ const Contabilidad = () => {
 
   return (
     <div>
-      <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-        integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-        crossOrigin="anonymous"
-      />
       <h1>Contabilidad</h1>
       <div id="buscadorOpcion">
         <div id="filtroOpcion">
@@ -309,13 +302,13 @@ const Contabilidad = () => {
             required
           />
 
-          <Button
+          <Buttom
             variant="primary"
             type="submit"
             style={{ width: '100%', marginTop: '20px' }}
           >
             Subir Documento
-          </Button>
+          </Buttom>
         </form>
       </Modal>
 
@@ -466,16 +459,16 @@ const Contabilidad = () => {
             required
           />
 
-          <Button variant="primary" type="submit">
+          <Buttom variant="primary" type="submit">
             Guardar Registro
-          </Button>
-          <Button
+          </Buttom>
+          <Buttom
             style={{ marginLeft: 20 }}
             variant="warning"
             onClick={() => onDeleteOperacion(registroEnEdicion._id)}
           >
             Eliminar Registro
-          </Button>
+          </Buttom>
         </form>
       </Modal>
     </div>

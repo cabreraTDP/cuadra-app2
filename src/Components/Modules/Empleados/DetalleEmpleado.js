@@ -5,9 +5,8 @@ import TableDisplay from '../../TableDisplay'
 import { useState, useEffect } from 'react'
 import { Post } from '../../../utils/axiosUtils'
 import { useNavigate, useParams } from 'react-router-dom'
-import { Button } from 'react-bootstrap'
 import { Modal } from '../../Modal'
-
+import { Buttom } from '../../Buttom'
 import { getProp } from '../../../utils/functions'
 import { mapaDetalleEmpleado as mapa} from '../../../Constants/mapaDetalleEmpleado'
 import axios from 'axios';
@@ -219,26 +218,26 @@ const DetalleEmpleado = () => {
             <div style={{ textAlign: 'center', marginTop: '40%' }}>
               <h3>Añadir Foto</h3>
             </div>
-            <Button
+            <Buttom
               variant="primary"
               onClick={handleShow}
               style={{ marginTop: '50%', marginLeft: '10%' }}
             >
               Expediente Digital
-            </Button>
+            </Buttom>
             {loadingContrato ?
               <p
               style={{ marginTop: '10%', marginLeft: '10%' }}
             >
               Generando Contrato ...
             </p>:
-            <Button
+            <Buttom
               variant="primary"
               onClick={()=> generarContrato()}
               style={{ marginTop: '10%', marginLeft: '10%' }}
             >
               Generar contrato
-            </Button>
+            </Buttom>
             }
           </div>
         </div>
@@ -275,12 +274,6 @@ const DetalleEmpleado = () => {
       </div>
 
       <>
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-          crossOrigin="anonymous"
-        />
         {/* EXPEDIENTE DIGITAL */}
         <Modal title="Expediente Digital" open={show} setOpen={setShow}>
           {archivos ? (
@@ -318,13 +311,13 @@ const DetalleEmpleado = () => {
               required
             />
 
-            <Button
+            <Buttom
               variant="primary"
               type="submit"
               style={{ width: '100%', marginTop: '20px' }}
             >
               Subir Documento
-            </Button>
+            </Buttom>
           </form>
         </Modal>
       </>
