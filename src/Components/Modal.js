@@ -1,4 +1,5 @@
 import React from 'react'
+import { Buttom } from './Buttom'
 
 const style = {
   modal: {
@@ -33,10 +34,6 @@ const style = {
     alignItems: 'center',
   },
   body: {},
-  btn: {
-    marginRight: '10px',
-    height: '28px',
-  },
   title: {
     marginLeft: '10px',
   },
@@ -52,9 +49,7 @@ export const Modal = ({ open, setOpen, children, title = 'Modal' }) => {
               <div style={style.title}>
                 <h2>{title}</h2>
               </div>
-              <button style={style.btn} onClick={() => setOpen(false)}>
-                X
-              </button>
+              <Buttom title="X" onClick={() => setOpen(false)} />
             </div>
             <hr></hr>
             <div style={style.body}>{children}</div>

@@ -10,6 +10,7 @@ import { numberToCurrency } from '../../../utils/format'
 import moment from 'moment'
 import { Link } from 'react-router-dom'
 import { Modal } from '../../Modal'
+import { Buttom } from '../../Buttom'
 
 const URL = process.env.REACT_APP_URL_URI
 
@@ -381,10 +382,7 @@ const Contabilidad = () => {
             onChange={(e) => onChangeOperacion(e)}
             required
           />
-
-          <Button variant="primary" type="submit">
-            Añadir Registro
-          </Button>
+          <Buttom title="Nuevo Registro" className="btn-btn" />
         </form>
       </Modal>
 

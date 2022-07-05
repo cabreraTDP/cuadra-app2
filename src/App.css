@@ -1,8 +1,8 @@
-.App{
-    height: 100%;
+.App {
+  height: 100%;
 }
 
-.grid-container{
+.grid-container {
   display: grid;
   grid-template-columns: 5% 95%;
   grid-template-rows: 13% 87%;
@@ -10,30 +10,30 @@
   position: relative;
 }
 
-.item-header{
+.item-header {
   grid-column: 1 / span 3;
   grid-row-start: 1;
   grid-row-end: 2;
   position: relative;
-  border-bottom: #B8BAF9 35px solid;
+  border-bottom: #b8baf9 35px solid;
 }
 
-.item-menu{
+.item-menu {
   grid-column-start: 1;
   grid-column-end: 2;
   grid-row: 2 / span 3;
-  border-right: 5px #B8BAF9 solid;
+  border-right: 5px #b8baf9 solid;
   height: 100%;
 }
 
-.item-main{
- grid-column-start: 2;
- grid-column-end: 3;
- grid-row-start: 2;
- grid-row-end: 3;
- padding: 0;
- height: 100%;
- padding-left: 4%;
- padding-right: 4%;
- background-color: #E9EEF0;
+.item-main {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  padding: 0;
+  height: 100%;
+  padding-left: 4%;
+  padding-right: 4%;
+  background-color: #e9eef0;
 }
