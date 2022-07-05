@@ -341,7 +341,7 @@ const DetalleEmpleado = () => {
               type="file"
               name="file"
               style={{ width: '100%', marginTop: '20px' }}
-              onChange={(e) => changeFile(e.target.files)}
+              onChange={(e) => changeFoto(e.target.files)}
               required
             />
 
