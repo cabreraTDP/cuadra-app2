@@ -455,7 +455,8 @@ const Contabilidad = () => {
             onChange={(e) => onChangeEditar(e)}
             required
           />
-          <Buttom title="Guardar Registro" />
+
+          <Buttom variant="primary" type="submit" title="Guardar Registro" />
           <Buttom
             title="Eliminar Registro"
             style={{ float: 'right', position: 'relative', top: '-32px' }}
