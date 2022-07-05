@@ -459,16 +459,14 @@ const Contabilidad = () => {
             required
           />
 
-          <Buttom variant="primary" type="submit">
-            Guardar Registro
-          </Buttom>
+          <Buttom variant="primary" type="submit" title='Guardar Registro' />
           <Buttom
             style={{ marginLeft: 20 }}
             variant="warning"
             onClick={() => onDeleteOperacion(registroEnEdicion._id)}
-          >
-            Eliminar Registro
-          </Buttom>
+            title='Eliminar Registro'
+          />
+
         </form>
       </Modal>
     </div>
