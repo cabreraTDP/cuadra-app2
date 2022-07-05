@@ -81,6 +81,12 @@ const DetalleEmpleado = () => {
 
   const navigate = useNavigate();
 
+  const bajaTrabajador = async(id) => {
+    const baja = await Post('/trabajadores/deleteTrabajador',{idTrabajador:id})
+    navigate('/app/empleados')
+    console.log('baja',baja)
+  }
+
   const generarContrato = async() => {
     const data = {
       patron: '',
@@ -253,13 +259,19 @@ const DetalleEmpleado = () => {
             <button
               className="submitButtonEmpleado"
               type="submit"
-              style={{ width: '100%' }}
+              style={{ width: '100%', marginLeft:'90%' }}
             >
               {' '}
               Guardar{' '}
             </button>
+            <button type="button" onClick={()=>bajaTrabajador(datos.idTrabajador)} className="submitButtonEmpleado" style={{width:'60%'}}>
+              Dar de baja
+            </button>
+            
           </form>
+          
         </div>
+        
       </div>
 
       <>

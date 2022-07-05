@@ -48,9 +48,10 @@ const Empleados = () => {
             <h1>Empleados</h1>
             <TableDisplay 
                 titles={titlesEmpleados} 
-                filter={true} 
+                paginacion={true} 
                 rawData={dataEmpleados} 
                 options={options} 
+                filter={true}
                 link={'empleados/editar/'} />
         </div>
     )
