@@ -6,7 +6,7 @@ import '../../../CSS/Contabilidad.css'
 import Icon from 'awesome-react-icons'
 import { Post } from '../../../utils/axiosUtils'
 import { numberToCurrency } from '../../../utils/format'
-import moment from 'moment'
+import moment, { invalid } from 'moment'
 import { Link } from 'react-router-dom'
 import { Modal } from '../../Modal'
 import { Buttom } from '../../Buttom'
@@ -301,14 +301,11 @@ const Contabilidad = () => {
             accept="application/pdf"
             required
           />
-
           <Buttom
-            variant="primary"
+            title="Subir Documento"
+            style={{ marginTop: '20px' }}
             type="submit"
-            style={{ width: '100%', marginTop: '20px' }}
-          >
-            Subir Documento
-          </Buttom>
+          />
         </form>
       </Modal>
 
@@ -458,17 +455,12 @@ const Contabilidad = () => {
             onChange={(e) => onChangeEditar(e)}
             required
           />
-
-          <Buttom variant="primary" type="submit">
-            Guardar Registro
-          </Buttom>
+          <Buttom title="Guardar Registro" />
           <Buttom
-            style={{ marginLeft: 20 }}
-            variant="warning"
+            title="Eliminar Registro"
+            style={{ float: 'right', position: 'relative', top: '-32px' }}
             onClick={() => onDeleteOperacion(registroEnEdicion._id)}
-          >
-            Eliminar Registro
-          </Buttom>
+          />
         </form>
       </Modal>
     </div>
