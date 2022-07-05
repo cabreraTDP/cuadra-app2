@@ -26,15 +26,22 @@ const DetalleEmpleado = () => {
 
   const [show2, setShow2] = useState(false)
 
+  const [showModalFoto , setShowModalFoto] = useState(false)
+
   const handleShow2 = () => setShow2(true)
 
   const [loadingContrato, setLoadingContrato] = useState(false)
 
   const [datosDocumento, setDatosDocumento] = useState({})
   const [archivo, setArchivo] = useState()
+  const [foto, setFoto] = useState();
 
   const changeFile = (e) => {
     setArchivo(e)
+  }
+
+  const changeFoto = (e) => {
+    setFoto(e)
   }
 
   const onChangeHandlerDocumento = (e) => {
@@ -146,6 +153,15 @@ const DetalleEmpleado = () => {
     setShow2(false)
   }
 
+  const onSubmitFoto = async (e) => {
+    e.preventDefault()
+
+    const f = new FormData()
+    f.append('file', foto[0])
+    const res = await axios.post(`${URL2}/trabajadores/subirFotoPerfil`, f)
+    setShowModalFoto(false)
+  }
+
   useEffect(() => {
     const getDatos = async (id) => {
       const data = {
@@ -215,16 +231,15 @@ const DetalleEmpleado = () => {
               borderRadius: '50%',
             }}
           >
-            <div style={{ textAlign: 'center', marginTop: '40%' }}>
+            <div onClick={()=>setShowModalFoto(true)} style={{ textAlign: 'center', marginTop: '40%' }}>
               <h3>Añadir Foto</h3>
             </div>
             <Buttom
               variant="primary"
               onClick={handleShow}
               style={{ marginTop: '50%', marginLeft: '10%' }}
-            >
-              Expediente Digital
-            </Buttom>
+              title='Expediente Digital'
+            />
             {loadingContrato ?
               <p
               style={{ marginTop: '10%', marginLeft: '10%' }}
@@ -235,9 +250,8 @@ const DetalleEmpleado = () => {
               variant="primary"
               onClick={()=> generarContrato()}
               style={{ marginTop: '10%', marginLeft: '10%' }}
-            >
-              Generar contrato
-            </Buttom>
+              title="Generar contrato"
+            />
             }
           </div>
         </div>
@@ -315,9 +329,29 @@ const DetalleEmpleado = () => {
               variant="primary"
               type="submit"
               style={{ width: '100%', marginTop: '20px' }}
-            >
-              Subir Documento
-            </Buttom>
+              title={'Subir Documento'}
+            />
+          </form>
+        </Modal>
+
+        {/* FOTO DE PERFIL */}
+        <Modal title="Foto del Empleado" open={showModalFoto} setOpen={setShowModalFoto}>
+        <form onSubmit={onSubmitFoto}>
+            <input
+              type="file"
+              name="file"
+              style={{ width: '100%', marginTop: '20px' }}
+              onChange={(e) => changeFile(e.target.files)}
+              required
+            />
+
+            <Buttom
+              variant="primary"
+              type="submit"
+              style={{ width: '100%', marginTop: '20px' }}
+              title={'Subir Foto'}
+            />
+
           </form>
         </Modal>
       </>
