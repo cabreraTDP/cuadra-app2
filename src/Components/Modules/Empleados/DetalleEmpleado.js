@@ -158,7 +158,7 @@ const DetalleEmpleado = () => {
 
     const f = new FormData()
     f.append('file', foto[0])
-    const res = await axios.post(`${URL2}/trabajadores/subirFotoPerfil`, f)
+    await axios.post(`${URL2}/trabajadores/subirFotoPerfil`, f)
     setShowModalFoto(false)
   }
 
