@@ -303,7 +303,6 @@ const Contabilidad = () => {
             required
           />
           <Buttom
-            title="Subir Documento"
             type="submit"
             style={{ width: '100%', marginTop: '20px' }}
             title="Subir Documento"
