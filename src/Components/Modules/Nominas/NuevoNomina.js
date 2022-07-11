@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Post } from '../../../utils/axiosUtils';
 import { useNavigate } from 'react-router';
-import PlusButton from '../../PlusButton'
+//import PlusButton from '../../PlusButton'
 
 const URL = process.env.REACT_APP_URL_URI;
 
@@ -32,7 +32,7 @@ const NuevoNomina = () => {
         }
     }
 
-    const options=[
+    /* const options=[
         {
             function: ()=>{
               agregarConcepto('Domingos Trabajados')
@@ -45,7 +45,7 @@ const NuevoNomina = () => {
             },
             title: 'Horas Extras'
         }
-    ]
+    ] */
 
     const [periodoInicio, setPeriodoInicio] = useState();
     const [periodoFin, setPeriodoFin] = useState();

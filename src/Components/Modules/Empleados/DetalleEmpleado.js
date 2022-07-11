@@ -3,7 +3,7 @@ import inputsEmpleado from '../../../Constants/inputsEmpleado'
 import InputForm from './InputForm'
 import TableDisplay from '../../TableDisplay'
 import { useState, useEffect } from 'react'
-import { Get, Post } from '../../../utils/axiosUtils'
+import { Post } from '../../../utils/axiosUtils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Modal } from '../../Modal'
 import { Buttom } from '../../Buttom'
@@ -235,7 +235,7 @@ const DetalleEmpleado = () => {
           >
 
               {fotoTrabajador?
-                <img src={fotoTrabajador} 
+                <img src={fotoTrabajador} alt="No disponible"
                 style={{
                   width: '200px',
                   height: '200px',
