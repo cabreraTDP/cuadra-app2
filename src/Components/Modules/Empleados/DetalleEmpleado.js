@@ -3,7 +3,7 @@ import inputsEmpleado from '../../../Constants/inputsEmpleado'
 import InputForm from './InputForm'
 import TableDisplay from '../../TableDisplay'
 import { useState, useEffect } from 'react'
-import { Post } from '../../../utils/axiosUtils'
+import { Get, Post } from '../../../utils/axiosUtils'
 import { useNavigate, useParams } from 'react-router-dom'
 import { Modal } from '../../Modal'
 import { Buttom } from '../../Buttom'
@@ -35,6 +35,8 @@ const DetalleEmpleado = () => {
   const [datosDocumento, setDatosDocumento] = useState({})
   const [archivo, setArchivo] = useState()
   const [foto, setFoto] = useState();
+
+  const [fotoTrabajador, setFotoTrabajador] = useState(false);
 
   const changeFile = (e) => {
     setArchivo(e)
@@ -155,6 +157,7 @@ const DetalleEmpleado = () => {
 
     const f = new FormData()
     f.append('file', foto[0])
+    f.append('idTrabajador', datosTrabajador._id)
     await axios.post(`${URL2}/trabajadores/subirFotoPerfil`, f)
     setShowModalFoto(false)
   }
@@ -167,6 +170,7 @@ const DetalleEmpleado = () => {
       const trabajador = await Post('/trabajadores/getTrabajador', data)
       const datosDelTrabajador = trabajador.data.data
       setDatosTrabajador(datosDelTrabajador);
+      if(datosDelTrabajador.foto) setFotoTrabajador(`${URL2}/trabajadores/downloadFile/${datosDelTrabajador.foto}`);
       setDatos({
         idTrabajador: datosDelTrabajador._id,
         nombre: (datosDelTrabajador.datosPersonales.nombre ? datosDelTrabajador.datosPersonales.nombre : ''),
@@ -219,6 +223,7 @@ const DetalleEmpleado = () => {
       >
         <div style={{ width: '25%', height: '400px', float: 'left' }}>
           <div
+          onClick={()=>setShowModalFoto(true)}
             style={{
               width: '200px',
               height: '200px',
@@ -228,12 +233,19 @@ const DetalleEmpleado = () => {
               borderRadius: '50%',
             }}
           >
-            <div onClick={()=>setShowModalFoto(true)} style={{ textAlign: 'center', marginTop: '40%' }}>
-              <h3>Añadir Foto</h3>
-            </div>
+
+              {fotoTrabajador?
+                <img src={fotoTrabajador} 
+                style={{
+                  width: '200px',
+                  height: '200px',
+                  borderRadius: '50%',
+                }}/>:
+                <h3 style={{ textAlign: 'center', marginTop: '40%', marginBottom: '50%' }}>Añadir Foto</h3>
+              }
             <Buttom
               onClick={handleShow}
-              style={{ marginTop: '50%', marginLeft: '10%', width: '150px', fontSize: '14px'}}
+              style={{ marginTop: '5px', marginLeft: '10%', width: '150px', fontSize: '14px'}}
               title='Expediente Digital'
             />
             {loadingContrato ?
