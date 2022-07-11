@@ -146,7 +146,7 @@ const DetalleEmpleado = () => {
     const f = new FormData()
     f.append('file', archivo[0])
     f.append('title', datosDocumento.title)
-    const res = await axios.post(`${URL2}/trabajadores/uploadFile`, f)
+    await axios.post(`${URL2}/trabajadores/uploadFile`, f)
     setShow2(false)
   }
 
