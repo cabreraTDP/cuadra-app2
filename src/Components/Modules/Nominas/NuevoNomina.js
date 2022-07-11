@@ -152,9 +152,11 @@ const NuevoNomina = () => {
                             </div>
                                 <input type='date' className='periodoInput' name="periodoFin" onChange={onChangePeriodoFin} required/>
                         </div>
+                        {/*
                         <span className="FilterEnd">
                                 <PlusButton options={options} /> 
                             </span>
+                        */}
                     </div>
 
                 </div>
