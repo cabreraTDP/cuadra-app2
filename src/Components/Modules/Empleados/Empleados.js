@@ -23,7 +23,7 @@ const Empleados = () => {
             const trabajadores = await axios.get(`${URL}/trabajadores`, {withCredentials: true});
             setDataEmpleados(trabajadores.data.data.map((trabajador) => (
                 trabajador.datosPersonales ? {
-                    "Nombre": trabajador.datosPersonales.nombre,
+                    "Nombre": `${trabajador.datosPersonales.nombre} ${trabajador.datosPersonales.apellidoPaterno} ${trabajador.datosPersonales.apellidoMaterno}`,
                     "RFC": trabajador.datosPersonales.rfc,
                     "CURP": trabajador.datosPersonales.curp,
                     "NSS": trabajador.datosPersonales.nss,

@@ -15,6 +15,7 @@ const style = {
     zIndex: 1000,
   },
   content: {
+
     backgroundColor: '#fff',
     borderRadius: '4px',
     padding: '20px',
@@ -32,8 +33,11 @@ const style = {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
+    marginBottom: '10px'
   },
-  body: {},
+  body: {
+    margin: '20px',
+  },
   title: {
     marginLeft: '10px',
   },
@@ -49,7 +53,14 @@ export const Modal = ({ open, setOpen, children, title = 'Modal' }) => {
               <div style={style.title}>
                 <h2>{title}</h2>
               </div>
-              <Buttom title="X" onClick={() => setOpen(false)} />
+              <Buttom 
+              style={{
+                backgroundColor: "white",
+                fontSize: '24px',
+                color:"black",
+                fontWeight: 'bold'
+              }}
+              title="X" onClick={() => setOpen(false)} />
             </div>
             <hr></hr>
             <div style={style.body}>{children}</div>
