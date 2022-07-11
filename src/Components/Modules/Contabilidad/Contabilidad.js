@@ -201,7 +201,8 @@ const Contabilidad = () => {
         <div id="filtroOpcion">
           <h3>Filtro:</h3>
           <select
-            style={{ height: '30px', width: '200px' }}
+            style={{ marginTop: '17px', marginLeft: '0px', backgroundColor: 'inherit', border: '2px black solid',
+                     height: '30px', width: '200px', borderRadius: '10px', padding: '3px', textAlign: 'center' }}
             value={filtroMes}
             onChange={(e) => funcionFiltroMes(e)}
           >
@@ -254,7 +255,7 @@ const Contabilidad = () => {
             </Link>
           </div>
           <div id="opcion">
-            <Icon name="chevron-down" strokeWidth="3" size="25" color="blue" />
+            <Icon onClick={() => exportarExcel()} name="chevron-down" strokeWidth="3" size="25" color="blue" />
 
             <div onClick={() => exportarExcel()}>Exportar a Excel</div>
           </div>
@@ -279,7 +280,7 @@ const Contabilidad = () => {
         <form onSubmit={onSubmitHandlerDocumento}>
           <label>Tipo de Documento:</label>
           <select
-            style={styles.input}
+            style={{...styles.input, marginTop: '5px'}}
             name="tipo"
             onChange={(e) => onChangeTipoArchivo(e)}
             required
@@ -306,9 +307,8 @@ const Contabilidad = () => {
             variant="primary"
             type="submit"
             style={{ width: '100%', marginTop: '20px' }}
-          >
-            Subir Documento
-          </Buttom>
+            title="Subir Documento"
+          />
         </form>
       </Modal>
 
@@ -334,7 +334,8 @@ const Contabilidad = () => {
 
           <label>Categoría:</label>
           <select
-            style={styles.input}
+            style={{...styles.input, }}
+            
             name="categoria"
             onChange={(e) => onChangeOperacion(e)}
             required
@@ -380,7 +381,7 @@ const Contabilidad = () => {
             onChange={(e) => onChangeOperacion(e)}
             required
           />
-          <Buttom title="Nuevo Registro" className="btn-btn" />
+          <Buttom title="Agregar Registro" style={{width:'100%'}} className="btn-btn" />
         </form>
       </Modal>
 
@@ -459,10 +460,9 @@ const Contabilidad = () => {
             required
           />
 
-          <Buttom variant="primary" type="submit" title='Guardar Registro' />
+          <Buttom  type="submit" title='Actualizar Registro' style={{ marginTop: 10, width: '100%' }} />
           <Buttom
-            style={{ marginLeft: 20 }}
-            variant="warning"
+            style={{ marginTop: 10, width: '100%', backgroundColor: 'red' }}
             onClick={() => onDeleteOperacion(registroEnEdicion._id)}
             title='Eliminar Registro'
           />
@@ -480,6 +480,6 @@ const styles = {
     marginBottom: 15,
     border: '1px black solid',
     height: 35,
-    padding: 5,
+    padding: 2,
   },
 }

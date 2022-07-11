@@ -27,7 +27,7 @@ const Nominas = () => {
                     "Periodo Inicio": moment(nomina.detalle.periodoInicio).format("DD-MM-YYYY"),
                     "Periodo Fin": moment(nomina.detalle.periodoFin).format("DD-MM-YYYY"),
                     "Semana": nomina.detalle.semana,
-                    "Total": nomina.detalle.total,
+                    "Total": nomina.detalle.total.toFixed(2),
                     "Ver": nomina._id
                 } :
                 {

@@ -88,9 +88,8 @@ const DetalleEmpleado = () => {
   const navigate = useNavigate();
 
   const bajaTrabajador = async(id) => {
-    const baja = await Post('/trabajadores/deleteTrabajador',{idTrabajador:id})
+    await Post('/trabajadores/deleteTrabajador',{idTrabajador:id})
     navigate('/app/empleados')
-    console.log('baja',baja)
   }
 
   const generarContrato = async() => {
@@ -147,9 +146,7 @@ const DetalleEmpleado = () => {
     const f = new FormData()
     f.append('file', archivo[0])
     f.append('title', datosDocumento.title)
-    console.log(f.get('file'))
     const res = await axios.post(`${URL2}/trabajadores/uploadFile`, f)
-    console.log(res)
     setShow2(false)
   }
 
@@ -235,9 +232,8 @@ const DetalleEmpleado = () => {
               <h3>Añadir Foto</h3>
             </div>
             <Buttom
-              variant="primary"
               onClick={handleShow}
-              style={{ marginTop: '50%', marginLeft: '10%' }}
+              style={{ marginTop: '50%', marginLeft: '10%', width: '150px', fontSize: '14px'}}
               title='Expediente Digital'
             />
             {loadingContrato ?
@@ -247,9 +243,8 @@ const DetalleEmpleado = () => {
               Generando Contrato ...
             </p>:
             <Buttom
-              variant="primary"
               onClick={()=> generarContrato()}
-              style={{ marginTop: '10%', marginLeft: '10%' }}
+              style={{ marginTop: '10%', marginLeft: '10%', width: '150px', fontSize: '14px' }}
               title="Generar contrato"
             />
             }
@@ -277,7 +272,7 @@ const DetalleEmpleado = () => {
               {' '}
               Guardar{' '}
             </button>
-            <button type="button" onClick={()=>bajaTrabajador(datos.idTrabajador)} className="submitButtonEmpleado" style={{width:'60%'}}>
+            <button type="button" onClick={()=>bajaTrabajador(datosTrabajador._id)} className="submitButtonEmpleado" style={{width:'60%'}}>
               Dar de baja
             </button>
             
@@ -300,9 +295,8 @@ const DetalleEmpleado = () => {
               target="_blank"
             />
           ) : null}
-          <button onClick={handleShow2} className="btn-primary">
-            Subir Archivos
-          </button>
+          <Buttom onClick={handleShow2} className="btn-primary" title="Subir Archivos" style={{ marginTop: '25px', width: '100%'}}/>
+
         </Modal>
 
         {/* SUBIR ARCHIVOS */}
@@ -312,7 +306,7 @@ const DetalleEmpleado = () => {
             <input
               type="text"
               name="title"
-              style={{ width: '100%', marginTop: '10px' }}
+              style={{ width: '100%', marginTop: '10px', padding: '7px' }}
               onChange={(e) => onChangeHandlerDocumento(e)}
               required
             />
