@@ -20,6 +20,7 @@ const NuevoNomina = () => {
 
     const [titles, setTitles] = useState(['Nombre','Faltas','Complementos','Rebajes']);
 
+    /*
     const agregarConcepto = (titulo) => {
         if(titles.filter(title => title === titulo).length === 0){
             setTitles([...titles,titulo]) 
@@ -32,7 +33,7 @@ const NuevoNomina = () => {
         }
     }
 
-    /* const options=[
+     const options=[
         {
             function: ()=>{
               agregarConcepto('Domingos Trabajados')
