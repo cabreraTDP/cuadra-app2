@@ -8,6 +8,7 @@ const mapaDetalleEmpleado = {
     'calle': 'datosPersonales.direccion.calle',
     'numeroExterior': 'datosPersonales.direccion.numeroExterior',
     'numeroInterior': 'datosPersonales.direccion.numeroInterior',
+    'colonia': 'datosPersonales.direccion.colonia',
     'codigoPostal': 'datosPersonales.direccion.codigoPostal',
     'municipio': 'datosPersonales.direccion.municipio',
     'estado': 'datosPersonales.direccion.estado',

@@ -63,6 +63,13 @@ const inputsEmpleado = [
         value:""
     }, 
     {
+        etiqueta: "Colonia",
+        placeholder: "----",
+        tipo: "text",
+        name: "colonia",
+        value:""
+    }, 
+    {
         etiqueta: "Código Postal",
         placeholder: "----",
         tipo: "text",

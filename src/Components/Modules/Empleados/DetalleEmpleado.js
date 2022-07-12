@@ -74,6 +74,7 @@ const DetalleEmpleado = () => {
     calle: '',
     numeroExterior: '',
     numeroInterior: '',
+    colonia: '',
     codigoPostal: '',
     municipio: '',
     estado: '',
@@ -182,6 +183,7 @@ const DetalleEmpleado = () => {
         calle: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.calle : ''),
         numeroExterior: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.numeroExterior : ''),
         numeroInterior: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.numeroInterior : ''),
+        colonia: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.colonia : ''),
         codigoPostal: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.codigoPostal : ''),
         municipio: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.municipio : ''),
         estado: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.estado : ''),
@@ -263,7 +265,7 @@ const DetalleEmpleado = () => {
           </div>
         </div>
         <div style={{ width: '30px', height: '400px', float: 'left' }}></div>
-        <div>
+        <div >
           <form className="grid-layout" onSubmit={onSubmitHandler}>
             {inputsEmpleado.map((input) => (
               <InputForm
@@ -276,18 +278,23 @@ const DetalleEmpleado = () => {
                 value={datos[input.name]}
               />
             ))}
-            <button
-              className="submitButtonEmpleado"
-              type="submit"
-              style={{ width: '100%', marginLeft:'90%' }}
-            >
-              {' '}
-              Guardar{' '}
-            </button>
-            <button type="button" onClick={()=>bajaTrabajador(datosTrabajador._id)} className="submitButtonEmpleado" style={{width:'60%'}}>
-              Dar de baja
-            </button>
-            
+            <div style={{padding: '2px', marginTop: '2px'}}></div>
+            <div style={{padding: '2px', marginTop: '2px'}}></div>
+            <div style={{padding: '2px', marginTop: '2px'}}></div>
+            <div style={{padding: '2px', marginTop: '2px'}}>
+              <button
+                className="submitButtonEmpleado"
+                type="submit"
+                style={{ width: '90%', marginLeft: '0'}}
+              >
+                Guardar
+              </button>
+            </div>
+            <div style={{padding: '2px', marginTop: '2px'}}>
+              <button type="button" onClick={()=>bajaTrabajador(datosTrabajador._id)} className="submitButtonEmpleado" style={{width:'90%', marginLeft: '0'}}>
+                Dar de baja
+              </button>
+            </div>
           </form>
           
         </div>

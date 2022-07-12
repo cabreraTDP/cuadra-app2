@@ -1,4 +1,4 @@
-const InputForm = ({etiqueta, placeholder, tipo, name, value={}, onChangeHandler}) => {
+const InputForm = ({etiqueta, placeholder, tipo, name, value, onChangeHandler}) => {
 
     return (
         <div style={{ padding:'2px', marginTop:'2px'}}>
