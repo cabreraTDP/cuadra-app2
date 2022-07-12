@@ -28,6 +28,8 @@ const DetalleEmpleado = () => {
 
   const [showModalFoto , setShowModalFoto] = useState(false)
 
+  const [showModalMovimiento, setShowModalMovimiento] = useState(false);
+
   const handleShow2 = () => setShow2(true)
 
   const [loadingContrato, setLoadingContrato] = useState(false)
@@ -35,6 +37,8 @@ const DetalleEmpleado = () => {
   const [datosDocumento, setDatosDocumento] = useState({})
   const [archivo, setArchivo] = useState()
   const [foto, setFoto] = useState();
+
+  const [fechaMovimiento, setFechaMovimiento] = useState({});
 
   const [fotoTrabajador, setFotoTrabajador] = useState(false);
 
@@ -91,12 +95,12 @@ const DetalleEmpleado = () => {
   const navigate = useNavigate();
 
   const bajaTrabajador = async(id) => {
-    await Post('/trabajadores/deleteTrabajador',{idTrabajador:id})
+    await Post('/trabajadores/deleteTrabajador',{idTrabajador:id, fechaMovimiento})
     navigate('/app/empleados')
   }
 
   const altaTrabajador = async(id) => {
-    await Post('/trabajadores/altaTrabajador',{idTrabajador:id})
+    await Post('/trabajadores/altaTrabajador',{idTrabajador:id, fechaMovimiento})
     navigate('/app/empleados')
   }
 
@@ -166,6 +170,13 @@ const DetalleEmpleado = () => {
     f.append('idTrabajador', datosTrabajador._id)
     await axios.post(`${URL2}/trabajadores/subirFotoPerfil`, f)
     setShowModalFoto(false)
+  }
+
+  const onChangeMovimiento = async (e) => {
+    const { name, value } = e.target
+    setFechaMovimiento({
+      [name]: value,
+    })
   }
 
   useEffect(() => {
@@ -297,10 +308,10 @@ const DetalleEmpleado = () => {
             </div>
             <div style={{padding: '2px', marginTop: '2px'}}>
             {datosTrabajador.activo ? 
-              <button type="button" onClick={()=>bajaTrabajador(datosTrabajador._id)} className="submitButtonEmpleado" style={{width:'90%', marginLeft: '0'}}>
+              <button type="button" onClick={()=> setShowModalMovimiento(true)} className="submitButtonEmpleado" style={{width:'90%', marginLeft: '0'}}>
                 Dar de baja
               </button> :
-              <button type="button" onClick={()=>altaTrabajador(datosTrabajador._id)} className="submitButtonEmpleado" style={{width:'90%', marginLeft: '0'}}>
+              <button type="button" onClick={()=>setShowModalMovimiento(true)} className="submitButtonEmpleado" style={{width:'90%', marginLeft: '0'}}>
                 Dar de alta
               </button>
             }
@@ -377,9 +388,47 @@ const DetalleEmpleado = () => {
 
           </form>
         </Modal>
+
+        {/* ALTAS / BAJAS */}
+        <Modal title="Mobimiento" open={showModalMovimiento} setOpen={setShowModalMovimiento}>
+
+          <label>Fecha Operación:</label>
+          <input
+            type="date"
+            name="fechaMovimiento"
+            style={styles.input}
+            onChange={(e) => onChangeMovimiento(e)}
+            required
+          />
+
+            {datosTrabajador.activo ? 
+              <Buttom style={{width:'100%', marginLeft: '0'}} 
+                      type="button" 
+                      title="Dar de baja"
+                      onClick={()=>bajaTrabajador(datosTrabajador._id)} 
+                      className="submitButtonEmpleado" />
+              :
+              <Buttom 
+                      type="button"
+                      title="Dar de alta" 
+                      onClick={()=>altaTrabajador(datosTrabajador._id)} 
+                      className="submitButtonEmpleado" 
+                      style={{width:'100%', marginLeft: '0'}} />
+            }
+        </Modal>
       </>
     </div>
   )
 }
 
 export default DetalleEmpleado
+
+const styles = {
+  input: {
+    width: '100%',
+    marginBottom: 15,
+    border: '1px black solid',
+    height: 35,
+    padding: 2,
+  },
+}
