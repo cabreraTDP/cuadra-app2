@@ -18,7 +18,7 @@ const NuevoNomina = () => {
         "Rebajes": 0
     }]);
 
-    const [titles, setTitles] = useState(['Nombre','Faltas','Complementos','Rebajes']);
+    const [titles] = useState(['Nombre','Faltas','Complementos','Rebajes']);
 
     /*
     const agregarConcepto = (titulo) => {
