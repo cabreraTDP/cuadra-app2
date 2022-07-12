@@ -17,6 +17,7 @@ import DetalleNomina from './Components/Modules/Nominas/DetalleNomina';
 
 import Contabilidad from "./Components/Modules/Contabilidad/Contabilidad";
 import Analisis from "./Components/Modules/Contabilidad/Analisis";
+import Bajas from './Components/Modules/Empleados/Bajas';
 
 
 
@@ -48,6 +49,7 @@ const RoutingPage = () => {
                         <Route path="/app/*" element={<App />} >
                             <Route exact path="home" element={<Home />} />
                             <Route exact path="empleados" element={<Empleados />} />
+                            <Route exact path="bajas" element={<Bajas />} />
                             <Route path="empleados/nuevo" element={<NuevoEmpleado />} />
                             <Route path="empleados/editar/:id" element={<DetalleEmpleado />} />
                             <Route path="nominas" element={<Nominas />} />
