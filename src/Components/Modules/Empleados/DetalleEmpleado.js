@@ -261,6 +261,11 @@ const DetalleEmpleado = () => {
                 }}/>:
                 <h3 style={{ textAlign: 'center', marginTop: '40%', marginBottom: '50%' }}>Añadir Foto</h3>
               }
+            </div>
+            <div 
+              style={{
+                margin: '265px 0 0 20px',
+              }}>
             <Buttom
               onClick={handleShow}
               style={{ marginTop: '5px', marginLeft: '10%', width: '150px', fontSize: '14px'}}
