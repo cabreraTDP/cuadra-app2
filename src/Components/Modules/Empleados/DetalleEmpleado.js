@@ -69,6 +69,7 @@ const DetalleEmpleado = () => {
   const { id } = useParams()
 
   const [datos, setDatos] = useState({
+    idTrabajador: '',
     nombre: '',
     apellidoPaterno: '',
     apellidoMaterno: '',
@@ -158,6 +159,7 @@ const DetalleEmpleado = () => {
     const f = new FormData()
     f.append('file', archivo[0])
     f.append('title', datosDocumento.title)
+    f.append('idTrabajador', id)
     await axios.post(`${URL2}/trabajadores/uploadFile`, f)
     setShow2(false)
   }
@@ -346,7 +348,7 @@ const DetalleEmpleado = () => {
 
         {/* SUBIR ARCHIVOS */}
         <Modal title="Subir Archivos" open={show2} setOpen={setShow2}>
-          <form onSubmit={onSubmitHandlerDocumento}>
+          <form onSubmit={(e)=>onSubmitHandlerDocumento(e)}>
             <label>Nombre del documento:</label>
             <input
               type="text"
