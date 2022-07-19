@@ -1,5 +1,12 @@
 const inputsEmpleado = [
     {
+        etiqueta: "ID",
+        placeholder: "----",
+        tipo: "text",
+        name: "ID",
+        value:""
+    },
+    {
         etiqueta: "Nombre (s):",
         placeholder: "----",
         tipo: "text",
@@ -39,6 +46,20 @@ const inputsEmpleado = [
         placeholder: "----",
         tipo: "text",
         name: "rfc",
+        value:""
+    }, 
+    {
+        etiqueta: "Estado Civil",
+        placeholder: "----",
+        tipo: "text",
+        name: "estadoCivil",
+        value:""
+    }, 
+    {
+        etiqueta: "Sexo",
+        placeholder: "----",
+        tipo: "text",
+        name: "sexo",
         value:""
     }, 
     {

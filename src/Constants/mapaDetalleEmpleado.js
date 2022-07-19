@@ -1,10 +1,13 @@
 const mapaDetalleEmpleado = {
+    'ID': 'datosLaborales.ID',
     'nombre': 'datosPersonales.nombre',
     'apellidoPaterno': 'datosPersonales.apellidoPaterno',
     'apellidoMaterno': 'datosPersonales.apellidoMaterno',
     'nss': 'datosPersonales.nss',
     'curp': 'datosPersonales.curp',
     'rfc': 'datosPersonales.rfc',
+    'estadoCivil': 'datosPersonales.estadoCivil',
+    'sexo': 'datosPersonales.sexo',
     'calle': 'datosPersonales.direccion.calle',
     'numeroExterior': 'datosPersonales.direccion.numeroExterior',
     'numeroInterior': 'datosPersonales.direccion.numeroInterior',

@@ -70,12 +70,15 @@ const DetalleEmpleado = () => {
 
   const [datos, setDatos] = useState({
     idTrabajador: '',
+    ID: '',
     nombre: '',
     apellidoPaterno: '',
     apellidoMaterno: '',
     nss: '',
     curp: '',
     rfc: '',
+    estadoCivil: '',
+    sexo: '',
     calle: '',
     numeroExterior: '',
     numeroInterior: '',
@@ -113,7 +116,7 @@ const DetalleEmpleado = () => {
       direccion_representante: '',
       principal_actividad: 'principal actividad',
       nombre_empleado: `${datosTrabajador.datosPersonales.nombre} ${datosTrabajador.datosPersonales.apellidoPaterno} ${datosTrabajador.datosPersonales.apellidoMaterno}`,
-      sexo: '',
+      sexo: datosTrabajador.datosPersonales.sexo,
       fecha_nacimiento: '',
       nss: datosTrabajador.datosPersonales.nss,
       rfc: datosTrabajador.datosPersonales.rfc,
@@ -147,6 +150,7 @@ const DetalleEmpleado = () => {
 
   const onChangeHandler = async (e) => {
     const { name, value } = e.target
+    console.log('ingreso editado', value)
     await setDatos({
       ...datos,
       [name]: value,
@@ -192,12 +196,15 @@ const DetalleEmpleado = () => {
       if(datosDelTrabajador.foto) setFotoTrabajador(`${URL2}/trabajadores/downloadFile/${datosDelTrabajador.foto}`);
       setDatos({
         idTrabajador: datosDelTrabajador._id,
+        ID: (datosDelTrabajador.datosLaborales.ID ? datosDelTrabajador.datosLaborales.ID : ''),
         nombre: (datosDelTrabajador.datosPersonales.nombre ? datosDelTrabajador.datosPersonales.nombre : ''),
         apellidoPaterno: (datosDelTrabajador.datosPersonales.apellidoPaterno ? datosDelTrabajador.datosPersonales.apellidoPaterno : ''),
         apellidoMaterno: (datosDelTrabajador.datosPersonales.apellidoMaterno ? datosDelTrabajador.datosPersonales.apellidoMaterno : ''),
         nss: (datosDelTrabajador.datosPersonales.nss ? datosDelTrabajador.datosPersonales.nss : ''),
         curp: (datosDelTrabajador.datosPersonales.curp ? datosDelTrabajador.datosPersonales.curp : ''),
         rfc: (datosDelTrabajador.datosPersonales.rfc ? datosDelTrabajador.datosPersonales.rfc : ''),
+        estadoCivil: (datosDelTrabajador.datosPersonales.estadoCivil ? datosDelTrabajador.datosPersonales.estadoCivil : ''),
+        sexo: (datosDelTrabajador.datosPersonales.sexo ? datosDelTrabajador.datosPersonales.sexo : ''),
         calle: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.calle : ''),
         numeroExterior: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.numeroExterior : ''),
         numeroInterior: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.numeroInterior : ''),
@@ -210,7 +217,7 @@ const DetalleEmpleado = () => {
         clabe: (datosDelTrabajador.datosBancarios ? datosDelTrabajador.datosBancarios.clabe : ''),
         Puesto: (datosDelTrabajador.datosLaborales.puesto ? datosDelTrabajador.datosLaborales.puesto : ''),
         sueldo: datosDelTrabajador.datosLaborales.sueldo,
-        ingreso: moment(datosDelTrabajador.datosLaborales.ingreso).format('YYYY-MM-DD')
+        ingreso: moment.utc(datosDelTrabajador.datosLaborales.ingreso).format('YYYY-MM-DD')
       });
       setArchivos(datosDelTrabajador.documentos.length>0?
         datosDelTrabajador.documentos.map(documento => (
