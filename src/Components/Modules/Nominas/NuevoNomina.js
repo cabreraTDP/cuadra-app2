@@ -126,7 +126,7 @@ const NuevoNomina = () => {
         <div>
             <h1>Crear Nómina</h1>
             <div style={{ marginLeft: '50px', marginRight: '50px' }}>
-            <form onSubmit={onSubmitHandler}>
+            <form onSubmit={(e) => onSubmitHandler(e)}>
                 <div id="contenedorPrincipal">
 
                     <div id="informacion">
@@ -166,7 +166,9 @@ const NuevoNomina = () => {
                     <TableNominasNueva 
                     titles={titles} 
                     rawData={dataEmpleados} 
-                    onChangeHandler={(e)=>onChangeHandler(e)}/>
+                    onChangeHandler={(e)=>onChangeHandler(e)}
+                   
+                    />
 
                     <button type='submit' className='submitButton'>Enviar</button>
                     
