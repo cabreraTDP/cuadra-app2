@@ -4,6 +4,7 @@ import TableDisplay from "../../TableDisplay"
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Post } from '../../../utils/axiosUtils';
+import { numberToCurrency } from '../../../utils/format';
 const XLSX = require("xlsx")
 const titlesNomina = ['Nombre','Banco','Clabe','Faltas','Complementos',"Rebajes", "Total a pagar"]
 
@@ -52,7 +53,7 @@ const DetalleNomina = () => {
                 "Faltas": registro.faltas,
                 "Complementos": registro.complementos,
                 "Rebajes": registro.rebajes,
-                "Total a pagar": registro.totalPagar
+                "Total a pagar": numberToCurrency(registro.totalPagar.toFixed(2))
             }));
 
             setNomina(registros);
