@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Post } from '../../../utils/axiosUtils';
 import { useNavigate } from 'react-router';
+import { Modal } from '../../Modal';
 //import PlusButton from '../../PlusButton'
 
 const URL = process.env.REACT_APP_URL_URI;
@@ -51,6 +52,9 @@ const NuevoNomina = () => {
     const [periodoInicio, setPeriodoInicio] = useState();
     const [periodoFin, setPeriodoFin] = useState();
     const [esquema, setEsquema] = useState();
+
+    const [aviso, setAviso] = useState(true);
+
 
     const onChangePeriodoInicio = (e) => {
         const {value} = e.target;
@@ -176,6 +180,15 @@ const NuevoNomina = () => {
                 </form>
             </div>
 
+        <Modal
+        title="Instrucciones"
+        open={aviso}
+        setOpen={setAviso}
+        >
+                <div>
+                    <p style={{fontSize: 20}}>Primero llena la nómina y una vez completada ingresa los datos del esquema y la fecha. Para finalizar da click en el boton "Enviar". </p>
+                </div>
+        </Modal>
         </div>
     )
 }
