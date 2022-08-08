@@ -164,7 +164,17 @@ const DetalleEmpleado = () => {
     f.append('file', archivo[0])
     f.append('title', datosDocumento.title)
     f.append('idTrabajador', id)
-    await axios.post(`${URL2}/trabajadores/uploadFile`, f)
+    const documento = await axios.post(`${URL2}/trabajadores/uploadFile`, f)
+    console.log(documento)
+    ////
+    setArchivos([
+      ...archivos,
+      {
+        "Titulo": documento.data.documento.titulo,
+        "Fecha": moment(Date.now()).format("YYYY-MM-DD"),
+        "Ver": documento.data.documento.URI
+      }
+    ]);
     setShow2(false)
   }
 
@@ -175,6 +185,8 @@ const DetalleEmpleado = () => {
     f.append('file', foto[0])
     f.append('idTrabajador', datosTrabajador._id)
     await axios.post(`${URL2}/trabajadores/subirFotoPerfil`, f)
+
+
     setShowModalFoto(false)
   }
 
