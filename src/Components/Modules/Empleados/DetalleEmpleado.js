@@ -89,7 +89,7 @@ const DetalleEmpleado = () => {
     banco: '',
     cuenta: '',
     clabe: '',
-    Puesto: '',
+    puesto: '',
     sueldo: '',
     ingreso: '',
   })
