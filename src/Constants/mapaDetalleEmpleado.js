@@ -18,7 +18,7 @@ const mapaDetalleEmpleado = {
     'banco': 'datosBancarios.banco',
     'cuenta': 'datosBancarios.cuenta',
     'clabe': 'datosBancarios.clabe',
-    'Puesto': 'datosLaborales.puesto',
+    'puesto': 'datosLaborales.puesto',
     'sueldo': 'datosLaborales.sueldo',
     'ingreso': 'datosLaborales.ingreso'
   };

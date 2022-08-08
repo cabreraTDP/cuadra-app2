@@ -136,7 +136,7 @@ const inputsEmpleado = [
         etiqueta: "Puesto",
         placeholder: "----",
         tipo: "text",
-        name: "Puesto",
+        name: "puesto",
         value:""
     }, 
     {
