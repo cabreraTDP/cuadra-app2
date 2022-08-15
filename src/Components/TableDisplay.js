@@ -118,8 +118,8 @@ const TableDisplay = (props) => {
                  <tr {...row.getRowProps()}>
                     {row.cells.map(cell => (
                    cell.column.Header==='Ver'|cell.column.Header==='Editar'| cell.column.Header==='Eliminar'?
-                    props.type==='button'?
-                    <td {...cell.getCellProps()}><button style={{backgroundColor:'inherit', border:'none', textDecoration:'underline'}} onClick={()=>props.buttonFunction(cell.value)}>{cell.column.Header}</button></td>    :
+                    props.type==='button' | cell.column.Header==='Eliminar'?
+                    <td {...cell.getCellProps()}><button style={{backgroundColor:'inherit', border:'none', textDecoration:'underline', fontSize: '16px'}} onClick={()=>{props.buttonFunction(cell.value); console.log('valores', cell)}}>{cell.column.Header}</button></td>    :
                     <td {...cell.getCellProps()}><a href={`${props.link}${cell.value}`} target={props.target?props.target:'_self'}>{cell.column.Header}</a></td>    :
                     <td {...cell.getCellProps()}>{cell.render('Cell')}</td> 
                     ))}

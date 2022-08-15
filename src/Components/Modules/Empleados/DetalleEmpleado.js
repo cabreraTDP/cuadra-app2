@@ -15,7 +15,7 @@ import moment from 'moment';
 
 const URL2 = `${process.env.REACT_APP_URL_URI}`;
 
-const titleArchivos = ['Titulo', 'Fecha', 'Ver']
+const titleArchivos = ['Titulo', 'Fecha', 'Ver', 'Eliminar']
 
 //Tratar de abstraer una estructura del json para el llenado del formulario
 
@@ -142,6 +142,17 @@ const DetalleEmpleado = () => {
       
   }
 
+  const eliminarDocumento = async(value) => {
+    const params = {
+      uri: value,
+      idTrabajador: datos.idTrabajador
+    }
+    await Post('/trabajadores/deleteFile/', params)
+
+    setArchivos([...archivos.filter((archivo) => archivo.Ver !== value)])
+
+  }
+
   const onSubmitHandler = async (e) => {
     e.preventDefault()
     await Post('/trabajadores/edit', datos)
@@ -236,13 +247,15 @@ const DetalleEmpleado = () => {
         {
           "Titulo": documento.titulo,
           "Fecha": documento.createdAt.slice(0,10),
-          "Ver": documento.URI
+          "Ver": documento.URI,
+          "Eliminar": documento.URI
         }))
         :
         [{
           "Titulo": '',
           "Fecha": '',
-          "Ver": ''
+          "Ver": '',
+          "Eliminar": ''
         }]
       );
     }
@@ -359,6 +372,7 @@ const DetalleEmpleado = () => {
               paginacion={false}
               link={`${URL2}/trabajadores/downloadFile/`}
               target="_blank"
+              buttonFunction={(value) => eliminarDocumento(value)}
             />
           ) : null}
           <Buttom onClick={handleShow2} className="btn-primary" title="Subir Archivos" style={{ marginTop: '25px', width: '100%'}}/>
