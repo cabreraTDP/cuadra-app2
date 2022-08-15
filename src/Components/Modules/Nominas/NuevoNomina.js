@@ -54,6 +54,7 @@ const NuevoNomina = () => {
     const [esquema, setEsquema] = useState();
 
     const [aviso, setAviso] = useState(true);
+    const [skipPageReset, setSkipPageReset] = useState(false)
 
 
     const onChangePeriodoInicio = (e) => {
@@ -84,6 +85,7 @@ const NuevoNomina = () => {
     const onChangeHandler = (e) => {
         e.preventDefault();
         const {name, id, value} = e.target;
+        setSkipPageReset(true)
 
         datos[id][name] = Number(value)
         setDatos([
@@ -96,6 +98,7 @@ const NuevoNomina = () => {
         ])
 
     };
+
 
     const onSubmitHandler = async(e) => {
         e.preventDefault();
@@ -149,7 +152,7 @@ const NuevoNomina = () => {
                             <div id="titulo">
                                 Esquema
                             </div>
-                                <select name="esquema" className='esquemaInput' onChange={onChangeEsquema} required>
+                                <select name="esquema" className='esquemaInput' onChange={(e) => onChangeEsquema(e)} required>
                                     <option value="Semana">Semanal</option>
                                     <option value="Quincena">Quincenal</option>
 
@@ -159,13 +162,13 @@ const NuevoNomina = () => {
                             <div id="titulo">
                                 De la fecha:
                             </div>
-                                <input className='periodoInput' type='date' name="periodoInicio" onChange={onChangePeriodoInicio} required/>
+                                <input className='periodoInput' type='date' name="periodoInicio" onChange={(e) => onChangePeriodoInicio(e)} required/>
                         </div>
                         <div id="informacionEspecifica">
                             <div id="titulo">
                                 A la fecha:
                             </div>
-                                <input type='date' className='periodoInput' name="periodoFin" onChange={onChangePeriodoFin} required/>
+                                <input type='date' className='periodoInput' name="periodoFin" onChange={(e) => onChangePeriodoFin(e)} required/>
                         </div>
                         {/*
                         <span className="FilterEnd">
@@ -181,7 +184,7 @@ const NuevoNomina = () => {
                     titles={titles} 
                     rawData={dataEmpleados} 
                     onChangeHandler={(e)=>onChangeHandler(e)}
-                   
+                    skipPageReset={skipPageReset}
                     />
 
                     <button type='submit' className='submitButton'>Enviar</button>

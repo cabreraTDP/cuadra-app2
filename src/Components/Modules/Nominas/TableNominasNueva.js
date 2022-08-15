@@ -58,6 +58,7 @@ const TableNominasNueva = (props) => {
           data,
           defaultColumn,
           initialState: { pageIndex: 0, pageSize: 8 },
+          autoResetPage: !props.skipPageReset,
         },
         useFilters, // useFilters!
         useGlobalFilter,
