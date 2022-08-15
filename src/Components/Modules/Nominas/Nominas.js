@@ -51,6 +51,7 @@ const Nominas = () => {
                 filter={true} 
                 rawData={dataNominas} 
                 options={options} 
+                paginacion={true}
                 link={'nominas/ver/'} />
         </div>
     )
