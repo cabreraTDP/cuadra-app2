@@ -85,6 +85,7 @@ const NuevoNomina = () => {
         setDatos([
             ...datos
         ]);
+
     };
 
     const onSubmitHandler = async(e) => {
@@ -114,9 +115,9 @@ const NuevoNomina = () => {
                 {
                 "trabajador": trabajador._id,
                 "sueldoBase": Number(trabajador.datosLaborales.sueldo),
-                "dias": 0,
-                "complementos": 0,
-                "rebajes": 0
+                "Faltas": 0,
+                "Complementos": 0,
+                "Rebajes": 0
                 }
             )
             ));
