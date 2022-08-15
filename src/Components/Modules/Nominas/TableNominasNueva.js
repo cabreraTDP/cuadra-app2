@@ -106,7 +106,7 @@ const TableNominasNueva = (props) => {
                  <tr {...row.getRowProps()}>
                    {row.cells.map(cell => 
                    cell.column.Header!=='Nombre'?
-                    <td {...cell.getCellProps()}><input type='number' className='inputNomina' name={cell.column.Header} id={cell.row.id} onChange={(e) => props.onChangeHandler(e)}/></td>    :
+                    <td {...cell.getCellProps()}><input type='number' className='inputNomina' value={cell.value} placeholder={cell.value} name={cell.column.Header} id={cell.row.id} onChange={(e) => props.onChangeHandler(e)}/></td>    :
                     <td {...cell.getCellProps()}>{cell.render('Cell')}</td>
                    )}
                  </tr>

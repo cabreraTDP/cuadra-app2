@@ -57,18 +57,21 @@ const NuevoNomina = () => {
 
 
     const onChangePeriodoInicio = (e) => {
+        e.preventDefault();
         const {value} = e.target;
 
         setPeriodoInicio(value);
     };
 
     const onChangePeriodoFin = (e) => {
+        e.preventDefault();
         const {value} = e.target;
 
         setPeriodoFin(value);
     };
 
     const onChangeEsquema = (e) => {
+        e.preventDefault();
         const {value} = e.target;
 
         setEsquema(value);
@@ -79,12 +82,18 @@ const NuevoNomina = () => {
     const navigate = useNavigate();
 
     const onChangeHandler = (e) => {
+        e.preventDefault();
         const {name, id, value} = e.target;
 
         datos[id][name] = Number(value)
         setDatos([
             ...datos
         ]);
+
+        dataEmpleados[id][name] = Number(value)
+        setDataEmpleados([
+            ...dataEmpleados
+        ])
 
     };
 
