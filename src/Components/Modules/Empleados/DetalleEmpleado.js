@@ -68,6 +68,8 @@ const DetalleEmpleado = () => {
 
   const { id } = useParams()
 
+  const[datosEmpresa, setDatosEmpresa] = useState({})
+
   const [datos, setDatos] = useState({
     idTrabajador: '',
     ID: '',
@@ -110,10 +112,10 @@ const DetalleEmpleado = () => {
 
   const generarContrato = async() => {
     const data = {
-      patron: '',
-      representante_legal: '',
-      rfc_representante: '',
-      direccion_representante: '',
+      patron: datosEmpresa.empresa,
+      representante_legal: datosEmpresa.representante_legal,
+      rfc_representante: datosEmpresa.rfc_representante,
+      direccion_representante: datosEmpresa.direccion_representante,
       principal_actividad: 'principal actividad',
       nombre_empleado: `${datosTrabajador.datosPersonales.nombre} ${datosTrabajador.datosPersonales.apellidoPaterno} ${datosTrabajador.datosPersonales.apellidoMaterno}`,
       sexo: datosTrabajador.datosPersonales.sexo,
@@ -214,7 +216,9 @@ const DetalleEmpleado = () => {
         idTrabajador: id,
       }
       const trabajador = await Post('/trabajadores/getTrabajador', data)
-      const datosDelTrabajador = trabajador.data.data
+      const datosDelTrabajador = trabajador.data.data.trabajador
+      const datosDeEmpresa = trabajador.data.data.cliente
+      setDatosEmpresa(datosDeEmpresa);
       setDatosTrabajador(datosDelTrabajador);
       if(datosDelTrabajador.foto) setFotoTrabajador(`${URL2}/trabajadores/downloadFile/${datosDelTrabajador.foto}`);
       setDatos({
