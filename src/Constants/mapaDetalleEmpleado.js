@@ -21,7 +21,7 @@ const mapaDetalleEmpleado = {
   'puesto': 'datosLaborales.puesto',
   'sueldo': 'datosLaborales.sueldo',
   'ingreso': 'datosLaborales.ingreso',
-  'nacimiento': 'datosPersonales.nacimiento'
+  'fecha_nacimiento': 'datosPersonales.fecha_nacimiento'
 };
 
 module.exports = { mapaDetalleEmpleado }

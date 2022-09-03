@@ -68,6 +68,8 @@ const DetalleEmpleado = () => {
 
   const { id } = useParams()
 
+  const [datosEmpresa, setDatosEmpresa] = useState({})
+
   const [datos, setDatos] = useState({
     idTrabajador: '',
     ID: '',
@@ -92,7 +94,7 @@ const DetalleEmpleado = () => {
     puesto: '',
     sueldo: '',
     ingreso: '',
-    nacimiento: ''
+    fecha_nacimiento: ''
   })
 
   const [datosTrabajador, setDatosTrabajador] = useState({})
@@ -111,14 +113,14 @@ const DetalleEmpleado = () => {
 
   const generarContrato = async () => {
     const data = {
-      patron: '',
-      representante_legal: '',
-      rfc_representante: '',
-      direccion_representante: '',
+      patron: datosEmpresa.empresa,
+      representante_legal: datosEmpresa.representante_legal,
+      rfc_representante: datosEmpresa.rfc_representante,
+      direccion_representante: datosEmpresa.direccion_representante,
       principal_actividad: 'principal actividad',
       nombre_empleado: `${datosTrabajador.datosPersonales.nombre} ${datosTrabajador.datosPersonales.apellidoPaterno} ${datosTrabajador.datosPersonales.apellidoMaterno}`,
       sexo: datosTrabajador.datosPersonales.sexo,
-      fecha_nacimiento: '',
+      fecha_nacimiento: datosTrabajador.fecha_nacimiento,
       nss: datosTrabajador.datosPersonales.nss,
       rfc: datosTrabajador.datosPersonales.rfc,
       curp: datosTrabajador.datosPersonales.curp,
@@ -215,8 +217,9 @@ const DetalleEmpleado = () => {
         idTrabajador: id,
       }
       const trabajador = await Post('/trabajadores/getTrabajador', data)
-      const datosDelTrabajador = trabajador.data.data
-      console.log(datosDelTrabajador)
+      const datosDelTrabajador = trabajador.data.data.trabajador
+      const datosDeEmpresa = trabajador.data.data.cliente
+      setDatosEmpresa(datosDeEmpresa);
       setDatosTrabajador(datosDelTrabajador);
       if (datosDelTrabajador.foto) setFotoTrabajador(`${URL2}/trabajadores/downloadFile/${datosDelTrabajador.foto}`);
       setDatos({
@@ -243,7 +246,7 @@ const DetalleEmpleado = () => {
         puesto: (datosDelTrabajador.datosLaborales.puesto ? datosDelTrabajador.datosLaborales.puesto : ''),
         sueldo: datosDelTrabajador.datosLaborales.sueldo,
         ingreso: moment.utc(datosDelTrabajador.datosLaborales.ingreso).format('YYYY-MM-DD'),
-        nacimiento: "10/05/2003"
+        fecha_nacimiento: moment.utc(datosDelTrabajador.datosPersonales.fecha_nacimiento).format('YYYY-MM-DD'),
       });
       setArchivos(datosDelTrabajador.documentos.length > 0 ?
         datosDelTrabajador.documentos.map(documento => (
@@ -336,7 +339,6 @@ const DetalleEmpleado = () => {
                 value={datos[input.name]}
               />
             ))}
-            <div style={{ padding: '2px', marginTop: '2px' }}></div>
             <div style={{ padding: '2px', marginTop: '2px' }}></div>
             <div style={{ padding: '2px', marginTop: '2px' }}></div>
             <div style={{ padding: '2px', marginTop: '2px' }}>
