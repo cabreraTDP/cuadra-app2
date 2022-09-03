@@ -68,6 +68,8 @@ const DetalleEmpleado = () => {
 
   const { id } = useParams()
 
+  const [datosEmpresa, setDatosEmpresa] = useState({})
+
   const [datos, setDatos] = useState({
     idTrabajador: '',
     ID: '',
@@ -111,10 +113,10 @@ const DetalleEmpleado = () => {
 
   const generarContrato = async () => {
     const data = {
-      patron: '',
-      representante_legal: '',
-      rfc_representante: '',
-      direccion_representante: '',
+      patron: datosEmpresa.empresa,
+      representante_legal: datosEmpresa.representante_legal,
+      rfc_representante: datosEmpresa.rfc_representante,
+      direccion_representante: datosEmpresa.direccion_representante,
       principal_actividad: 'principal actividad',
       nombre_empleado: `${datosTrabajador.datosPersonales.nombre} ${datosTrabajador.datosPersonales.apellidoPaterno} ${datosTrabajador.datosPersonales.apellidoMaterno}`,
       sexo: datosTrabajador.datosPersonales.sexo,
@@ -217,36 +219,38 @@ const DetalleEmpleado = () => {
       const trabajador = await Post('/trabajadores/getTrabajador', data)
       const datosDelTrabajador = trabajador.data.data
       console.log(datosDelTrabajador)
-      setDatosTrabajador(datosDelTrabajador);
-      if (datosDelTrabajador.foto) setFotoTrabajador(`${URL2}/trabajadores/downloadFile/${datosDelTrabajador.foto}`);
+      console.log(datosDelTrabajador.trabajador.datosPersonales.nombre)
+      setDatosTrabajador(datosDelTrabajador.trabajador);
+      setDatosEmpresa(datosDelTrabajador.cliente)
+      if (datosDelTrabajador.trabajador.foto) setFotoTrabajador(`${URL2}/trabajadores/downloadFile/${datosDelTrabajador.trabajador.foto}`);
       setDatos({
-        idTrabajador: datosDelTrabajador._id,
-        ID: (datosDelTrabajador.datosLaborales.ID ? datosDelTrabajador.datosLaborales.ID : ''),
-        nombre: (datosDelTrabajador.datosPersonales.nombre ? datosDelTrabajador.datosPersonales.nombre : ''),
-        apellidoPaterno: (datosDelTrabajador.datosPersonales.apellidoPaterno ? datosDelTrabajador.datosPersonales.apellidoPaterno : ''),
-        apellidoMaterno: (datosDelTrabajador.datosPersonales.apellidoMaterno ? datosDelTrabajador.datosPersonales.apellidoMaterno : ''),
-        nss: (datosDelTrabajador.datosPersonales.nss ? datosDelTrabajador.datosPersonales.nss : ''),
-        curp: (datosDelTrabajador.datosPersonales.curp ? datosDelTrabajador.datosPersonales.curp : ''),
-        rfc: (datosDelTrabajador.datosPersonales.rfc ? datosDelTrabajador.datosPersonales.rfc : ''),
-        estadoCivil: (datosDelTrabajador.datosPersonales.estadoCivil ? datosDelTrabajador.datosPersonales.estadoCivil : ''),
-        sexo: (datosDelTrabajador.datosPersonales.sexo ? datosDelTrabajador.datosPersonales.sexo : ''),
-        calle: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.calle : ''),
-        numeroExterior: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.numeroExterior : ''),
-        numeroInterior: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.numeroInterior : ''),
-        colonia: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.colonia : ''),
-        codigoPostal: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.codigoPostal : ''),
-        municipio: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.municipio : ''),
-        estado: (datosDelTrabajador.datosPersonales.direccion ? datosDelTrabajador.datosPersonales.direccion.estado : ''),
-        banco: (datosDelTrabajador.datosBancarios ? datosDelTrabajador.datosBancarios.banco : ''),
-        cuenta: (datosDelTrabajador.datosBancarios ? datosDelTrabajador.datosBancarios.cuenta : ''),
-        clabe: (datosDelTrabajador.datosBancarios ? datosDelTrabajador.datosBancarios.clabe : ''),
-        puesto: (datosDelTrabajador.datosLaborales.puesto ? datosDelTrabajador.datosLaborales.puesto : ''),
-        sueldo: datosDelTrabajador.datosLaborales.sueldo,
-        ingreso: moment.utc(datosDelTrabajador.datosLaborales.ingreso).format('YYYY-MM-DD'),
+        idTrabajador: datosDelTrabajador.trabajador.datosLaborales.ID,
+        ID: (datosDelTrabajador.trabajador.datosLaborales.ID ? datosDelTrabajador.trabajador.datosLaborales.ID : ''),
+        nombre: (datosDelTrabajador.trabajador.datosPersonales.nombre ? datosDelTrabajador.trabajador.datosPersonales.nombre : ''),
+        apellidoPaterno: (datosDelTrabajador.trabajador.datosPersonales.apellidoPaterno ? datosDelTrabajador.trabajador.datosPersonales.apellidoPaterno : ''),
+        apellidoMaterno: (datosDelTrabajador.trabajador.datosPersonales.apellidoMaterno ? datosDelTrabajador.trabajador.datosPersonales.apellidoMaterno : ''),
+        nss: (datosDelTrabajador.trabajador.datosPersonales.nss ? datosDelTrabajador.trabajador.datosPersonales.nss : ''),
+        curp: (datosDelTrabajador.trabajador.datosPersonales.curp ? datosDelTrabajador.trabajador.datosPersonales.curp : ''),
+        rfc: (datosDelTrabajador.trabajador.datosPersonales.rfc ? datosDelTrabajador.trabajador.datosPersonales.rfc : ''),
+        estadoCivil: (datosDelTrabajador.trabajador.datosPersonales.estadoCivil ? datosDelTrabajador.trabajador.datosPersonales.estadoCivil : ''),
+        sexo: (datosDelTrabajador.trabajador.datosPersonales.sexo ? datosDelTrabajador.trabajador.datosPersonales.sexo : ''),
+        calle: (datosDelTrabajador.trabajador.datosPersonales.direccion ? datosDelTrabajador.trabajador.datosPersonales.direccion.calle : ''),
+        numeroExterior: (datosDelTrabajador.trabajador.datosPersonales.direccion ? datosDelTrabajador.trabajador.datosPersonales.direccion.numeroExterior : ''),
+        numeroInterior: (datosDelTrabajador.trabajador.datosPersonales.direccion ? datosDelTrabajador.trabajador.datosPersonales.direccion.numeroInterior : ''),
+        colonia: (datosDelTrabajador.trabajador.datosPersonales.direccion ? datosDelTrabajador.trabajador.datosPersonales.direccion.colonia : ''),
+        codigoPostal: (datosDelTrabajador.trabajador.datosPersonales.direccion ? datosDelTrabajador.trabajador.datosPersonales.direccion.codigoPostal : ''),
+        municipio: (datosDelTrabajador.trabajador.datosPersonales.direccion ? datosDelTrabajador.trabajador.datosPersonales.direccion.municipio : ''),
+        estado: (datosDelTrabajador.trabajador.datosPersonales.direccion ? datosDelTrabajador.trabajador.datosPersonales.direccion.estado : ''),
+        banco: (datosDelTrabajador.trabajador.datosBancarios ? datosDelTrabajador.trabajador.datosBancarios.banco : ''),
+        cuenta: (datosDelTrabajador.trabajador.datosBancarios ? datosDelTrabajador.trabajador.datosBancarios.cuenta : ''),
+        clabe: (datosDelTrabajador.trabajador.datosBancarios ? datosDelTrabajador.trabajador.datosBancarios.clabe : ''),
+        puesto: (datosDelTrabajador.trabajador.datosLaborales.puesto ? datosDelTrabajador.trabajador.datosLaborales.puesto : ''),
+        sueldo: datosDelTrabajador.trabajador.datosLaborales.sueldo,
+        ingreso: moment.utc(datosDelTrabajador.trabajador.datosLaborales.ingreso).format('YYYY-MM-DD'),
         nacimiento: "10/05/2003"
       });
-      setArchivos(datosDelTrabajador.documentos.length > 0 ?
-        datosDelTrabajador.documentos.map(documento => (
+      setArchivos(datosDelTrabajador.trabajador.documentos.length > 0 ?
+        datosDelTrabajador.trabajador.documentos.map(documento => (
           {
             "Titulo": documento.titulo,
             "Fecha": documento.createdAt.slice(0, 10),
@@ -336,7 +340,6 @@ const DetalleEmpleado = () => {
                 value={datos[input.name]}
               />
             ))}
-            <div style={{ padding: '2px', marginTop: '2px' }}></div>
             <div style={{ padding: '2px', marginTop: '2px' }}></div>
             <div style={{ padding: '2px', marginTop: '2px' }}></div>
             <div style={{ padding: '2px', marginTop: '2px' }}>
