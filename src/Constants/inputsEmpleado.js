@@ -4,154 +4,161 @@ const inputsEmpleado = [
         placeholder: "----",
         tipo: "text",
         name: "ID",
-        value:""
+        value: ""
     },
     {
         etiqueta: "Nombre (s):",
         placeholder: "----",
         tipo: "text",
         name: "nombre",
-        value:""
+        value: ""
     },
     {
         etiqueta: "Apellido Paterno",
         placeholder: "----",
         tipo: "text",
         name: "apellidoPaterno",
-        value:""
+        value: ""
     },
     {
         etiqueta: "Apellido Materno",
         placeholder: "----",
         tipo: "text",
         name: "apellidoMaterno",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "NSS",
         placeholder: "----",
         tipo: "text",
         name: "nss",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "CURP",
         placeholder: "----",
         tipo: "text",
         name: "curp",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "RFC",
         placeholder: "----",
         tipo: "text",
         name: "rfc",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "Estado Civil",
         placeholder: "----",
         tipo: "text",
         name: "estadoCivil",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "Sexo",
         placeholder: "----",
         tipo: "text",
         name: "sexo",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "Calle",
         placeholder: "----",
         tipo: "text",
         name: "calle",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "Número Exterior",
         placeholder: "----",
         tipo: "text",
         name: "numeroExterior",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "Número Interior",
         placeholder: "----",
         tipo: "text",
         name: "numeroInterior",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "Colonia",
         placeholder: "----",
         tipo: "text",
         name: "colonia",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "Código Postal",
         placeholder: "----",
         tipo: "text",
         name: "codigoPostal",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "Municipio",
         placeholder: "----",
         tipo: "text",
         name: "municipio",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "Estado",
         placeholder: "----",
         tipo: "text",
         name: "estado",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "Banco",
         placeholder: "----",
         tipo: "text",
         name: "banco",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "Cuenta",
         placeholder: "----",
         tipo: "text",
         name: "cuenta",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "Clabe",
         placeholder: "----",
         tipo: "text",
         name: "clabe",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "Puesto",
         placeholder: "----",
         tipo: "text",
         name: "puesto",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "Sueldo",
         placeholder: "----",
         tipo: "text",
         name: "sueldo",
-        value:""
-    }, 
+        value: ""
+    },
     {
         etiqueta: "Fecha Ingreso",
         placeholder: "----",
         tipo: "date",
         name: "ingreso",
-        value:""
+        value: ""
+    },
+    {
+        etiqueta: "Nacimiento",
+        placeholder: "----",
+        tipo: "date",
+        name: "nacimiento", //modificar esta linea
+        value: ""
     }
 ];
 
