@@ -8,7 +8,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Modal } from '../../Modal'
 import { Buttom } from '../../Buttom'
 import { getProp } from '../../../utils/functions'
-import { mapaDetalleEmpleado as mapa} from '../../../Constants/mapaDetalleEmpleado'
+import { mapaDetalleEmpleado as mapa } from '../../../Constants/mapaDetalleEmpleado'
 import axios from 'axios';
 import moment from 'moment';
 
@@ -26,7 +26,7 @@ const DetalleEmpleado = () => {
 
   const [show2, setShow2] = useState(false)
 
-  const [showModalFoto , setShowModalFoto] = useState(false)
+  const [showModalFoto, setShowModalFoto] = useState(false)
 
   const [showModalMovimiento, setShowModalMovimiento] = useState(false);
 
@@ -68,7 +68,7 @@ const DetalleEmpleado = () => {
 
   const { id } = useParams()
 
-  const[datosEmpresa, setDatosEmpresa] = useState({})
+  const [datosEmpresa, setDatosEmpresa] = useState({})
 
   const [datos, setDatos] = useState({
     idTrabajador: '',
@@ -94,23 +94,24 @@ const DetalleEmpleado = () => {
     puesto: '',
     sueldo: '',
     ingreso: '',
+    fecha_nacimiento: ''
   })
 
   const [datosTrabajador, setDatosTrabajador] = useState({})
 
   const navigate = useNavigate();
 
-  const bajaTrabajador = async(id) => {
-    await Post('/trabajadores/deleteTrabajador',{idTrabajador:id, fechaMovimiento})
+  const bajaTrabajador = async (id) => {
+    await Post('/trabajadores/deleteTrabajador', { idTrabajador: id, fechaMovimiento })
     navigate('/app/empleados')
   }
 
-  const altaTrabajador = async(id) => {
-    await Post('/trabajadores/altaTrabajador',{idTrabajador:id, fechaMovimiento})
+  const altaTrabajador = async (id) => {
+    await Post('/trabajadores/altaTrabajador', { idTrabajador: id, fechaMovimiento })
     navigate('/app/empleados')
   }
 
-  const generarContrato = async() => {
+  const generarContrato = async () => {
     const data = {
       patron: datosEmpresa.empresa,
       representante_legal: datosEmpresa.representante_legal,
@@ -119,7 +120,7 @@ const DetalleEmpleado = () => {
       principal_actividad: 'principal actividad',
       nombre_empleado: `${datosTrabajador.datosPersonales.nombre} ${datosTrabajador.datosPersonales.apellidoPaterno} ${datosTrabajador.datosPersonales.apellidoMaterno}`,
       sexo: datosTrabajador.datosPersonales.sexo,
-      fecha_nacimiento: '',
+      fecha_nacimiento: datosTrabajador.fecha_nacimiento,
       nss: datosTrabajador.datosPersonales.nss,
       rfc: datosTrabajador.datosPersonales.rfc,
       curp: datosTrabajador.datosPersonales.curp,
@@ -141,10 +142,10 @@ const DetalleEmpleado = () => {
     link.click()
     URL.revokeObjectURL(link.href)
     setLoadingContrato(false)
-      
+
   }
 
-  const eliminarDocumento = async(value) => {
+  const eliminarDocumento = async (value) => {
     const params = {
       uri: value,
       idTrabajador: datos.idTrabajador
@@ -220,7 +221,7 @@ const DetalleEmpleado = () => {
       const datosDeEmpresa = trabajador.data.data.cliente
       setDatosEmpresa(datosDeEmpresa);
       setDatosTrabajador(datosDelTrabajador);
-      if(datosDelTrabajador.foto) setFotoTrabajador(`${URL2}/trabajadores/downloadFile/${datosDelTrabajador.foto}`);
+      if (datosDelTrabajador.foto) setFotoTrabajador(`${URL2}/trabajadores/downloadFile/${datosDelTrabajador.foto}`);
       setDatos({
         idTrabajador: datosDelTrabajador._id,
         ID: (datosDelTrabajador.datosLaborales.ID ? datosDelTrabajador.datosLaborales.ID : ''),
@@ -244,16 +245,17 @@ const DetalleEmpleado = () => {
         clabe: (datosDelTrabajador.datosBancarios ? datosDelTrabajador.datosBancarios.clabe : ''),
         puesto: (datosDelTrabajador.datosLaborales.puesto ? datosDelTrabajador.datosLaborales.puesto : ''),
         sueldo: datosDelTrabajador.datosLaborales.sueldo,
-        ingreso: moment.utc(datosDelTrabajador.datosLaborales.ingreso).format('YYYY-MM-DD')
+        ingreso: moment.utc(datosDelTrabajador.datosLaborales.ingreso).format('YYYY-MM-DD'),
+        fecha_nacimiento: moment.utc(datosDelTrabajador.datosPersonales.fecha_nacimiento).format('YYYY-MM-DD'),
       });
-      setArchivos(datosDelTrabajador.documentos.length>0?
+      setArchivos(datosDelTrabajador.documentos.length > 0 ?
         datosDelTrabajador.documentos.map(documento => (
-        {
-          "Titulo": documento.titulo,
-          "Fecha": documento.createdAt.slice(0,10),
-          "Ver": documento.URI,
-          "Eliminar": documento.URI
-        }))
+          {
+            "Titulo": documento.titulo,
+            "Fecha": documento.createdAt.slice(0, 10),
+            "Ver": documento.URI,
+            "Eliminar": documento.URI
+          }))
         :
         [{
           "Titulo": '',
@@ -279,7 +281,7 @@ const DetalleEmpleado = () => {
       >
         <div style={{ width: '25%', height: '400px', float: 'left' }}>
           <div
-          onClick={()=>setShowModalFoto(true)}
+            onClick={() => setShowModalFoto(true)}
             style={{
               width: '200px',
               height: '200px',
@@ -290,36 +292,36 @@ const DetalleEmpleado = () => {
             }}
           >
 
-              {fotoTrabajador?
-                <img src={fotoTrabajador} alt="No disponible"
+            {fotoTrabajador ?
+              <img src={fotoTrabajador} alt="No disponible"
                 style={{
                   width: '200px',
                   height: '200px',
                   borderRadius: '50%',
-                }}/>:
-                <h3 style={{ textAlign: 'center', marginTop: '40%', marginBottom: '50%' }}>Añadir Foto</h3>
-              }
-            </div>
-            <div 
-              style={{
-                margin: '265px 0 0 20px',
-              }}>
+                }} /> :
+              <h3 style={{ textAlign: 'center', marginTop: '40%', marginBottom: '50%' }}>Añadir Foto</h3>
+            }
+          </div>
+          <div
+            style={{
+              margin: '265px 0 0 20px',
+            }}>
             <Buttom
               onClick={handleShow}
-              style={{ marginTop: '5px', marginLeft: '10%', width: '150px', fontSize: '14px'}}
+              style={{ marginTop: '5px', marginLeft: '10%', width: '150px', fontSize: '14px' }}
               title='Expediente Digital'
             />
             {loadingContrato ?
               <p
-              style={{ marginTop: '10%', marginLeft: '10%' }}
-            >
-              Generando Contrato ...
-            </p>:
-            <Buttom
-              onClick={()=> generarContrato()}
-              style={{ marginTop: '10%', marginLeft: '10%', width: '150px', fontSize: '14px' }}
-              title="Generar contrato"
-            />
+                style={{ marginTop: '10%', marginLeft: '10%' }}
+              >
+                Generando Contrato ...
+              </p> :
+              <Buttom
+                onClick={() => generarContrato()}
+                style={{ marginTop: '10%', marginLeft: '10%', width: '150px', fontSize: '14px' }}
+                title="Generar contrato"
+              />
             }
           </div>
         </div>
@@ -337,32 +339,31 @@ const DetalleEmpleado = () => {
                 value={datos[input.name]}
               />
             ))}
-            <div style={{padding: '2px', marginTop: '2px'}}></div>
-            <div style={{padding: '2px', marginTop: '2px'}}></div>
-            <div style={{padding: '2px', marginTop: '2px'}}></div>
-            <div style={{padding: '2px', marginTop: '2px'}}>
+            <div style={{ padding: '2px', marginTop: '2px' }}></div>
+            <div style={{ padding: '2px', marginTop: '2px' }}></div>
+            <div style={{ padding: '2px', marginTop: '2px' }}>
               <button
                 className="submitButtonEmpleado"
                 type="submit"
-                style={{ width: '90%', marginLeft: '0'}}
+                style={{ width: '90%', marginLeft: '0' }}
               >
                 Guardar
               </button>
             </div>
-            <div style={{padding: '2px', marginTop: '2px'}}>
-            {datosTrabajador.activo ? 
-              <button type="button" onClick={()=> setShowModalMovimiento(true)} className="submitButtonEmpleado" style={{width:'90%', marginLeft: '0'}}>
-                Dar de baja
-              </button> :
-              <button type="button" onClick={()=>setShowModalMovimiento(true)} className="submitButtonEmpleado" style={{width:'90%', marginLeft: '0'}}>
-                Dar de alta
-              </button>
-            }
+            <div style={{ padding: '2px', marginTop: '2px' }}>
+              {datosTrabajador.activo ?
+                <button type="button" onClick={() => setShowModalMovimiento(true)} className="submitButtonEmpleado" style={{ width: '90%', marginLeft: '0' }}>
+                  Dar de baja
+                </button> :
+                <button type="button" onClick={() => setShowModalMovimiento(true)} className="submitButtonEmpleado" style={{ width: '90%', marginLeft: '0' }}>
+                  Dar de alta
+                </button>
+              }
             </div>
           </form>
-          
+
         </div>
-        
+
       </div>
 
       <>
@@ -379,13 +380,13 @@ const DetalleEmpleado = () => {
               buttonFunction={(value) => eliminarDocumento(value)}
             />
           ) : null}
-          <Buttom onClick={handleShow2} className="btn-primary" title="Subir Archivos" style={{ marginTop: '25px', width: '100%'}}/>
+          <Buttom onClick={handleShow2} className="btn-primary" title="Subir Archivos" style={{ marginTop: '25px', width: '100%' }} />
 
         </Modal>
 
         {/* SUBIR ARCHIVOS */}
         <Modal title="Subir Archivos" open={show2} setOpen={setShow2}>
-          <form onSubmit={(e)=>onSubmitHandlerDocumento(e)}>
+          <form onSubmit={(e) => onSubmitHandlerDocumento(e)}>
             <label>Nombre del documento:</label>
             <input
               type="text"
@@ -414,7 +415,7 @@ const DetalleEmpleado = () => {
 
         {/* FOTO DE PERFIL */}
         <Modal title="Foto del Empleado" open={showModalFoto} setOpen={setShowModalFoto}>
-        <form onSubmit={onSubmitFoto}>
+          <form onSubmit={onSubmitFoto}>
             <input
               type="file"
               name="file"
@@ -445,20 +446,20 @@ const DetalleEmpleado = () => {
             required
           />
 
-            {datosTrabajador.activo ? 
-              <Buttom style={{width:'100%', marginLeft: '0'}} 
-                      type="button" 
-                      title="Dar de baja"
-                      onClick={()=>bajaTrabajador(datosTrabajador._id)} 
-                      className="submitButtonEmpleado" />
-              :
-              <Buttom 
-                      type="button"
-                      title="Dar de alta" 
-                      onClick={()=>altaTrabajador(datosTrabajador._id)} 
-                      className="submitButtonEmpleado" 
-                      style={{width:'100%', marginLeft: '0'}} />
-            }
+          {datosTrabajador.activo ?
+            <Buttom style={{ width: '100%', marginLeft: '0' }}
+              type="button"
+              title="Dar de baja"
+              onClick={() => bajaTrabajador(datosTrabajador._id)}
+              className="submitButtonEmpleado" />
+            :
+            <Buttom
+              type="button"
+              title="Dar de alta"
+              onClick={() => altaTrabajador(datosTrabajador._id)}
+              className="submitButtonEmpleado"
+              style={{ width: '100%', marginLeft: '0' }} />
+          }
         </Modal>
       </>
     </div>
