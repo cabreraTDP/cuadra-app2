@@ -278,7 +278,7 @@ const DetalleEmpleado = () => {
 
   return (
     <div>
-      <h1>Nuevo Empleado</h1>
+      <h1>Detalle Empleado</h1>
       <div
         style={{
           backgroundColor: 'white',
