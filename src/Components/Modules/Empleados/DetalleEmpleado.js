@@ -120,7 +120,11 @@ const DetalleEmpleado = () => {
       representante_legal: datosEmpresa.representante_legal,
       rfc_representante: datosEmpresa.rfc_representante,
       direccion_representante: datosEmpresa.direccion_representante,
+<<<<<<< HEAD
       principal_actividad: actividad,
+=======
+      principal_actividad: 'principal actividad',
+>>>>>>> 80dc714e7d303119401dd482a412d0665f380f59
       nombre_empleado: `${datosTrabajador.datosPersonales.nombre} ${datosTrabajador.datosPersonales.apellidoPaterno} ${datosTrabajador.datosPersonales.apellidoMaterno}`,
       sexo: datosTrabajador.datosPersonales.sexo,
       fecha_nacimiento: datosTrabajador.fecha_nacimiento,

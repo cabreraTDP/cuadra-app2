@@ -157,7 +157,7 @@ const inputsEmpleado = [
         etiqueta: "Nacimiento",
         placeholder: "----",
         tipo: "date",
-        name: "nacimiento", //modificar esta linea
+        name: "fecha_nacimiento", //modificar esta linea
         value: ""
     }
 ];
