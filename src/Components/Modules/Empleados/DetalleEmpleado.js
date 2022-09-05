@@ -125,7 +125,7 @@ const DetalleEmpleado = () => {
       principal_actividad: actividad,
       nombre_empleado: `${datosTrabajador.datosPersonales.nombre} ${datosTrabajador.datosPersonales.apellidoPaterno} ${datosTrabajador.datosPersonales.apellidoMaterno}`,
       sexo: datosTrabajador.datosPersonales.sexo,
-      fecha_nacimiento: datosTrabajador.fecha_nacimiento,
+      fecha_nacimiento: moment(datosTrabajador.datosPersonales.fecha_nacimiento).format('DD-MM-YYYY'),
       nss: datosTrabajador.datosPersonales.nss,
       rfc: datosTrabajador.datosPersonales.rfc,
       curp: datosTrabajador.datosPersonales.curp,
