@@ -28,6 +28,8 @@ const DetalleEmpleado = () => {
 
   const [showModalFoto, setShowModalFoto] = useState(false)
 
+  const [showModalContrato, setShowModalContrato] = useState(false)
+
   const [showModalMovimiento, setShowModalMovimiento] = useState(false);
 
   const handleShow2 = () => setShow2(true)
@@ -120,7 +122,7 @@ const DetalleEmpleado = () => {
       representante_legal: datosEmpresa.representante_legal,
       rfc_representante: datosEmpresa.rfc_representante,
       direccion_representante: datosEmpresa.direccion_representante,
-      principal_actividad: 'principal actividad',
+      principal_actividad: actividad,
       nombre_empleado: `${datosTrabajador.datosPersonales.nombre} ${datosTrabajador.datosPersonales.apellidoPaterno} ${datosTrabajador.datosPersonales.apellidoMaterno}`,
       sexo: datosTrabajador.datosPersonales.sexo,
       fecha_nacimiento: datosTrabajador.fecha_nacimiento,
@@ -134,6 +136,7 @@ const DetalleEmpleado = () => {
     }
 
     setLoadingContrato(true)
+    setShowModalContrato(false)
     setShowModalContrato(false)
     const link = document.createElement('a')
     link.download = 'contrato.pdf'
@@ -322,7 +325,7 @@ const DetalleEmpleado = () => {
                 Generando Contrato ...
               </p> :
               <Buttom
-                onClick={() => generarContrato()}
+                onClick={() => setShowModalContrato(true)}
                 style={{ marginTop: '10%', marginLeft: '10%', width: '150px', fontSize: '14px' }}
                 title="Generar contrato"
               />
@@ -464,6 +467,37 @@ const DetalleEmpleado = () => {
               className="submitButtonEmpleado"
               style={{ width: '100%', marginLeft: '0' }} />
           }
+        </Modal>
+
+        {/* INFO DE CONTRATO */}
+        <Modal title="Información de contrato" open={showModalContrato} setOpen={setShowModalContrato}>
+
+          <label>Actividad Principal:</label>
+          <input
+            type="text"
+            name="actividad"
+            style={styles.input}
+            onChange={(e) => setActividad(e.target.value)}
+            required
+          />
+
+          <label>Fecha Contrato:</label>
+          <input
+            type="date"
+            name="fechaIngreso"
+            style={styles.input}
+            onChange={(e) => setFechaIngreso(e.target.value)}
+            required
+          />
+
+          <Buttom
+            variant="primary"
+            type="submit"
+            style={{ width: '100%', marginTop: '20px' }}
+            title={'Generar Contrato'}
+            onClick={() => generarContrato()}
+          />
+
         </Modal>
       </>
     </div>
