@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import { Post } from '../../../utils/axiosUtils';
 import { numberToCurrency } from '../../../utils/format';
 const XLSX = require("xlsx")
-const titlesNomina = ['Nombre','Banco','Clabe','Faltas','Complementos',"Rebajes", "Total a pagar"]
+const titlesNomina = ['Nombre','Banco','Clabe','Faltas','Complementos',"Rebajes","ISR", "Total a pagar"]
 
 
 
@@ -19,6 +19,7 @@ const DetalleNomina = () => {
         "Faltas": "",
         "Complementos": "",
         "Rebajes": "",
+        "ISR": "",
         "Total a pagar": ""
     }]);
     const [periodoInicio, setPeriodoInicio] = useState(null);
@@ -53,6 +54,7 @@ const DetalleNomina = () => {
                 "Faltas": registro.faltas,
                 "Complementos": registro.complementos,
                 "Rebajes": registro.rebajes,
+                "ISR":registro.isr,
                 "Total a pagar": numberToCurrency(registro.totalPagar.toFixed(2))
             }));
 
