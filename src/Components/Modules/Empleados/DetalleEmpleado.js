@@ -11,7 +11,7 @@ import { getProp } from '../../../utils/functions'
 import { mapaDetalleEmpleado as mapa } from '../../../Constants/mapaDetalleEmpleado'
 import axios from 'axios';
 import moment from 'moment';
-
+import { numberToCurrency } from '../../../utils/format';
 
 const URL2 = `${process.env.REACT_APP_URL_URI}`;
 
@@ -32,6 +32,8 @@ const DetalleEmpleado = () => {
 
   const [showModalMovimiento, setShowModalMovimiento] = useState(false);
 
+  const [showModalFiniquito, setShowModalFiniquito] = useState(false);
+
   const handleShow2 = () => setShow2(true)
 
   const [loadingContrato, setLoadingContrato] = useState(false)
@@ -41,11 +43,15 @@ const DetalleEmpleado = () => {
   const [foto, setFoto] = useState();
 
   const [fechaMovimiento, setFechaMovimiento] = useState({});
+  
+  const [fechaUltimoDia, setFechaUltimoDia] = useState({});
 
   const [fotoTrabajador, setFotoTrabajador] = useState(false);
 
   const [actividad, setActividad] = useState('');
   const [fechaIngreso, setFechaIngreso] = useState();
+
+  const [finiquito, setFiniquito] = useState({});
 
   const changeFile = (e) => {
     setArchivo(e)
@@ -105,6 +111,13 @@ const DetalleEmpleado = () => {
   const [datosTrabajador, setDatosTrabajador] = useState({})
 
   const navigate = useNavigate();
+
+  const crearFiniquito = async() => {
+    const finiquitoObjeto = await Post('/nominas/finiquito', { sueldoDiario:datos.sueldo, fechaIngreso:datos.ingreso, ultimoDiaPago:fechaUltimoDia.ultimoDiaPago })
+    setFiniquito(finiquitoObjeto.data.resultado)
+    console.log(finiquito)
+    setShowModalFiniquito(true)
+  }
 
   const bajaTrabajador = async (id) => {
     await Post('/trabajadores/deleteTrabajador', { idTrabajador: id, fechaMovimiento })
@@ -214,6 +227,13 @@ const DetalleEmpleado = () => {
   const onChangeMovimiento = async (e) => {
     const { name, value } = e.target
     setFechaMovimiento({
+      [name]: value,
+    })
+  }
+
+  const onChangeUltimoDia = async (e) => {
+    const { name, value } = e.target
+    setFechaUltimoDia({
       [name]: value,
     })
   }
@@ -442,30 +462,54 @@ const DetalleEmpleado = () => {
         </Modal>
 
         {/* ALTAS / BAJAS */}
-        <Modal title="Mobimiento" open={showModalMovimiento} setOpen={setShowModalMovimiento}>
+        <Modal title="Movimiento" open={showModalMovimiento} setOpen={setShowModalMovimiento}>
 
-          <label>Fecha Operación:</label>
-          <input
-            type="date"
-            name="fechaMovimiento"
-            style={styles.input}
-            onChange={(e) => onChangeMovimiento(e)}
-            required
-          />
+          
 
           {datosTrabajador.activo ?
+
+          <div>
+            <label>Fecha baja:</label>
+            <input
+              type="date"
+              name="fechaMovimiento"
+              style={styles.input}
+              onChange={(e) => onChangeMovimiento(e)}
+              required
+            />
+            <label>Ultimo dia de pago:</label>
+            <input
+              type="date"
+              name="ultimoDiaPago"
+              style={styles.input}
+              onChange={(e) => onChangeUltimoDia(e)}
+              required
+            />
             <Buttom style={{ width: '100%', marginLeft: '0' }}
               type="button"
               title="Dar de baja"
-              onClick={() => bajaTrabajador(datosTrabajador._id)}
+              /* onClick={() => bajaTrabajador(datosTrabajador._id)} */
+              onClick={() => crearFiniquito()}
               className="submitButtonEmpleado" />
+
+          </div>
             :
+            <div>
+            <label>Fecha baja:</label>
+            <input
+              type="date"
+              name="fechaMovimiento"
+              style={styles.input}
+              onChange={(e) => onChangeMovimiento(e)}
+              required
+            />
             <Buttom
               type="button"
               title="Dar de alta"
               onClick={() => altaTrabajador(datosTrabajador._id)}
               className="submitButtonEmpleado"
               style={{ width: '100%', marginLeft: '0' }} />
+              </div>
           }
         </Modal>
 
@@ -498,6 +542,34 @@ const DetalleEmpleado = () => {
             onClick={() => generarContrato()}
           />
 
+        </Modal>
+
+        {/* FINIQUITO */}
+        <Modal title="Finiquito" open={showModalFiniquito} setOpen={setShowModalFiniquito}>
+          <div style={{marginLeft: '10%', marginBottom: 30}}>
+            <table style={{width: '80%'}}>
+              <tr>
+                <td><p>Salario pendiente: </p></td><td style={{textAlign: 'center'}}>{numberToCurrency(finiquito.pendiente)}</td>
+              </tr>
+              <tr>
+                <td><p>Proporcional aguinaldo: </p></td><td style={{textAlign: 'center'}}>{numberToCurrency(finiquito.aguinaldo)}</td>
+              </tr>
+              <tr>
+                <td><p>Proporcional vacaciones: </p></td><td style={{textAlign: 'center'}}>{numberToCurrency(finiquito.vacaciones)}</td>
+              </tr>
+              <tr>
+                <td><p>Prima vacacional: </p></td><td style={{textAlign: 'center'}}>{numberToCurrency(finiquito.primaVacacional)}</td>
+              </tr>
+              <tr> 
+                <td><h3>Total a pagar: </h3></td><td style={{textAlign: 'center'}}><h3>{numberToCurrency(finiquito.total)}</h3></td>
+              </tr>
+            </table>
+          </div>
+          <Buttom style={{ width: '100%', marginLeft: '0' }}
+              type="button"
+              title="Dar de baja"
+              onClick={() => bajaTrabajador(datosTrabajador._id)}
+              className="submitButtonEmpleado" />
         </Modal>
       </>
     </div>
