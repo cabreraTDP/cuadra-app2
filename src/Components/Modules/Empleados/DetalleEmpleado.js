@@ -46,6 +46,8 @@ const DetalleEmpleado = () => {
   
   const [fechaUltimoDia, setFechaUltimoDia] = useState({});
 
+  const [otros, setOtros] = useState();
+
   const [fotoTrabajador, setFotoTrabajador] = useState(false);
 
   const [actividad, setActividad] = useState('');
@@ -113,7 +115,7 @@ const DetalleEmpleado = () => {
   const navigate = useNavigate();
 
   const crearFiniquito = async() => {
-    const finiquitoObjeto = await Post('/nominas/finiquito', { sueldoDiario:datos.sueldo, fechaIngreso:datos.ingreso, ultimoDiaPago:fechaUltimoDia.ultimoDiaPago })
+    const finiquitoObjeto = await Post('/nominas/finiquito', { sueldoDiario:datos.sueldo, fechaIngreso:datos.ingreso, ultimoDiaPago:fechaUltimoDia.ultimoDiaPago, otros:otros })
     setFiniquito(finiquitoObjeto.data.resultado)
     console.log(finiquito)
     setShowModalFiniquito(true)
@@ -236,6 +238,11 @@ const DetalleEmpleado = () => {
     setFechaUltimoDia({
       [name]: value,
     })
+  }
+
+  const onChangeOtros = async(e) => {
+    const { name, value} = e.target
+    setOtros(value);
   }
 
   useEffect(() => {
@@ -485,6 +492,15 @@ const DetalleEmpleado = () => {
               onChange={(e) => onChangeUltimoDia(e)}
               required
             />
+            <label>Otros:</label>
+            <input
+              type="number"
+              step="0.01"
+              name="otros"
+              style={styles.input}
+              onChange={(e) => onChangeOtros(e)}
+              required
+            />
             <Buttom style={{ width: '100%', marginLeft: '0' }}
               type="button"
               title="Dar de baja"
@@ -559,6 +575,9 @@ const DetalleEmpleado = () => {
               </tr>
               <tr>
                 <td><p>Prima vacacional: </p></td><td style={{textAlign: 'center'}}>{numberToCurrency(finiquito.primaVacacional)}</td>
+              </tr>
+              <tr>
+                <td><p>Otros: </p></td><td style={{textAlign: 'center'}}>{numberToCurrency(finiquito.otros)}</td>
               </tr>
               <tr> 
                 <td><h3>Total a pagar: </h3></td><td style={{textAlign: 'center'}}><h3>{numberToCurrency(finiquito.total)}</h3></td>
