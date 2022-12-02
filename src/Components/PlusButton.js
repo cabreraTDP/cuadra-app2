@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import '../CSS/PlusButton.css'
 import { Link } from "react-router-dom";
-
+import PlusIcon from '../svg/plus.svg'
 
 
 const PlusButton = (props) => {
@@ -19,7 +19,7 @@ const PlusButton = (props) => {
         {isOpened?
         <>
         <div className="PlusButton" onClick={toggleMenu}>
-           <p>+</p>
+           <img src={PlusIcon}></img>
         </div>
         <div className="toggleMenu" onMouseLeave={toggleMenu}>
             <ul>
@@ -35,7 +35,7 @@ const PlusButton = (props) => {
         </>
         :
         <div className="PlusButton" onMouseEnter={toggleMenu} onClick={toggleMenu}>
-           <p>+</p>
+           <img src={PlusIcon}></img>
         </div>
         }
     </div>

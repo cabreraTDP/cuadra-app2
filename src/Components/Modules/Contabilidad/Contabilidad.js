@@ -11,6 +11,13 @@ import { Link } from 'react-router-dom'
 import { Modal } from '../../Modal'
 import { Buttom } from '../../Buttom'
 
+import PlusIcon from '../../../svg/plus.svg'
+import UploadIcon from '../../../svg/upload.svg'
+import DownloadIcon from '../../../svg/download.svg'
+import AnalysisIcon from '../../../svg/analysis.svg'
+
+
+
 const XLSX = require('xlsx')
 const URL = process.env.REACT_APP_URL_URI
 
@@ -226,23 +233,12 @@ const Contabilidad = () => {
         <div style={{ width: '100%' }}></div>
         <div id="opciones">
           <div id="opcion">
-            <Icon
-              name="plus"
-              strokeWidth="3"
-              size="25"
-              color="blue"
-              onClick={CrearNuevoRegistro}
-            />
+            <img src={PlusIcon} onClick={CrearNuevoRegistro} style={{ marginLeft: 5, width:35,height:35}}>
+            </img>
             <div>Añadir</div>
           </div>
           <div id="opcion">
-            <Icon
-              name="chevron-up"
-              strokeWidth="3"
-              size="25"
-              color="blue"
-              onClick={AgregarArchivoSAT}
-            />
+            <img src={UploadIcon} onClick={AgregarArchivoSAT} style={{ marginLeft: 30, width:35,height:35}}></img>
             <div>Subir pdf sat</div>
           </div>
           <div id="opcion">
@@ -250,13 +246,12 @@ const Contabilidad = () => {
               to="analisis"
               style={{ textDecoration: 'none', color: 'black' }}
             >
-              <Icon name="activity" strokeWidth="3" size="25" color="blue" />
+              <img src={AnalysisIcon} style={{width:35,height:35}}></img>
               <div>Análisis</div>
             </Link>
           </div>
           <div id="opcion">
-            <Icon onClick={() => exportarExcel()} name="chevron-down" strokeWidth="3" size="25" color="blue" />
-
+            <img src={DownloadIcon} style={{ marginLeft: 35,width:35,height:35}}></img>
             <div onClick={() => exportarExcel()}>Exportar a Excel</div>
           </div>
         </div>
