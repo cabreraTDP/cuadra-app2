@@ -20,36 +20,36 @@ const SideMenu = () => {
 
     return (
         <div className="container">
-            <div id="mySidenav" style={{ width: isMenuShown ? '300%' : '100%' }} className="sidenav" onMouseEnter={openNav} onMouseLeave={closeNav}>
+            <div id="mySidenav" style={{ width: isMenuShown ? '200%' : '100%' }} className="sidenav" onMouseEnter={openNav} onMouseLeave={closeNav}>
                 <table>
                     {isMenuShown ?
                         <tbody>
                             <tr>
-                                <td><Link to="home"><img src={HomeIcon} style={{width:25, height:25, marginLeft: 10,marginRight:5, marginTop:10}}></img>Incio</Link></td>
+                                <td><Link to="home"><img src={HomeIcon} style={{width:40, height:40, marginLeft: 30,marginRight:5, marginTop:20}}></img><span>Incio</span></Link></td>
                             </tr>
                             <tr>
-                                <td><Link to="empleados"><img src={EmpleadoIcon} style={{width:25, height:25, marginLeft: 10,marginRight:5, marginTop:10}}></img>Empleados</Link></td>
+                                <td><Link to="empleados"><img src={EmpleadoIcon} style={{width:40, height:40, marginLeft: 30,marginRight:5, marginTop:20}}></img><span>Empleados</span></Link></td>
                             </tr>
                             <tr>
-                                <td><Link to="nominas"><img src={NominaIcon} style={{width:25, height:25, marginLeft: 10,marginRight:5, marginTop:10}}></img>Nominas</Link></td>
+                                <td><Link to="nominas"><img src={NominaIcon} style={{width:40, height:40, marginLeft: 30,marginRight:5, marginTop:20}}></img><span>Nominas</span></Link></td>
                             </tr>
                             <tr>
-                                <td><Link to="contabilidad"><img src={ContabilidadIcon} style={{width:25, height:25, marginLeft: 10,marginRight:5, marginTop:10}}></img>Contabilidad</Link></td>
+                                <td><Link to="contabilidad"><img src={ContabilidadIcon} style={{width:40, height:40, marginLeft: 30,marginRight:5, marginTop:20}}></img><span>Contabilidad</span></Link></td>
                             </tr>
                         </tbody>
                         :
                         <tbody>
                             <tr>
-                                <td><img src={HomeIcon} style={{width:40, height:40, marginLeft: 10, marginTop:10}}></img></td>
+                                <td><img src={HomeIcon} style={{width:40, height:40, marginLeft: 30, marginTop:20}}></img></td>
                             </tr>
                             <tr>
-                                <td><img src={EmpleadoIcon} style={{width:40, height:40, marginLeft: 10, marginTop:10}}></img></td>
+                                <td><img src={EmpleadoIcon} style={{width:40, height:40, marginLeft: 30, marginTop:20}}></img></td>
                             </tr>
                             <tr>
-                                <td><img src={NominaIcon} style={{width:40, height:40, marginLeft: 10, marginTop:10}}></img></td>
+                                <td><img src={NominaIcon} style={{width:40, height:40, marginLeft: 30, marginTop:20}}></img></td>
                             </tr>
                             <tr>
-                                <td><img src={ContabilidadIcon} style={{width:40, height:40, marginLeft: 10, marginTop:10}}></img></td>
+                                <td><img src={ContabilidadIcon} style={{width:40, height:40, marginLeft: 30, marginTop:20}}></img></td>
                             </tr>
                         </tbody>
                     }

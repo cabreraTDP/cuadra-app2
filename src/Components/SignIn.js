@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom'
 import store from '../state/store';
 import {login}  from '../state/actions/auth_actions'
 import { Post } from '../utils/axiosUtils';
-import logo from '../svg/logo.svg';
+import logo from '../svg/Twhite.svg';
 
 const SignIn = () => {
 
@@ -40,40 +40,46 @@ const SignIn = () => {
     };
 
     return (
-        <div style={{position:'relative', width:'100%', height:'100%', backgroundColor:'#B9BBFA', opacity: 0.9}}>
-            <div style={{position:'absolute', top: '25%', left: '30%', width: '40%', height:'50%',margin: '-25px 0 0 -25px', border:'2px groove black', 
-                borderRadius: 50, backgroundColor:'RGBA(255,255,255,0.5)', boxShadow:'5px 5px 5px 5px gray'}}>
-                <div style={{marginLeft: '25%', width: '50%', marginTop: 20}}>
-                <img src={logo} ></img>
+        <>
+        <div style={{backgroundColor: '#B9BBFA', opacity: 0.9, borderBottom: '1px solid #E6E6E6'}}>
+            <img src={logo} style={{width: '15%', marginTop: '30px', marginLeft: '60px', marginBottom: '30px'}} ></img>
+        </div>
+
+
+        <div style={{ color: '#4D4D4D', position:'relative', width:'100%', height:'100%', backgroundColor:'#B9BBFA', opacity: 0.9}}>
+            <div style={{position:'absolute', top: '15%', left: '25%', width: '50%', height:'65%',margin: '-25px 0 0 -25px', border:'2px groove #E6E6E6', 
+                borderRadius: 20, backgroundColor:'RGB(255,255,255)'}}>
+                <div style={{marginLeft: '25%', width: '50%', marginTop: 50}}>
+                    <p style={{marginLeft: '25%', fontSize: '25px', fontWeight: 'bolder'}}>Iniciar Sesión</p>
                 </div>
                 <form onSubmit={onSubmitHandler}>
                     
-                <div style={{width:'60%', marginLeft:'20%', marginTop:25}}>
+                <div style={{width:'60%', marginLeft:'20%', marginTop:50}}>
                     <label style={{fontSize:'23px'}}>Usuario:</label >
-                    <input style={{padding: '5px', width:'100%', marginBottom:30}} name='usuario' onChange={onChangeText} required/>
+                    <input style={{padding: '10px', width:'100%', marginBottom:30, borderRadius: 10, border:'1px solid #4D4D4D'}} name='usuario' onChange={onChangeText} required/>
 
                     <label style={{fontSize:'23px'}}>Contraseña:</label >
-                    <input className='input' style={{padding: '5px', width:'100%',marginBottom:5}} type='password' name='password' onChange={onChangeText} required/>
+                    <input className='input' style={{padding: '10px', width:'100%',marginBottom:5, borderRadius: 10, border:'1px solid #4D4D4D'}} type='password' name='password' onChange={onChangeText} required/>
                     
-                    <a href="" id='a'>Olvidé mi contraseña</a>.
                     <h3 style={{color:'red', textAlign:'center'}}>{error?error:null}</h3>
                 </div>
 
                 <div style={{
-                    marginTop: 30,
-                    paddingLeft: '200px',}}>
+                    marginTop: 60,
+                    width: '100%', marginLeft: '40%', width: '20%'}}>
                      
                     <button type="submit"
                         style={{
                             border: 0,
-                            backgroundColor: '#1C70E6',
+                            backgroundColor: '#EE9EFF',
                             color: 'white',
                             height: '35px',
-                            width: '170px',
+                            width: '120px',
+                           
                             borderRadius: '6px',
                             fontSize:'20px'
                         }}>
-                        Iniciar Sesion
+                        Entrar
                     </button>
                     
                 </div>
@@ -83,6 +89,7 @@ const SignIn = () => {
 
             
         </div>
+        </>
     )
 }
 

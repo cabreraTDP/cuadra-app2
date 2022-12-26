@@ -11,7 +11,7 @@
     position:relative; /* Stay in place */
     overflow-x: hidden; /* Disable horizontal scroll */
     transition: 0s; /* 0.5 second transition effect to slide in the sidenav */
-    background-color: whitesmoke;
+    background-color: white;
     height: 100%;
     margin:0px;
   }
@@ -21,8 +21,24 @@
     text-decoration: none;
     color: #2400FF;
     display: block;
-    text-align: justify;
     font-size: 20px;
+    text-align:left;
+  }
+
+  .sidenav a span{
+    text-decoration: none;
+    color: #4D4D4D;
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 26px;
+    position:absolute;
+  }  
+
+  .sidenav a span:hover {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+    text-align: justify;
   }
 
   .sidenav a:hover {
@@ -41,10 +57,8 @@
     text-align: center;
     padding: 0px;
     margin-left: 10px;
-    margin-top: 25px;
   }
 
   .side-nav > td {
    text-align: center;
-
   }
