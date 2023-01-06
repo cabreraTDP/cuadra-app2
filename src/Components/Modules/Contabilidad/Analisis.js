@@ -139,7 +139,6 @@ const Analisis = () => {
                             <td style={{ textAlign: 'right' }}>
                                 {dataFiltered.ingresos.ventas}
                             </td>
-
                         </tr>
                     </table>
                 </div>
