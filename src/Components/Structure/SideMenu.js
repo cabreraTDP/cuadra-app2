@@ -1,6 +1,5 @@
 import '../../CSS/sideMenu.css'
 import { useState } from 'react';
-import Icon from "awesome-react-icons";
 import { Link } from "react-router-dom";
 import HomeIcon from '../../svg/logoicon.svg'
 import EmpleadoIcon from '../../svg/user.svg'
