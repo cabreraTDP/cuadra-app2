@@ -110,19 +110,14 @@ const Analisis = () => {
                 <div id='separador' style={{ borderRight: 'solid 2px black'}}>
                     <table id='tabla'>
                         <tr >
-                            <td rowSpan={2} style={{ width: '150px' }}>
-                                <div id='icono-ingreso' >
-
-                                </div>
-                            </td>
                             <td style={{ textAlign: 'left' }}>
-                                <h5>Ingresos</h5>
+                                <h2>Ingresos</h2>
                             </td>
                         </tr>
 
                         <tr>
                             <td style={{ textAlign: 'right', color:'green'}}>
-                                <h6 style={{fontSize: 24 }}>{dataFiltered.ingresos.total}</h6>
+                                <h4 style={{fontSize: 24 }}>{dataFiltered.ingresos.total}</h4>
                             </td>
                         </tr>
 
@@ -151,21 +146,12 @@ const Analisis = () => {
                 <div id='separador' style={{ borderRight: 'solid 2px black'}}>
                     <table id='tabla'>
                         <tr >
-                            <td rowSpan={2} style={{ width: '150px' }}>
-                                <div id='icono-gasto' >
-
-                                </div>
-                            </td>
                             <td style={{ textAlign: 'left' }}>
-                                <h5>Gastos</h5>
+                                <h2>Gastos</h2>
                             </td>
-
                         </tr>
 
                         <tr>
-                            <td >
-
-                            </td>
                             <td style={{ textAlign: 'right', color:'red' }}>
                                 <h6 style={{fontSize: 24 }}>{dataFiltered.gastos.total}</h6>
                             </td>

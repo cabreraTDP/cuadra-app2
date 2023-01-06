@@ -73,11 +73,12 @@ const SignIn = () => {
                             border: 0,
                             backgroundColor: '#EE9EFF',
                             color: 'white',
-                            height: '35px',
+                            height: '50px',
                             width: '120px',
-                           
-                            borderRadius: '6px',
-                            fontSize:'20px'
+                            fontWeight: 'bold',
+                            borderRadius: '10px',
+                            fontSize:'20px',
+                            padding: '3px'
                         }}>
                         Entrar
                     </button>

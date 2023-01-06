@@ -244,10 +244,10 @@ const Contabilidad = () => {
           <div id="opcion">
             <Link
               to="analisis"
-              style={{ textDecoration: 'none', color: 'black' }}
+              style={{ textDecoration: 'none'}}
             >
               <img src={AnalysisIcon} style={{width:35,height:35}}></img>
-              <div>Análisis</div>
+              <div id="opcion">Análisis</div>
             </Link>
           </div>
           <div id="opcion">
