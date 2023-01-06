@@ -327,7 +327,7 @@ const DetalleEmpleado = () => {
           >
 
             {fotoTrabajador ?
-              <img alt="None" src={fotoTrabajador} alt="No disponible"
+              <img  src={fotoTrabajador} alt="No disponible"
                 style={{
                   width: '200px',
                   height: '200px',
