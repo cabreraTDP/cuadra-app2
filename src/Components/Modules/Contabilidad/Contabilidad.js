@@ -234,11 +234,11 @@ const Contabilidad = () => {
           <div id="opcion">
             <img alt="None" src={PlusIcon} onClick={CrearNuevoRegistro} style={{ marginLeft: 5, width:35,height:35}}>
             </img>
-            <div>Añadir</div>
+            <div onClick={CrearNuevoRegistro} >Añadir</div>
           </div>
           <div id="opcion">
             <img  alt="None" src={UploadIcon} onClick={AgregarArchivoSAT} style={{ marginLeft: 30, width:35,height:35}}></img>
-            <div>Subir pdf sat</div>
+            <div onClick={AgregarArchivoSAT}>Subir pdf sat</div>
           </div>
           <div id="opcion">
             <Link
@@ -250,7 +250,7 @@ const Contabilidad = () => {
             </Link>
           </div>
           <div id="opcion">
-            <img alt="None" src={DownloadIcon} style={{ marginLeft: 35,width:35,height:35}}></img>
+            <img onClick={() => exportarExcel()} alt="None" src={DownloadIcon} style={{ marginLeft: 35,width:35,height:35}}></img>
             <div onClick={() => exportarExcel()}>Exportar a Excel</div>
           </div>
         </div>
