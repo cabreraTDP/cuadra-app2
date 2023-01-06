@@ -19,7 +19,7 @@ const PlusButton = (props) => {
         {isOpened?
         <>
         <div className="PlusButton" onClick={toggleMenu}>
-           <img src={PlusIcon}></img>
+           <img alt="None" src={PlusIcon}></img>
         </div>
         <div className="toggleMenu" onMouseLeave={toggleMenu}>
             <ul>
@@ -35,7 +35,7 @@ const PlusButton = (props) => {
         </>
         :
         <div className="PlusButton" onMouseEnter={toggleMenu} onClick={toggleMenu}>
-           <img src={PlusIcon}></img>
+           <img alt="None" src={PlusIcon}></img>
         </div>
         }
     </div>

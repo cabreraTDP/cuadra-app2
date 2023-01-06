@@ -42,7 +42,7 @@ const SignIn = () => {
     return (
         <>
         <div style={{backgroundColor: '#B9BBFA', opacity: 0.9, borderBottom: '1px solid #E6E6E6'}}>
-            <img src={logo} style={{width: '15%', marginTop: '30px', marginLeft: '60px', marginBottom: '30px'}} ></img>
+            <img alt="None" src={logo} style={{width: '15%', marginTop: '30px', marginLeft: '60px', marginBottom: '30px'}} ></img>
         </div>
 
 
@@ -66,7 +66,7 @@ const SignIn = () => {
 
                 <div style={{
                     marginTop: 60,
-                    width: '100%', marginLeft: '40%', width: '20%'}}>
+                    marginLeft: '40%', width: '20%'}}>
                      
                     <button type="submit"
                         style={{

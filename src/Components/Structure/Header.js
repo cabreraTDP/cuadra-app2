@@ -6,7 +6,7 @@ const Header = () => {
 
     return (
         <div className="header">
-            <img 
+            <img  alt="None"
             style={{width:200, marginTop:30, marginLeft: 50}}
             src={Logo} ></img>
             <Link to="/"><button style={{width: '200px', height: '50px', marginTop: 30, marginLeft: '65%', 

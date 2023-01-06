@@ -3,7 +3,6 @@ import React from 'react'
 import TableDisplay from '../../TableDisplay'
 import axios from 'axios'
 import '../../../CSS/Contabilidad.css'
-import Icon from 'awesome-react-icons'
 import { Post } from '../../../utils/axiosUtils'
 import { numberToCurrency } from '../../../utils/format'
 import moment from 'moment'
@@ -233,12 +232,12 @@ const Contabilidad = () => {
         <div style={{ width: '100%' }}></div>
         <div id="opciones">
           <div id="opcion">
-            <img src={PlusIcon} onClick={CrearNuevoRegistro} style={{ marginLeft: 5, width:35,height:35}}>
+            <img alt="None" src={PlusIcon} onClick={CrearNuevoRegistro} style={{ marginLeft: 5, width:35,height:35}}>
             </img>
             <div>Añadir</div>
           </div>
           <div id="opcion">
-            <img src={UploadIcon} onClick={AgregarArchivoSAT} style={{ marginLeft: 30, width:35,height:35}}></img>
+            <img  alt="None" src={UploadIcon} onClick={AgregarArchivoSAT} style={{ marginLeft: 30, width:35,height:35}}></img>
             <div>Subir pdf sat</div>
           </div>
           <div id="opcion">
@@ -246,12 +245,12 @@ const Contabilidad = () => {
               to="analisis"
               style={{ textDecoration: 'none'}}
             >
-              <img src={AnalysisIcon} style={{width:35,height:35}}></img>
+              <img alt="None" src={AnalysisIcon} style={{width:35,height:35}}></img>
               <div id="opcion">Análisis</div>
             </Link>
           </div>
           <div id="opcion">
-            <img src={DownloadIcon} style={{ marginLeft: 35,width:35,height:35}}></img>
+            <img alt="None" src={DownloadIcon} style={{ marginLeft: 35,width:35,height:35}}></img>
             <div onClick={() => exportarExcel()}>Exportar a Excel</div>
           </div>
         </div>
