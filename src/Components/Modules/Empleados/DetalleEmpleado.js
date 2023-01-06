@@ -241,7 +241,7 @@ const DetalleEmpleado = () => {
   }
 
   const onChangeOtros = async(e) => {
-    const { name, value} = e.target
+    const {  value} = e.target
     setOtros(value);
   }
 
@@ -327,7 +327,7 @@ const DetalleEmpleado = () => {
           >
 
             {fotoTrabajador ?
-              <img src={fotoTrabajador} alt="No disponible"
+              <img alt="None" src={fotoTrabajador} alt="No disponible"
                 style={{
                   width: '200px',
                   height: '200px',
