@@ -234,7 +234,7 @@ const Contabilidad = () => {
           <div id="opcion">
             <img alt="None" src={PlusIcon} onClick={CrearNuevoRegistro} style={{ marginLeft: 5, width:35,height:35}}>
             </img>
-            <div onClick={CrearNuevoRegistro} >Añadir</div>
+            <div onClick={CrearNuevoRegistro} >Añadir Registro</div>
           </div>
           <div id="opcion">
             <img  alt="None" src={UploadIcon} onClick={AgregarArchivoSAT} style={{ marginLeft: 30, width:35,height:35}}></img>
