@@ -14,20 +14,6 @@
     width: 96%;
     height: 96%;
     margin: 2%;
-    overflow-x: scroll;
-    white-space: nowrap;
-    display: block;
-}
-
-.Table > tbody {
-    width: 100%;
-    display:table;
-}
-
-.Table > thead {
-    width: 100%;
-    display:table;
-
 }
 
 .Table > tbody > tr:nth-child(odd){
@@ -52,7 +38,6 @@
 .Table > thead > tr > th {
     height: 30px;
     padding-bottom: 10px;
-    text-align: center;
 }
 
 .Filters{
@@ -118,4 +103,3 @@
     color: black;
     cursor: pointer;
 }
-
