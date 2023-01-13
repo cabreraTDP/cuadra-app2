@@ -52,9 +52,9 @@ const DetalleNomina = () => {
                 "Banco": registro.trabajador.datosBancarios?registro.trabajador.datosBancarios.banco:'',
                 "Clabe": registro.trabajador.datosBancarios?registro.trabajador.datosBancarios.clabe:'',
                 "Faltas": registro.faltas,
-                "Complementos": registro.complementos,
-                "Rebajes": registro.rebajes,
-                "ISR":registro.isr,
+                "Complementos": numberToCurrency(registro.complementos),
+                "Rebajes": numberToCurrency(registro.rebajes),
+                "ISR": numberToCurrency(registro.isr),
                 "Total a pagar": numberToCurrency(registro.totalPagar.toFixed(2))
             }));
 
