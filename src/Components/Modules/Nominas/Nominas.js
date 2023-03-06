@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import axios from "axios";
 import { useState } from "react";
 import moment from "moment";
+import { numberToCurrency } from "../../../utils/format";
 
 const URL = process.env.REACT_APP_URL_URI;
 
@@ -27,7 +28,7 @@ const Nominas = () => {
                     "Periodo Inicio": moment(nomina.detalle.periodoInicio).format("DD-MM-YYYY"),
                     "Periodo Fin": moment(nomina.detalle.periodoFin).format("DD-MM-YYYY"),
                     "Semana": nomina.detalle.semana,
-                    "Total": nomina.detalle.total.toFixed(2),
+                    "Total": numberToCurrency(nomina.detalle.total.toFixed(2)),
                     "Ver": nomina._id
                 } :
                 {
