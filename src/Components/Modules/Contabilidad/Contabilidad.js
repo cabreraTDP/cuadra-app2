@@ -207,8 +207,8 @@ const Contabilidad = () => {
         <div id="filtroOpcion">
           <h3>Filtro:</h3>
           <select
-            style={{ marginTop: '17px', marginLeft: '0px', backgroundColor: 'inherit', border: '2px black solid',
-                     height: '30px', width: '200px', borderRadius: '10px', padding: '3px', textAlign: 'center' }}
+            style={{ marginTop: '17px', marginLeft: '0px', backgroundColor: 'white', border: '1px solid black',
+                     height: '30px', width: '200px', borderRadius: '30px', padding: '4px', textAlign: 'center' }}
             value={filtroMes}
             onChange={(e) => funcionFiltroMes(e)}
           >
