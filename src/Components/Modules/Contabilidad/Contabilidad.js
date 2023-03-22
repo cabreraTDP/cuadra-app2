@@ -76,7 +76,7 @@ const Contabilidad = () => {
   const [registroEnEdicion, setRegistroEnEdicion] = useState({})
 
   const [archivo, setArchivo] = useState()
-  const [tipoArchivo, setTipoArchivo] = useState()
+  const [tipoArchivo, setTipoArchivo] = useState("emitida")
   const [datosOperacion, setDatosOperacion] = useState({})
 
   const [filtroMes, setFiltroMes] = useState('all')
