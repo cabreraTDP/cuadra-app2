@@ -1,4 +1,4 @@
-import { AUTH_LOGIN, AUTH_LOGOUT } from './types';
+import { AUTH_LOGIN, AUTH_LOGOUT, EMPRESA_SELECT } from './types';
 import { Post } from '../../utils/axiosUtils';
 
 export const login = (respuesta) => {
@@ -59,4 +59,45 @@ export const logout = () => {
 
     return null;
   };
+};
+
+export const empresa = (respuesta) => {
+  return async (dispatch, getState) => {
+    console.log('empresa...')
+    console.log(respuesta.data.data[0].empresas[0].empresa)
+    try {
+      const idEmpresa = respuesta.data.data[0].empresas[0].empresa
+      if(idEmpresa){
+        console.log('siempresa',idEmpresa)
+        localStorage.setItem('idEmpresa', idEmpresa)
+        await dispatch({
+          type: EMPRESA_SELECT, 
+          payload: idEmpresa
+        });
+      }else{
+        console.log('refresh')
+        const idEmpresaLocal = localStorage.getItem('idEmpresa')
+        await dispatch({
+          type: EMPRESA_SELECT, 
+          payload: idEmpresaLocal
+        });
+      }
+      return null;
+
+    } catch (err) {
+      console.log(
+        err.message
+      );
+      return null;
+    }
+  };
+};
+
+export const getEmpresa = (respuesta) => {
+  return async (dispatch, getState) => {
+      console.log('getempresa...')
+      const empresa = await getState()
+      console.log(empresa)
+      return empresa
+    }
 };

@@ -15,7 +15,8 @@ const NuevoEmpleado = () => {
 
     const onSubmitHandler = async(e) => {
         e.preventDefault();
-        await Post('/trabajadores/add', datos);
+        const empresa = localStorage.getItem('idEmpresa')
+        await Post('/trabajadores/add', {...datos, empresa: empresa});
         navigate('/app/empleados');
     };
 

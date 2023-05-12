@@ -1,9 +1,17 @@
 import { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
 import store from '../state/store';
-import {login}  from '../state/actions/auth_actions'
-import { Post } from '../utils/axiosUtils';
+import axios from 'axios';
+import {login, empresa}  from '../state/actions/auth_actions'
+import { Post, Get } from '../utils/axiosUtils';
 import logo from '../svg/Twhite.svg';
+const URL = process.env.REACT_APP_URL_URI
+
+async function delay(time) {
+    setTimeout(function () {
+        return null
+    }, time);
+}
 
 const SignIn = () => {
 
@@ -20,7 +28,13 @@ const SignIn = () => {
             if(respuesta){
                 console.log('Login');
                 await store.dispatch(login(respuesta));
+                const cliente = await axios.get(
+                    `${URL}/users/getEmpresa`,
+                    { withCredentials: true }
+                  )
+                await store.dispatch(empresa(cliente))
                 navigate('/app');
+
             }
         }catch(e){
             console.log('error',e.response.data.error);

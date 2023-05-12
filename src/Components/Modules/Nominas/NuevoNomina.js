@@ -102,7 +102,8 @@ const NuevoNomina = () => {
 
     const onSubmitHandler = async(e) => {
         e.preventDefault();
-        await Post('/nominas/add', {operaciones:datos, detalle:{periodoInicio,periodoFin, esquema}});
+        const empresa = localStorage.getItem('idEmpresa')
+        await Post('/nominas/add', {empresa, operaciones:datos, detalle:{periodoInicio,periodoFin, esquema}});
         navigate('/app/nominas');
     };
 

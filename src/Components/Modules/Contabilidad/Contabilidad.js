@@ -9,7 +9,8 @@ import moment from 'moment'
 import { Link } from 'react-router-dom'
 import { Modal } from '../../Modal'
 import { Buttom } from '../../Buttom'
-
+import store from '../../../state/store';
+import {getEmpresa}  from '../../../state/actions/auth_actions'
 import PlusIcon from '../../../svg/plus.svg'
 import UploadIcon from '../../../svg/upload.svg'
 import DownloadIcon from '../../../svg/download.svg'
@@ -87,7 +88,8 @@ const Contabilidad = () => {
 
   const onSubmitOperacion = async (e) => {
     e.preventDefault()
-    const nuevosDatos = await Post('/contabilidad/crear', datosOperacion)
+    const empresa = localStorage.getItem('idEmpresa')
+    const nuevosDatos = await Post('/contabilidad/crear', {...datosOperacion,idEmpresa: empresa})
     setDataContabilidad([
       ...dataContabilidad,
       ...transformarDatos([nuevosDatos.data.data]),
@@ -174,9 +176,14 @@ const Contabilidad = () => {
   useEffect(() => {
     const getData = async (URL) => {
       //Ajustar Dirección y obj json de contabilidad ya que cuenta con información de la tabla trabajadores
-      const registros = await axios.get(`${URL}/contabilidad/operaciones`, {
-        withCredentials: true,
-      })
+      //const empresa = '645dadb2904b1706868bf164'
+      //const {isSignedIn} =  store.getState().auth.isSignedIn
+      const empresa = localStorage.getItem('idEmpresa')
+      const registros = await axios.post(
+        `${URL}/contabilidad/operacionesEmpresa`, 
+        { empresa }, 
+        { withCredentials: true }
+      )
       const datos = transformarDatos(registros.data.data)
       if (registros.data.data.length > 0) {
         setDataContabilidad(datos)

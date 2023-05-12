@@ -1,8 +1,11 @@
-import { AUTH_LOGIN, AUTH_LOGOUT } from '../actions/types';
+import { AUTH_LOGIN, AUTH_LOGOUT, EMPRESA_SELECT } from '../actions/types';
+
+const idEmpresa = localStorage.getItem('token')
 
 const initialState = {
   loading: true,
-  isSignedIn: false
+  isSignedIn: false,
+  idEmpresa: idEmpresa
 };
     /* eslint-disable */
 
@@ -10,6 +13,7 @@ const initialState = {
 
 export default (state = initialState, action) => {
   const { type, payload } = action;
+  console.log('payload',payload)
   switch (type) {
     case AUTH_LOGIN:
       return {
@@ -23,6 +27,12 @@ export default (state = initialState, action) => {
         loading: true,
         isSignedIn: null
       };
+    case EMPRESA_SELECT:
+      return {
+        ...state,
+        loading: true,
+        idEmpresa: payload
+      }
 
     default:
       return state;

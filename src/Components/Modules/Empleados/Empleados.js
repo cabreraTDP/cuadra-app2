@@ -24,7 +24,8 @@ const Empleados = () => {
 
     useEffect(()=>{
         const  getData = async(URL) => {
-            const trabajadores = await axios.get(`${URL}/trabajadores`, {withCredentials: true});
+            const empresa = localStorage.getItem('idEmpresa')
+            const trabajadores = await axios.post(`${URL}/trabajadores/getTrabajadoresByEmpresa`, {empresa}, {withCredentials: true});
             setDataEmpleados(trabajadores.data.data.map((trabajador) => (
                 trabajador.datosPersonales ? {
                     "Nombre": `${trabajador.datosPersonales.nombre} ${trabajador.datosPersonales.apellidoPaterno} ${trabajador.datosPersonales.apellidoMaterno}`,
