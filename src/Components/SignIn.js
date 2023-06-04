@@ -4,13 +4,15 @@ import store from '../state/store';
 import {login}  from '../state/actions/auth_actions'
 import { Post } from '../utils/axiosUtils';
 import logo from '../svg/Twhite.svg';
+import axios from 'axios';
+
 const URL = process.env.REACT_APP_URL_URI
 
 const SignIn = () => {
 
     const [datos, setData] = useState({});
     const [error, setError] = useState('');
-
+    const [empresa, setEmpresa] = useState('')
     const navigate = useNavigate();
 
     const onSubmitHandler = async(e) => {

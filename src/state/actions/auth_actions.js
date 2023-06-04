@@ -1,4 +1,4 @@
-import { AUTH_LOGIN, AUTH_LOGOUT } from './types';
+import { AUTH_LOGIN, AUTH_LOGOUT, EMPRESA_SELECT } from './types';
 import { Post } from '../../utils/axiosUtils';
 
 export const login = (respuesta) => {
