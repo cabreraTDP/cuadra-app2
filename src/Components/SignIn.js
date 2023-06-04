@@ -4,6 +4,7 @@ import store from '../state/store';
 import {login}  from '../state/actions/auth_actions'
 import { Post } from '../utils/axiosUtils';
 import logo from '../svg/Twhite.svg';
+const URL = process.env.REACT_APP_URL_URI
 
 const SignIn = () => {
 
@@ -18,9 +19,14 @@ const SignIn = () => {
         try{
             const respuesta = await Post('/users/signIn', datos);
             if(respuesta){
-                console.log('Login');
                 await store.dispatch(login(respuesta));
-                navigate('/app');
+                const cliente = await axios.get(
+                    `${URL}/users/getEmpresa`,
+                    { withCredentials: true }
+                  )
+                await store.dispatch(empresa(cliente))
+                navigate('/app/home');
+
             }
         }catch(e){
             console.log('error',e.response.data.error);

@@ -60,3 +60,64 @@ export const logout = () => {
     return null;
   };
 };
+
+export const empresa = (respuesta) => {
+  return async (dispatch, getState) => {
+    console.log('empresa...')
+    console.log(respuesta.data.data[0].empresas)
+    try {
+      const idEmpresa = respuesta.data.data[0].empresas[0].empresa
+      if(idEmpresa){
+        localStorage.setItem('idEmpresa', idEmpresa._id)
+        localStorage.setItem('empresas', JSON.stringify(respuesta.data.data[0].empresas))
+        await dispatch({
+          type: EMPRESA_SELECT, 
+          payload: idEmpresa
+        });
+      }else{
+        const idEmpresaLocal = localStorage.getItem('idEmpresa')
+        await dispatch({
+          type: EMPRESA_SELECT, 
+          payload: idEmpresaLocal
+        });
+      }
+      return null;
+
+    } catch (err) {
+      console.log(
+        err.message
+      );
+      return null;
+    }
+  };
+};
+
+export const setEmpresaId = (respuesta) => {
+  return async (dispatch, getState) => {
+    try {
+      if(respuesta){
+        localStorage.setItem('idEmpresa', respuesta)
+        await dispatch({
+          type: EMPRESA_SELECT, 
+          payload: respuesta
+        });
+      }
+      return null;
+
+    } catch (err) {
+      console.log(
+        err.message
+      );
+      return null;
+    }
+  };
+};
+
+export const getEmpresa = (respuesta) => {
+  return async (dispatch, getState) => {
+      console.log('getempresa...')
+      const empresa = await getState()
+      console.log(empresa)
+      return empresa
+    }
+};
