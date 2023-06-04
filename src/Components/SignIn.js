@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
 import store from '../state/store';
-import {login}  from '../state/actions/auth_actions'
+import {empresa, login}  from '../state/actions/auth_actions'
 import { Post } from '../utils/axiosUtils';
 import logo from '../svg/Twhite.svg';
 import axios from 'axios';
@@ -12,7 +12,6 @@ const SignIn = () => {
 
     const [datos, setData] = useState({});
     const [error, setError] = useState('');
-    const [empresa, setEmpresa] = useState('')
     const navigate = useNavigate();
 
     const onSubmitHandler = async(e) => {
@@ -31,7 +30,7 @@ const SignIn = () => {
 
             }
         }catch(e){
-            console.log('error',e.response.data.error);
+            console.log('error',e);
             console.error(e.response.data.error);
             setError(e.response.data.error);
         }
