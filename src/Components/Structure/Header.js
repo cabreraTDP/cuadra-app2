@@ -12,7 +12,6 @@ const Header = () => {
     const [empresa, setEmpresa] = useState(empresas[0].empresa.empresa)
     const onChangeOperacion = async (e) => {
         const { name, value } = e.target
-        console.log('value',value)
         setEmpresa(
           value
         )
