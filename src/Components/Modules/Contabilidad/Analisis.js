@@ -86,7 +86,7 @@ const Analisis = () => {
         if(filtroMes==='all'){
             setDataFiltered(calcularTotal(data))
         }else{
-            setDataFiltered(calcularTotal(data.filter((operacion) => moment(operacion.fechaOperacion,"DD-MM-YYYY").month()+1 === monthToNumber[filtroMes])));
+            setDataFiltered(calcularTotal(data.filter((operacion) => moment(operacion.fechaOperacion,"DD-MM-YYYY").month()+1 === filtroMes)));
         };
     }, [data,filtroMes]);
 
@@ -94,7 +94,7 @@ const Analisis = () => {
         if(dataFiltered.ingresos.total && dataFiltered.gastos.total){
             setUtilidad(numberToCurrency(currencyToNumber(dataFiltered.ingresos.total)-currencyToNumber(dataFiltered.gastos.total)));
         }
-    },[utilidad,dataFiltered, monthToNumber])
+    },[utilidad,dataFiltered])
 
 
     const removeFilter = () => {
@@ -102,7 +102,7 @@ const Analisis = () => {
     }
 
     const applyFilter = (params) => {
-        setFiltroMes(params)
+        setFiltroMes(monthToNumber[params])
     }
 
     const statsData = [
