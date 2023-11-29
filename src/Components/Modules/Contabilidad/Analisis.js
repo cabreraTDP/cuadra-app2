@@ -72,10 +72,6 @@ const Analisis = () => {
 
     const [filtroMes, setFiltroMes] = useState("all")
 
-    const funcionFiltroMes = (e) => {
-        setFiltroMes(e.target.value);
-    };
-
     useEffect(() => {
         const getData = async (URL) => {
             //Ajustar Dirección y obj json de contabilidad ya que cuenta con información de la tabla trabajadores
