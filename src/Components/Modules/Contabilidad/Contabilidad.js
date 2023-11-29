@@ -121,9 +121,11 @@ const Contabilidad = () => {
 
   const onSubmitHandlerDocumento = async (e) => {
     e.preventDefault()
+    const empresa = localStorage.getItem('idEmpresa')
     const f = new FormData()
     f.append('file', archivo[0])
     f.append('tipo', tipoArchivo)
+    f.append('idEmpresa', empresa)
     const nuevosDatos = await axios.post(`${URL}/contabilidad/sat`, f, {
       withCredentials: true,
     })

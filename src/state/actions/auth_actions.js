@@ -64,9 +64,8 @@ export const logout = () => {
 export const empresa = (respuesta) => {
   return async (dispatch, getState) => {
     console.log('empresa...')
-    console.log(respuesta.data.data[0].empresas[0].empresa)
     try {
-      const idEmpresa = respuesta.data.data[0].empresas[0].empresa
+      const idEmpresa = respuesta.data.data[0].empresas[0]._id
       if(idEmpresa){
         console.log('siempresa',idEmpresa)
         localStorage.setItem('idEmpresa', idEmpresa)

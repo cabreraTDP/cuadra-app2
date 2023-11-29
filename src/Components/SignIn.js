@@ -26,6 +26,7 @@ const SignIn = () => {
                     `${URL}/users/getEmpresa`,
                     { withCredentials: true }
                   )
+                console.log("cliente",cliente)
                 await store.dispatch(empresa(cliente))
                 navigate('/app');
 
