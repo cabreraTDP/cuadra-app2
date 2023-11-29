@@ -19,7 +19,9 @@ const TopSideButtons = ({removeFilter, applyFilter}) => {
 
     const aStyle = {
         "text-decoration": "none",
-        "color": "inherit"
+        "color": "inherit",
+        "background-color":"none",
+        "border":"none"
     }
 
     return(
@@ -30,11 +32,11 @@ const TopSideButtons = ({removeFilter, applyFilter}) => {
                 <ul style={{"background-color":"rgba(242, 242, 242,0.9)"}} tabIndex={0}   className="dropdown-content menu p-2 text-sm shadow bg-base-100 rounded-box w-52">
                     {
                         monthFilters.map((l, k) => {
-                            return  <li key={k}><a style={aStyle} onClick={() => showFiltersAndApply(l)} href="javascript:;">{l}</a></li>
+                            return  <li key={k}><button style={aStyle} onClick={() => showFiltersAndApply(l)} >{l}</button></li>
                         })
                     }
                     <div className="divider mt-0 mb-0"></div>
-                    <li><a style={{...aStyle,"color":"#B9BBFA", "fontWeight":"bolder"}} onClick={() => removeAppliedFilter()} href="javascript:;">Remover Filtro</a></li>
+                    <li><button style={{...aStyle,"fontWeight":"bolder"}} onClick={() => removeAppliedFilter()}>Remover Filtro</button></li>
                 </ul>
             </div>
         </div>
