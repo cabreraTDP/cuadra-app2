@@ -15,7 +15,6 @@ const TopSideButtons = ({removeFilter, applyFilter}) => {
     const removeAppliedFilter = () => {
         removeFilter()
         setFilterParam("")
-        setSearchText("")
     }
 
     return(
