@@ -94,7 +94,7 @@ const Analisis = () => {
         if(dataFiltered.ingresos.total && dataFiltered.gastos.total){
             setUtilidad(numberToCurrency(currencyToNumber(dataFiltered.ingresos.total)-currencyToNumber(dataFiltered.gastos.total)));
         }
-    },[utilidad,dataFiltered])
+    },[utilidad,dataFiltered, monthToNumber])
 
 
     const removeFilter = () => {

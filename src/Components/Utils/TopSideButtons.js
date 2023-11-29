@@ -1,11 +1,10 @@
 import FunnelIcon from '@heroicons/react/24/outline/FunnelIcon'
 import XMarkIcon from '@heroicons/react/24/outline/XMarkIcon'
 
-import { useEffect, useState } from "react"
-const TopSideButtons = ({removeFilter, applyFilter, applySearch}) => {
+import { useState } from "react"
+const TopSideButtons = ({removeFilter, applyFilter}) => {
 
     const [filterParam, setFilterParam] = useState("")
-    const [searchText, setSearchText] = useState("")
     const monthFilters = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"]
 
     const showFiltersAndApply = (params) => {
@@ -18,14 +17,6 @@ const TopSideButtons = ({removeFilter, applyFilter, applySearch}) => {
         setFilterParam("")
         setSearchText("")
     }
-
-    useEffect(() => {
-        if(searchText == ""){
-            removeAppliedFilter()
-        }else{
-            applySearch(searchText)
-        }
-    }, [searchText])
 
     return(
         <div className="inline-block float-right">
