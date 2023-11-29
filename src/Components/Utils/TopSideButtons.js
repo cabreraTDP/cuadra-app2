@@ -25,11 +25,11 @@ const TopSideButtons = ({removeFilter, applyFilter}) => {
                 <ul style={{"background-color":"rgba(242, 242, 242,0.95)"}} tabIndex={0}   className="dropdown-content menu p-2 text-sm shadow bg-base-100 rounded-box w-52">
                     {
                         monthFilters.map((l, k) => {
-                            return  <li key={k}><a onClick={() => showFiltersAndApply(l)} href="">{l}</a></li>
+                            return  <li key={k}><a onClick={() => showFiltersAndApply(l)} href="/#">{l}</a></li>
                         })
                     }
                     <div className="divider mt-0 mb-0"></div>
-                    <li><a onClick={() => removeAppliedFilter()}>Remover Filtro</a></li>
+                    <li><a onClick={() => removeAppliedFilter()} href="/#">Remover Filtro</a></li>
                 </ul>
             </div>
         </div>
