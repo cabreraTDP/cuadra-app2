@@ -3,15 +3,9 @@ import {useNavigate} from 'react-router-dom'
 import store from '../state/store';
 import axios from 'axios';
 import {login, empresa}  from '../state/actions/auth_actions'
-import { Post, Get } from '../utils/axiosUtils';
+import { Post } from '../utils/axiosUtils';
 import logo from '../svg/Twhite.svg';
 const URL = process.env.REACT_APP_URL_URI
-
-async function delay(time) {
-    setTimeout(function () {
-        return null
-    }, time);
-}
 
 const SignIn = () => {
 

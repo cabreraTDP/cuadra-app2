@@ -9,8 +9,6 @@ import moment from 'moment'
 import { Link } from 'react-router-dom'
 import { Modal } from '../../Modal'
 import { Buttom } from '../../Buttom'
-import store from '../../../state/store';
-import {getEmpresa}  from '../../../state/actions/auth_actions'
 import PlusIcon from '../../../svg/plus.svg'
 import UploadIcon from '../../../svg/upload.svg'
 import DownloadIcon from '../../../svg/download.svg'
