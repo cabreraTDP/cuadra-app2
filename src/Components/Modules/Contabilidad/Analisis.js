@@ -20,6 +20,8 @@ const calcularTotal = (registros) => {
     })
 };
 
+const dateFormat = "YYYY-MM-DD"
+
 const calcularIngresos = (ingresos) => {
     let initial = 0;
     const total = numberToCurrency(ingresos.reduce((prev,current)=> prev+current.monto,initial));
@@ -57,14 +59,14 @@ const agruparDatosParaGrafica = (operaciones,filter) => {
     if(filter === "all"){
         for(const month in labelsMonths){
             let initial = 0;
-            ingresos.push(ingreso.filter(operacion => moment(operacion.fechaOperacion,"DD-MM-YYYY").month() === parseInt(month)).reduce((prev,current)=> prev+current.monto,initial));
-            gastos.push(gasto.filter(operacion => moment(operacion.fechaOperacion,"DD-MM-YYYY").month() === parseInt(month)).reduce((prev,current)=> prev+current.monto,initial));
+            ingresos.push(ingreso.filter(operacion => moment(operacion.fechaOperacion,dateFormat).month() === parseInt(month)).reduce((prev,current)=> prev+current.monto,initial));
+            gastos.push(gasto.filter(operacion => moment(operacion.fechaOperacion,dateFormat).month() === parseInt(month)).reduce((prev,current)=> prev+current.monto,initial));
         }
     }else{
         for(const day in labelsDays){
             let initial = 0;
-            ingresos.push(ingreso.filter(operacion => moment(operacion.fechaOperacion,"DD-MM-YYYY").day() === parseInt(day)).reduce((prev,current)=> prev+current.monto,initial));
-            gastos.push(gasto.filter(operacion => moment(operacion.fechaOperacion,"DD-MM-YYYY").day() === parseInt(day)).reduce((prev,current)=> prev+current.monto,initial));
+            ingresos.push(ingreso.filter(operacion => moment(operacion.fechaOperacion,dateFormat).date() === parseInt(day)).reduce((prev,current)=> prev+current.monto,initial));
+            gastos.push(gasto.filter(operacion => moment(operacion.fechaOperacion,dateFormat).date() === parseInt(day)).reduce((prev,current)=> prev+current.monto,initial));
         }
     }
 
@@ -119,8 +121,8 @@ const Analisis = () => {
             setDataFiltered(calcularTotal(data))
             setDataGraph(agruparDatosParaGrafica(data,"all"))
         }else{
-            setDataFiltered(calcularTotal(data.filter((operacion) => moment(operacion.fechaOperacion,"DD-MM-YYYY").month()+1 === filtroMes)));
-            setDataGraph(agruparDatosParaGrafica(data.filter((operacion) => moment(operacion.fechaOperacion,"DD-MM-YYYY").month()+1 === filtroMes),""))
+            setDataFiltered(calcularTotal(data.filter((operacion) => moment(operacion.fechaOperacion,dateFormat).month()+1 === filtroMes)));
+            setDataGraph(agruparDatosParaGrafica(data.filter((operacion) => moment(operacion.fechaOperacion,dateFormat).month()+1 === filtroMes),""))
         };
     }, [data,filtroMes]);
 
