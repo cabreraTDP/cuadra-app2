@@ -5,7 +5,7 @@ import { currencyToNumber, numberToCurrency } from '../../../utils/format';
 import moment from 'moment';
 import TitleCard from '../../Utils/Cards';
 import Stats from '../../Utils/Stats';
-
+import Chart from '../../Utils/Chart';
 
 import TopSideButtons from '../../Utils/TopSideButtons';
 
@@ -45,6 +45,36 @@ const calcularGastos = (gastos) => {
     return resultado
 };
 
+const agruparDatosParaGrafica = (operaciones,filter) => {
+    const labelsMonths = [ ...Array(12).keys() ].map( i => i+1);
+    const labelsDays = [ ...Array(31).keys() ].map( i => i+1);
+    const ingreso = operaciones.filter(operacion => operacion.tipo === "Ingreso")
+    const gasto = operaciones.filter(operacion => operacion.tipo === "Gasto")
+
+    const ingresos = []
+    const gastos = []
+
+    if(filter === "all"){
+        for(const month in labelsMonths){
+            let initial = 0;
+            ingresos.push(ingreso.filter(operacion => moment(operacion.fechaOperacion,"DD-MM-YYYY").month() === parseInt(month)).reduce((prev,current)=> prev+current.monto,initial));
+            gastos.push(gasto.filter(operacion => moment(operacion.fechaOperacion,"DD-MM-YYYY").month() === parseInt(month)).reduce((prev,current)=> prev+current.monto,initial));
+        }
+    }else{
+        for(const day in labelsDays){
+            let initial = 0;
+            ingresos.push(ingreso.filter(operacion => moment(operacion.fechaOperacion,"DD-MM-YYYY").day() === parseInt(day)).reduce((prev,current)=> prev+current.monto,initial));
+            gastos.push(gasto.filter(operacion => moment(operacion.fechaOperacion,"DD-MM-YYYY").day() === parseInt(day)).reduce((prev,current)=> prev+current.monto,initial));
+        }
+    }
+
+
+    return({
+        "ingresos": ingresos,
+        "gastos": gastos
+    })
+};
+
 const Analisis = () => {
 
     const monthToNumber = {
@@ -65,6 +95,8 @@ const Analisis = () => {
     const [utilidad, setUtilidad] = useState(0);
 
     const [data, setData] = useState([]);
+    const [dataGraph, setDataGraph] = useState([]);
+
     const [dataFiltered, setDataFiltered] = useState({
         ingresos:{},
         gastos:{}
@@ -85,8 +117,10 @@ const Analisis = () => {
     useEffect(() => {
         if(filtroMes==='all'){
             setDataFiltered(calcularTotal(data))
+            setDataGraph(agruparDatosParaGrafica(data,"all"))
         }else{
             setDataFiltered(calcularTotal(data.filter((operacion) => moment(operacion.fechaOperacion,"DD-MM-YYYY").month()+1 === filtroMes)));
+            setDataGraph(agruparDatosParaGrafica(data.filter((operacion) => moment(operacion.fechaOperacion,"DD-MM-YYYY").month()+1 === filtroMes),""))
         };
     }, [data,filtroMes]);
 
@@ -112,18 +146,23 @@ const Analisis = () => {
     ]
 
     return (
-        <div>
-            <TitleCard title="Analisis financiero" topMargin="mt-20"  style={{backgroundcolor:"black"}} TopSideButtons={<TopSideButtons  applyFilter={applyFilter} removeFilter={removeFilter}/>}>         
-            <div className="grid lg:grid-cols-3 mt-6 md:grid-cols-2 grid-cols-1 gap-6">
-            {
-                statsData.map((d, k) => {
-                    return (
-                        <Stats key={k} {...d} colorIndex={k}/>
-                    )
-                })
-            }
-            </div>
+        <div >
+            <TitleCard title="Analisis financiero" topMargin="mt-6"  style={{backgroundcolor:"black"}} TopSideButtons={<TopSideButtons  applyFilter={applyFilter} removeFilter={removeFilter}/>}>         
+                <div className="grid lg:grid-cols-3 mt-6 md:grid-cols-2 grid-cols-1 gap-6">
+                    {
+                        statsData.map((d, k) => {
+                            return (
+                                <Stats key={k} {...d} colorIndex={k}/>
+                            )
+                        })
+                    }
+                </div>
+
+                <div className="grid lg:grid-cols-1 mt-6 md:grid-cols-1 grid-cols-1 gap-6" >
+                    <Chart filter={filtroMes} data={dataGraph}/>
+                </div>
             </TitleCard>
+            
         </div>
     )
 }
