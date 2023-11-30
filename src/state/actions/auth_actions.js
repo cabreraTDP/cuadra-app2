@@ -64,42 +64,21 @@ export const logout = () => {
 export const empresa = (respuesta) => {
   return async (dispatch, getState) => {
     console.log('empresa...')
-    console.log(respuesta.data.data[0].empresas)
     try {
-      const idEmpresa = respuesta.data.data[0].empresas[0].empresa
+      const idEmpresa = respuesta.data.data[0]._id
       if(idEmpresa){
-        localStorage.setItem('idEmpresa', idEmpresa._id)
-        localStorage.setItem('empresas', JSON.stringify(respuesta.data.data[0].empresas))
+        console.log('siempresa',idEmpresa)
+        localStorage.setItem('idEmpresa', idEmpresa)
         await dispatch({
           type: EMPRESA_SELECT, 
           payload: idEmpresa
         });
       }else{
+        console.log('refresh')
         const idEmpresaLocal = localStorage.getItem('idEmpresa')
         await dispatch({
           type: EMPRESA_SELECT, 
           payload: idEmpresaLocal
-        });
-      }
-      return null;
-
-    } catch (err) {
-      console.log(
-        err.message
-      );
-      return null;
-    }
-  };
-};
-
-export const setEmpresaId = (respuesta) => {
-  return async (dispatch, getState) => {
-    try {
-      if(respuesta){
-        localStorage.setItem('idEmpresa', respuesta)
-        await dispatch({
-          type: EMPRESA_SELECT, 
-          payload: respuesta
         });
       }
       return null;

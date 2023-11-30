@@ -10,7 +10,7 @@
     margin-right: 170px;
 }
 
-#filtroOpcion {
+#filtropcion {
     display: inline-grid;
     grid-template-columns: 100px auto;
 }

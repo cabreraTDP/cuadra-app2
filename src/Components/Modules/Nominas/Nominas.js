@@ -22,7 +22,8 @@ const Nominas = () => {
 
     useEffect(()=>{
         const getData = async(URL) => {
-            const nominas = await axios.get(`${URL}/nominas`, {withCredentials: true});
+            const empresa = localStorage.getItem('idEmpresa')
+            const nominas = await axios.post(`${URL}/nominas/getByEmpresa`, {empresa}, {withCredentials: true});
             setDataNominas(nominas.data.data.map((nomina) => (
                 nomina.detalle ? {
                     "Periodo Inicio": moment(nomina.detalle.periodoInicio).format("DD-MM-YYYY"),

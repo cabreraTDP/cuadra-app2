@@ -3,6 +3,12 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { currencyToNumber, numberToCurrency } from '../../../utils/format';
 import moment from 'moment';
+import TitleCard from '../../Utils/Cards';
+import Stats from '../../Utils/Stats';
+import Chart from '../../Utils/Chart';
+
+import TopSideButtons from '../../Utils/TopSideButtons';
+
 const URL = process.env.REACT_APP_URL_URI;
 
 const calcularTotal = (registros) => {
@@ -13,6 +19,8 @@ const calcularTotal = (registros) => {
         gastos:gasto
     })
 };
+
+const dateFormat = "YYYY-MM-DD"
 
 const calcularIngresos = (ingresos) => {
     let initial = 0;
@@ -39,21 +47,64 @@ const calcularGastos = (gastos) => {
     return resultado
 };
 
+const agruparDatosParaGrafica = (operaciones,filter) => {
+    const labelsMonths = [ ...Array(12).keys() ].map( i => i+1);
+    const labelsDays = [ ...Array(31).keys() ].map( i => i+1);
+    const ingreso = operaciones.filter(operacion => operacion.tipo === "Ingreso")
+    const gasto = operaciones.filter(operacion => operacion.tipo === "Gasto")
+
+    const ingresos = []
+    const gastos = []
+
+    if(filter === "all"){
+        for(const month in labelsMonths){
+            let initial = 0;
+            ingresos.push(ingreso.filter(operacion => moment(operacion.fechaOperacion,dateFormat).month() === parseInt(month)).reduce((prev,current)=> prev+current.monto,initial));
+            gastos.push(gasto.filter(operacion => moment(operacion.fechaOperacion,dateFormat).month() === parseInt(month)).reduce((prev,current)=> prev+current.monto,initial));
+        }
+    }else{
+        for(const day in labelsDays){
+            let initial = 0;
+            ingresos.push(ingreso.filter(operacion => moment(operacion.fechaOperacion,dateFormat).date() === parseInt(day)).reduce((prev,current)=> prev+current.monto,initial));
+            gastos.push(gasto.filter(operacion => moment(operacion.fechaOperacion,dateFormat).date() === parseInt(day)).reduce((prev,current)=> prev+current.monto,initial));
+        }
+    }
+
+
+    return({
+        "ingresos": ingresos,
+        "gastos": gastos
+    })
+};
+
 const Analisis = () => {
+
+    const monthToNumber = {
+        "Enero": 1,
+        "Febrero": 2,
+        "Marzo": 3,
+        "Abril": 4,
+        "Mayo": 5,
+        "Junio": 6,
+        "Julio": 7,
+        "Agosto": 8,
+        "Septiembre": 9,
+        "Octubre": 10,
+        "Noviembre": 11,
+        "Diciembre": 12,
+    }
 
     const [utilidad, setUtilidad] = useState(0);
 
     const [data, setData] = useState([]);
+    const [dataGraph, setDataGraph] = useState([]);
+
     const [dataFiltered, setDataFiltered] = useState({
         ingresos:{},
         gastos:{}
     });
 
-    const [filtroMes, setFiltroMes] = useState('all');
-
-    const funcionFiltroMes = (e) => {
-        setFiltroMes(e.target.value);
-    };
+    const [filtroMes, setFiltroMes] = useState("all")
 
     useEffect(() => {
         const getData = async (URL) => {
@@ -68,8 +119,10 @@ const Analisis = () => {
     useEffect(() => {
         if(filtroMes==='all'){
             setDataFiltered(calcularTotal(data))
+            setDataGraph(agruparDatosParaGrafica(data,"all"))
         }else{
-            setDataFiltered(calcularTotal(data.filter((operacion) => moment(operacion.fechaOperacion,"DD-MM-YYYY").month()+1 === Number(filtroMes))));
+            setDataFiltered(calcularTotal(data.filter((operacion) => moment(operacion.fechaOperacion,dateFormat).month()+1 === filtroMes)));
+            setDataGraph(agruparDatosParaGrafica(data.filter((operacion) => moment(operacion.fechaOperacion,dateFormat).month()+1 === filtroMes),""))
         };
     }, [data,filtroMes]);
 
@@ -80,148 +133,38 @@ const Analisis = () => {
     },[utilidad,dataFiltered])
 
 
+    const removeFilter = () => {
+        setFiltroMes("all")
+    }
+
+    const applyFilter = (params) => {
+        setFiltroMes(monthToNumber[params])
+    }
+
+    const statsData = [
+        {title : "Ingresos", value : dataFiltered.ingresos.total, background:"green"},
+        {title : "Gastos", value : dataFiltered.gastos.total, background:"red"},
+        {title : "Ganancias", value :utilidad, background:"gray"},
+    ]
 
     return (
-        <div>
-            <h1 style={{paddingBottom:'30px'}}>Analisis financiero</h1>
-            <div style={{ width: '500px', paddingBottom:'40px' }}>
-                <div id='fecha'>
-                <div id='filtroOpcion'>
-                    <h3>Filtro:</h3>
-                    <select style={{ height: '30px', width:'200px' }} value={filtroMes} onChange={(e)=> funcionFiltroMes(e)}>
-                        <option selected value="all">Todos los meses...</option>
-                        <option value="1">Enero</option>
-                        <option value="2">Febrero</option>
-                        <option value="3">Marzo</option>
-                        <option value="4">Abril</option>
-                        <option  value="5">Mayo</option>
-                        <option value="6">Junio</option>
-                        <option value="7">Julio</option>
-                        <option value="8">Agosto</option>
-                        <option  value="9">Septiembre</option>
-                        <option value="10">Octubre</option>
-                        <option value="11">Noviembre</option>
-                        <option value="12">Diciembre</option>
-                    </select>
+        <div >
+            <TitleCard title="Analisis financiero" topMargin="mt-6"  style={{backgroundcolor:"black"}} TopSideButtons={<TopSideButtons  applyFilter={applyFilter} removeFilter={removeFilter}/>}>         
+                <div className="grid lg:grid-cols-3 mt-6 md:grid-cols-2 grid-cols-1 gap-6">
+                    {
+                        statsData.map((d, k) => {
+                            return (
+                                <Stats key={k} {...d} colorIndex={k}/>
+                            )
+                        })
+                    }
                 </div>
+
+                <div className="grid lg:grid-cols-1 mt-6 md:grid-cols-1 grid-cols-1 gap-6" >
+                    <Chart filter={filtroMes} data={dataGraph}/>
                 </div>
-            </div>
-            <div id='contenido'>
-                <div id='separador' style={{ borderRight: 'solid 2px black'}}>
-                    <table id='tabla'>
-                        <tr >
-                            <td style={{ textAlign: 'left' }}>
-                                <h2>Ingresos</h2>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style={{ textAlign: 'right', color:'green'}}>
-                                <h4 style={{fontSize: 24 }}>{dataFiltered.ingresos.total}</h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td >
-                                <div style={{ width: '100%', height: '30px' }}>
-
-                                </div>
-                            </td>
-                            <td ><div style={{ width: '100%', height: '30px' }}>
-
-                            </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td >
-                                Ventas
-                            </td>
-                            <td style={{ textAlign: 'right' }}>
-                                {dataFiltered.ingresos.ventas}
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div id='separador' style={{ borderRight: 'solid 2px black'}}>
-                    <table id='tabla'>
-                        <tr >
-                            <td style={{ textAlign: 'left' }}>
-                                <h2>Gastos</h2>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td style={{ textAlign: 'right', color:'red' }}>
-                                <h6 style={{fontSize: 24 }}>{dataFiltered.gastos.total}</h6>
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td >
-                                <div style={{ width: '100%', height: '30px' }}>
-
-                                </div>
-                            </td>
-                            <td ><div style={{ width: '100%', height: '30px' }}>
-
-                            </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td  >
-                                Sueldos
-                            </td>
-                            <td colSpan={2} style={{ textAlign: 'right' }}>
-                                {dataFiltered.gastos.sueldos}
-                            </td>
-
-                        </tr>
-                        <tr>
-                            <td >
-                                Impuestos
-                            </td>
-                            <td colSpan={2} style={{ textAlign: 'right' }}>
-                                {dataFiltered.gastos.impuestos}
-                            </td>
-
-                        </tr>
-                    </table>
-                </div>
-                <div id='separador'>
-                    <table id='tabla'>
-                        <tr >
-                            <td rowSpan={2}>
-                                <div id='icono-utilidad' >
-
-                                </div>
-                            </td>
-                            <td style={{ textAlign: 'left' }}>
-                                <h5>Utilidad</h5>
-                            </td>
-
-                        </tr>
-
-                        <tr>
-                            <td >
-                                <div style={{ width: '100%', height: '30px' }}>
-
-                                </div>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colSpan={2} style={{paddingTop:'40px'}}>
-                                <div id='utilidad'>
-
-                                    {utilidad}
-
-                                </div>
-                            </td>
-                        </tr>
-
-
-                    </table>
-                </div>
-            </div>
+            </TitleCard>
+            
         </div>
     )
 }

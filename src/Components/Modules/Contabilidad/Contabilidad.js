@@ -86,7 +86,8 @@ const Contabilidad = () => {
 
   const onSubmitOperacion = async (e) => {
     e.preventDefault()
-    const nuevosDatos = await Post('/contabilidad/crear', datosOperacion)
+    const empresa = localStorage.getItem('idEmpresa')
+    const nuevosDatos = await Post('/contabilidad/crear', {...datosOperacion,idEmpresa: empresa})
     setDataContabilidad([
       ...dataContabilidad,
       ...transformarDatos([nuevosDatos.data.data]),
@@ -120,9 +121,11 @@ const Contabilidad = () => {
 
   const onSubmitHandlerDocumento = async (e) => {
     e.preventDefault()
+    const empresa = localStorage.getItem('idEmpresa')
     const f = new FormData()
     f.append('file', archivo[0])
     f.append('tipo', tipoArchivo)
+    f.append('idEmpresa', empresa)
     const nuevosDatos = await axios.post(`${URL}/contabilidad/sat`, f, {
       withCredentials: true,
     })
@@ -177,6 +180,7 @@ const Contabilidad = () => {
       //Ajustar Dirección y obj json de contabilidad ya que cuenta con información de la tabla trabajadores
       //const empresa = '645dadb2904b1706868bf164'
       //const {isSignedIn} =  store.getState().auth.isSignedIn
+      const empresa = localStorage.getItem('idEmpresa')
       const registros = await axios.post(
         `${URL}/contabilidad/operacionesEmpresa`, 
         { empresa }, 

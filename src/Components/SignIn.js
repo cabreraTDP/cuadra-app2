@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import {useNavigate} from 'react-router-dom'
 import store from '../state/store';
-import {empresa, login}  from '../state/actions/auth_actions'
+import axios from 'axios';
+import {login, empresa}  from '../state/actions/auth_actions'
 import { Post } from '../utils/axiosUtils';
 import logo from '../svg/Twhite.svg';
-import axios from 'axios';
-
 const URL = process.env.REACT_APP_URL_URI
 
 const SignIn = () => {
@@ -25,8 +24,9 @@ const SignIn = () => {
                     `${URL}/users/getEmpresa`,
                     { withCredentials: true }
                   )
+                console.log("cliente",cliente)
                 await store.dispatch(empresa(cliente))
-                navigate('/app/home');
+                navigate('/app');
 
             }
         }catch(e){
