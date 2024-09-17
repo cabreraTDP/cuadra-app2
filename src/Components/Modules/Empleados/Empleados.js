@@ -51,7 +51,7 @@ const Empleados = () => {
     return (
         <div >
             <h1>Empleados</h1>
-            <TableDisplay 
+            <TableDisplay
                 titles={titlesEmpleados} 
                 paginacion={true} 
                 rawData={dataEmpleados} 
